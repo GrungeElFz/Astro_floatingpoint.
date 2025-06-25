@@ -36,15 +36,7 @@ export function MobileMenu() {
 
       {/* The content that slides in */}
       <SheetContent side="right" className="bg-black text-neutral-400">
-        <SheetHeader>
-          <SheetClose asChild>
-            <Button type="button" variant="ghost">
-              <span className="sr-only">Close menu</span>
-            </Button>
-          </SheetClose>
-        </SheetHeader>
-
-        <nav className="mt-6 ml-5 flow-root">
+        <nav className="mt-30 ml-5 flow-root">
           <div className="-my-6 divide-y divide-gray-500/10">
             <div className="space-y-2 py-6">
               <a
