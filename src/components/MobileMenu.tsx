@@ -14,7 +14,7 @@ export function MobileMenu() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" className="lg:hidden">
+        <Button type="button" variant="ghost" className="lg:hidden cursor-pointer border border-transparent hover:bg-transparent hover:border hover:border-neutral-400">
           <span className="sr-only">Open Main Menu</span>
           <svg
             className="size-6"
@@ -49,28 +49,28 @@ export function MobileMenu() {
             <div className="space-y-2 py-6">
               <a
                 href="/sets"
-                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:bg-gray-50"
+                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Sets
               </a>
               <a
                 href="/videos"
-                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:bg-gray-50"
+                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Videos
               </a>
               <a
                 href="/events"
-                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:bg-gray-50"
+                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Events
               </a>
               <a
                 href="/about"
-                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:bg-gray-50"
+                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:text-white"
                 onClick={() => setIsOpen(false)}
               >
                 About
@@ -79,7 +79,7 @@ export function MobileMenu() {
             <div className="py-6">
               <a
                 href="#"
-                className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-neutral-200 hover:bg-gray-50"
+                className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-neutral-200 hover:text-white"
                 onClick={() => setIsOpen(false)}
               >
                 Instagram
