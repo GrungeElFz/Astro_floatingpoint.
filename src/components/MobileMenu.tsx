@@ -1,12 +1,6 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTrigger,
-  SheetClose,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -14,7 +8,11 @@ export function MobileMenu() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button type="button" variant="ghost" className="lg:hidden cursor-pointer border border-transparent hover:bg-transparent hover:border hover:border-neutral-400">
+        <Button
+          type="button"
+          variant="ghost"
+          className="lg:hidden cursor-pointer border border-transparent hover:bg-transparent hover:border hover:border-neutral-400"
+        >
           <span className="sr-only">Open Main Menu</span>
           <svg
             className="size-6"
