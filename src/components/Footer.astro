@@ -1,0 +1,161 @@
+---
+import { Image } from "astro:assets";
+import Logo from "@/assets/logo_horizontal.png";
+import {
+  SiInstagram,
+  SiSoundcloud,
+  SiYoutube,
+  SiMailboxdotorg,
+} from "@icons-pack/react-simple-icons";
+---
+
+<footer class="bg-black pt-16 pb-8 text-neutral-300">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="grid grid-cols-1 gap-8 md:grid-cols-5 xl:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] md:gap-y-12"
+    >
+      <div class="md:col-span-2 xl:col-span-1 flex flex-col items-start">
+        <a href="/" class="mb-4">
+          <Image
+            src={Logo}
+            width={160}
+            height={160}
+            loading="lazy"
+            alt="floatingpoint."
+          />
+          <span class="sr-only">floatingpoint.</span>
+        </a>
+        <p class="text-sm leading-6 max-w-sm mb-6 text-neutral-300">
+          Our passion is in the art of sound, driven by deep connections through
+          immersive sonic landscapes.
+        </p>
+
+        <div class="flex space-x-3 mt-auto">
+          <a
+            href="https://soundcloud.com/floatingpoint000"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="size-8 rounded-full flex items-center justify-center text-neutral-300 hover:text-white transition-colors"
+            aria-label="SoundCloud profile"
+          >
+            <SiSoundcloud
+              className="size-5"
+              fill="currentColor"
+              stroke="none"
+            />
+          </a>
+          <a
+            href="https://youtube.com/@floatingpoint000"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="size-8 rounded-full flex items-center justify-center text-neutral-300 hover:text-white transition-colors"
+            aria-label="YouTube channel"
+          >
+            <SiYoutube className="size-5" fill="currentColor" stroke="none" />
+          </a>
+          <a
+            href="https://instagram.com/floatingpoint___"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="size-8 rounded-full flex items-center justify-center text-neutral-300 hover:bg-text-white transition-colors"
+            aria-label="Instagram profile"
+          >
+            <SiInstagram className="size-5" fill="currentColor" stroke="none" />
+          </a>
+          <a
+            href="mailto:contact@floatingpoint.club"
+            class="size-8 rounded-full flex items-center justify-center text-neutral-300 hover:bg-text-white transition-colors"
+            aria-label="Email address"
+          >
+            <SiMailboxdotorg
+              className="size-5"
+              fill="currentColor"
+              stroke="none"
+            />
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-y-4">
+        <h3 class="text-base font-semibold text-neutral-300">Home</h3>
+        <ul role="list" class="space-y-3">
+          <li>
+            <a
+              href="#"
+              class="text-sm leading-6 hover:text-white cursor-pointer">1</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-sm leading-6 hover:text-white cursor-pointer">2</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-sm leading-6 hover:text-white cursor-pointer">3</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-sm leading-6 hover:text-white cursor-pointer">4</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-y-4">
+        <h3 class="text-base font-semibold text-neutral-300">Events</h3>
+        <ul role="list" class="space-y-3">
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">1</a>
+          </li>
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">2</a>
+          </li>
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">3</a>
+          </li>
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">4</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-y-4">
+        <h3 class="text-base font-semibold text-neutral-300">Nerd Stats</h3>
+        <ul role="list" class="space-y-3">
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">1</a>
+          </li>
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">2</a>
+          </li>
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">3</a>
+          </li>
+          <li>
+            <a href="#" class="text-sm leading-6 hover:text-white">4</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-16 border-t border-neutral-400 pt-8 sm:mt-20 lg:mt-24"></div>
+
+    <div
+      class="flex flex-col items-center justify-between gap-y-2 sm:flex-row sm:gap-y-0"
+    >
+      <p class="text-xs leading-5 text-gray-500">
+        © {new Date().getFullYear()} floatingpoint. All rights reserved.
+      </p>
+      <div class="flex space-x-6 text-xs leading-5 text-gray-500">
+        <a href="#" class="hover:text-neutral-300">Terms</a>
+        <a href="#" class="hover:text-neutral-300">Privacy</a>
+        <a href="#" class="hover:text-neutral-300">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
