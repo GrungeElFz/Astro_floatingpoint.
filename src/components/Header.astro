@@ -1,5 +1,7 @@
 ---
 import { MobileMenu } from "@/components/MobileMenu";
+import { Image } from "astro:assets";
+import Logo from "@/assets/logo.png";
 ---
 
 <header class="absolute inset-x-0 top-0 z-50">
@@ -10,9 +12,9 @@ import { MobileMenu } from "@/components/MobileMenu";
     <div class="flex lg:flex-1">
       <a href="#" class="-m-1.5 p-1.5">
         <span class="sr-only">floatingpoint.</span>
-        <img
+        <Image
+          src={Logo}
           class="h-8 w-auto"
-          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
           alt="floatingpoint."
         />
       </a>
