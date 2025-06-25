@@ -1,6 +1,17 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetFooter,
+} from "@/components/ui/sheet";
+import {
+  SiInstagram,
+  SiYoutube,
+  SiSoundcloud,
+  SiMailboxdotorg,
+} from "@icons-pack/react-simple-icons";
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -77,6 +88,52 @@ export function MobileMenu() {
             </div>
           </div>
         </nav>
+
+        <SheetFooter className="mt-auto p-4">
+          <div className="flex justify-center space-x-6">
+            {/* Social Media: SoundCloud */}
+            <a
+              href="https://soundcloud.com/floatingpoint000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-white"
+            >
+              <SiSoundcloud className="size-6" />
+              <span className="sr-only">SoundCloud</span>
+            </a>
+
+            {/* Social Media: YouTube */}
+            <a
+              href="https://youtube.com/@floatingpoint000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-white"
+            >
+              <SiYoutube className="size-6" />
+              <span className="sr-only">YouTube</span>
+            </a>
+
+            {/* Social Media: Instagram */}
+            <a
+              href="https://instagram.com/floatingpoint___"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-neutral-400 hover:text-white"
+            >
+              <SiInstagram className="size-6" />
+              <span className="sr-only">Instagram</span>
+            </a>
+
+            {/* Social Media: Email */}
+            <a
+              href="mailto:contact@floatingpoint.club"
+              className="text-neutral-400 hover:text-white"
+            >
+              <SiMailboxdotorg className="size-6" />
+              <span className="sr-only">Email</span>
+            </a>
+          </div>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
