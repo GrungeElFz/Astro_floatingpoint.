@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Logo from "@/assets/logo_horizontal.png";
 ---
 
 <Layout>
@@ -29,11 +31,8 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
         <div class="text-center">
-          <h1
-            class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl"
-          >
-            floatingpoint<span class="text-cyan-300">.</span>
-          </h1>
+          <Image alt="floatingpoint." src={Logo} width:100% loading="lazy" />
+          <span class="sr-only">floatingpoint.</span>
           <p
             class="mt-8 text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8"
           >
