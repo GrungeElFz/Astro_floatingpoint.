@@ -98,7 +98,7 @@ export function MobileMenu() {
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
             >
-              <SiSoundcloud className="size-6" />
+              <SiSoundcloud className="size-5" />
               <span className="sr-only">SoundCloud</span>
             </a>
 
@@ -109,7 +109,7 @@ export function MobileMenu() {
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
             >
-              <SiYoutube className="size-6" />
+              <SiYoutube className="size-5" />
               <span className="sr-only">YouTube</span>
             </a>
 
@@ -120,7 +120,7 @@ export function MobileMenu() {
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
             >
-              <SiInstagram className="size-6" />
+              <SiInstagram className="size-5" />
               <span className="sr-only">Instagram</span>
             </a>
 
@@ -129,7 +129,7 @@ export function MobileMenu() {
               href="mailto:contact@floatingpoint.club"
               className="text-neutral-400 hover:text-white"
             >
-              <SiMailboxdotorg className="size-6" />
+              <SiMailboxdotorg className="size-5" />
               <span className="sr-only">Email</span>
             </a>
           </div>
