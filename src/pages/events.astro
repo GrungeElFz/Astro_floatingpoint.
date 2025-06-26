@@ -1,7 +1,68 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
+import EventSection from "@/components/EventSection.astro";
+
+const allEvents = [
+  {
+    title: "TBA",
+    date: "Someday: July 00, 2025",
+    time: "00:00",
+    location: "TBA",
+    performers: [
+      "Performer 1",
+      "Performer 2",
+      "Performer 3",
+      "Performer 4",
+      "Performer 5",
+    ],
+    pass: "#",
+    imageSrc: "",
+  },
+  {
+    title: "Zenith",
+    date: "Friday: June 6, 2025",
+    location: "The Terrarium",
+    time: "22:00 - 02:00",
+    performers: ["LCDC", "ILOVECAUSINGDRAMA", "0x01000111", "Qualia"],
+    pass: "#",
+    imageSrc: "",
+  },
+  {
+    title: "The Dean's List",
+    date: "Sunday: May 18, 2025",
+    location: "The Terrarium",
+    time: "19:00 - 23:00",
+    performers: ["Dytro", "ILOVECAUSINGDRAMA", "0x01000111", "Qualia", "Fele"],
+    pass: "#",
+    imageSrc: "",
+  },
+  {
+    title: "Bipolarity",
+    date: "Thursday: May 8, 2025",
+    location: "The Terrarium",
+    time: "19:30 - 00:00",
+    performers: ["LCDC", "Venus The Fly Trap", "0x01000111", "Qualia"],
+    pass: "#",
+    imageSrc: "",
+  },
+  {
+    title: "Engrammatic Eden",
+    date: "Friday: April 25, 2025",
+    location: "The Terrarium",
+    time: "17:00 - 23:00",
+    performers: [
+      "Sam Crutcher",
+      "Nevaeh",
+      "ILOVECAUSINGDRAMA",
+      "0x01000111",
+      "Venus The Fly Trap",
+    ],
+    pass: "#",
+    imageSrc: "",
+  },
+];
 ---
 
 <Layout title="Events">
-  <h1>Events</h1>
+  <EventSection events={allEvents} />
 </Layout>
