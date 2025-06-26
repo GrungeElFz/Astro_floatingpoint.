@@ -7,16 +7,6 @@ import Logo from "@/assets/logo_horizontal.png";
 <Layout>
   <div class="bg-black">
     <div class="relative isolate px-6 pt-14 lg:px-8">
-      <div
-        class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        aria-hidden="true"
-      >
-        <div
-          class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-cyan-100 to-cyan-700 opacity-35 sm:left-[calc(50%-30rem)] sm:w-288.75"
-          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
-        >
-        </div>
-      </div>
       <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
         <div class="hidden sm:mb-8 sm:flex sm:justify-center">
           <div
@@ -26,7 +16,7 @@ import Logo from "@/assets/logo_horizontal.png";
             <a href="#" class="font-semibold text-cyan-400 hover:text-cyan-300">
               <span class="absolute inset-0" aria-hidden="true"></span>
               Read more
-              <span aria-hidden="true">&rarr;</span>
+              <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
@@ -54,16 +44,36 @@ import Logo from "@/assets/logo_horizontal.png";
           </div>
         </div>
       </div>
-      <div
-        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-        aria-hidden="true"
-      >
+
+      <div class="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <!-- Background: Light 1 (Orbit | Blur) -->
         <div
-          class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-cyan-100 to-cyan-700 opacity-35 sm:left-[calc(50%+36rem)] sm:w-288.75"
-          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+          class="absolute top-1/2 left-1/2 w-5xl h-[338px] -translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none"
+          style="animation: bg-orbit-clockwise 30s linear infinite normal;"
+          aria-hidden="true"
         >
+          <!-- Background: Light 1 (Gradient | Clip-path) -->
+          <div
+            class="absolute inset-0 bg-linear-to-tr from-cyan-100 to-cyan-700 opacity-30"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+          >
+          </div>
+        </div>
+
+        <!-- Background: Light 2 (Orbit | Blur) -->
+        <div
+          class="absolute top-1/2 left-1/2 w-5xl h-[338px] -translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none"
+          style="animation: bg-orbit-clockwise 30s linear infinite normal; animation-delay: -15s;"
+          aria-hidden="true"
+        >
+          <!-- Background: Light 2 (Gradient | Clip-path) -->
+          <div
+            class="absolute inset-0 bg-linear-to-tr from-cyan-100 to-cyan-700 opacity-30"
+            style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%);"
+          >
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</Layout>
+  </div></Layout
+>
