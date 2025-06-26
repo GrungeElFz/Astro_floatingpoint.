@@ -6,6 +6,7 @@ interface EventCardProps {
   title: string;
   date: string;
   time: string;
+  eventDateTime?: number | null | undefined;
   location: string;
   performers: string[];
   pass: string;

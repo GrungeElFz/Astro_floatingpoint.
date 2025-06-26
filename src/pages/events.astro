@@ -1,12 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import EventSection from "@/components/EventSection.astro";
+import { EventSection } from "@/components/EventSection.tsx";
 
 const allEvents = [
   {
     title: "TBA",
     date: "Someday: July 00, 2025",
     time: "00:00",
+    eventDateTime: undefined,
     location: "TBA",
     performers: [
       "Performer 1",
@@ -23,6 +24,7 @@ const allEvents = [
     date: "Friday: June 6, 2025",
     location: "The Terrarium",
     time: "22:00 - 02:00",
+    eventDateTime: 1749265200000,
     performers: ["LCDC", "ILOVECAUSINGDRAMA", "0x01000111", "Qualia"],
     pass: "#",
     imageSrc: "",
@@ -32,6 +34,7 @@ const allEvents = [
     date: "Sunday: May 18, 2025",
     location: "The Terrarium",
     time: "19:00 - 23:00",
+    eventDateTime: 1747612800000,
     performers: ["Dytro", "ILOVECAUSINGDRAMA", "0x01000111", "Qualia", "Fele"],
     pass: "#",
     imageSrc: "",
@@ -41,6 +44,7 @@ const allEvents = [
     date: "Thursday: May 8, 2025",
     location: "The Terrarium",
     time: "19:30 - 00:00",
+    eventDateTime: 1746750600000,
     performers: ["LCDC", "Venus The Fly Trap", "0x01000111", "Qualia"],
     pass: "#",
     imageSrc: "",
@@ -50,6 +54,7 @@ const allEvents = [
     date: "Friday: April 25, 2025",
     location: "The Terrarium",
     time: "17:00 - 23:00",
+    eventDateTime: 1745618400000,
     performers: [
       "Sam Crutcher",
       "Nevaeh",
@@ -64,5 +69,5 @@ const allEvents = [
 ---
 
 <Layout title="Events">
-  <EventSection events={allEvents} />
+  <EventSection events={allEvents} client:load />
 </Layout>
