@@ -1,0 +1,76 @@
+---
+import { MobileMenu } from "@/components/MobileMenu";
+import { Image } from "astro:assets";
+import Logo from "@/assets/logo.png";
+import {
+  SiInstagram,
+  SiSoundcloud,
+  SiYoutube,
+  SiMailboxdotorg,
+} from "@icons-pack/react-simple-icons";
+---
+
+<header class="absolute inset-x-0 top-0 z-50">
+  <nav
+    class="flex items-center justify-between p-6 lg:px-8"
+    aria-label="Global"
+  >
+    <div class="flex lg:flex-1">
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">floatingpoint.</span>
+        <Image src={Logo} class="h-8 w-auto" alt="floatingpoint." />
+      </a>
+    </div>
+    <div class="flex lg:hidden">
+      <MobileMenu client:load />
+    </div>
+
+    <div class="hidden lg:flex lg:gap-x-12">
+      <a href="/sets" class="text-sm/6 font-semibold text-neutral-200">Sets</a>
+      <a href="/videos" class="text-sm/6 font-semibold text-neutral-200"
+        >Videos</a
+      >
+      <a href="/events" class="text-sm/6 font-semibold text-neutral-200"
+        >Events</a
+      >
+      <a href="/about" class="text-sm/6 font-semibold text-neutral-200">About</a
+      >
+    </div>
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      <div class="flex space-x-3 mt-auto">
+        {/* Social Media: SoundCloud */}
+        <a
+          href="https://soundcloud.com/floatingpoint000"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="size-8 rounded-full flex items-center justify-center text-neutral-300 hover:text-white transition-colors"
+          aria-label="SoundCloud profile"
+        >
+          <SiSoundcloud className="size-5" fill="currentColor" stroke="none" />
+        </a>
+
+        {/* Social Media: YouTube */}
+        <a
+          href="https://youtube.com/@floatingpoint000"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="size-8 rounded-full flex items-center justify-center text-neutral-300 hover:text-white transition-colors"
+          aria-label="YouTube channel"
+        >
+          <SiYoutube className="size-5" fill="currentColor" stroke="none" />
+        </a>
+
+        {/* Social Media: Instagram */}
+        <a
+          href="https://instagram.com/floatingpoint___"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="size-8 rounded-full flex items-center justify-center text-neutral-300 hover:bg-text-white transition-colors"
+          aria-label="Instagram profile"
+        >
+          <SiInstagram className="size-5" fill="currentColor" stroke="none" />
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
