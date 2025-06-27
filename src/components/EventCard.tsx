@@ -1,4 +1,3 @@
-// src/components/EventCard.tsx
 import * as React from "react";
 import { Calendar, Clock, MapPin, Users, Ticket } from "lucide-react";
 
@@ -11,6 +10,7 @@ interface EventCardProps {
   performers: string[];
   pass: string;
   imageSrc?: string;
+  className?: string;
 }
 
 export const EventCard: React.FC<EventCardProps> = ({
@@ -21,9 +21,15 @@ export const EventCard: React.FC<EventCardProps> = ({
   performers,
   pass,
   imageSrc,
+  className,
 }) => {
   return (
-    <div className="backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 overflow-hidden text-neutral-300 flex flex-col">
+    <div
+      className={`
+        backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 overflow-hidden text-neutral-300 flex flex-col transition-all duration-300 ease-in-out
+        ${className || ""}
+        `}
+    >
       {/* Event Image */}
       <div className="relative aspect-[4/5] overflow-hidden bg-neutral-900 flex items-center justify-center">
         {imageSrc ? (

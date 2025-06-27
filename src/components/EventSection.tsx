@@ -19,73 +19,60 @@ interface EventSectionProps {
 export const EventSection: React.FC<EventSectionProps> = ({
   events: initialEvents,
 }) => {
-  // State: Manage the current filter ('Upcoming' | 'Past')
-  // Default = 'Upcoming'
-  const [filter, setFilter] = useState<"upcoming" | "past">("upcoming");
-  // State: Hold the events currently being displayed after filtering
-  const [filteredEvents, setFilteredEvents] = useState<EventData[]>([]);
+  // State: `activeFilter` can be 'upcoming', 'past', or `null` (Show all events when no filter)
+  // Initial state: `null` (All events are displayed
+  // Default: No selected button
+  const [activeFilter, setActiveFilter] = useState<"upcoming" | "past" | null>(
+    null
+  );
+  // State: This will hold the full list of sorted events.
+  // Visual filtering (de-emphasis) will be applied during rendering.
+  const [displayedEvents, setDisplayedEvents] = useState<EventData[]>([]);
 
-  // useEffect hook to re-filter and sort events whenever the filter or initialEvents change
+  // Effect to sort initial events once when component mounts or initialEvents change.
+  // The full list is always maintained here.
   useEffect(() => {
-    // Get the current Epoch timestamp in milliseconds
-    // User Local Time
-    const nowEpoch = Date.now();
-
-    // Create a copy of initialEvents and sort them.
-    // Events with no defined eventDateTime are treated as 'Upcoming'
-    const sortedEvents = [...initialEvents].sort((a, b) => {
+    const sortedFullList = [...initialEvents].sort((a, b) => {
       const aTime = a.eventDateTime;
       const bTime = b.eventDateTime;
 
-      // Case Handles:
-      // If one or both of `eventDateTime` values are null or undefined
+      // Sort Logic: Events with no defined `eventDateTime` are considered as 'Upcoming'
+      // This places them at the beginning of the list when sorted ascending.
+      if (aTime == null && bTime != null) return -1; // 'a' (no time) comes before 'b' (has time)
+      if (bTime == null && aTime != null) return 1; // 'b' (no time) comes before 'a' (has time)
+      if (aTime == null && bTime == null) return 0; // Both have no time, maintain relative order
 
-      // 'a' (no time) comes before 'b' (has time)
-      if (aTime == null && bTime != null) return -1;
-
-      // 'b' (no time) comes before 'a' (has time)
-      if (bTime == null && aTime != null) return 1;
-
-      // Both have no time, maintain relative order
-      if (aTime == null && bTime == null) return 0;
-
-      // If both events have a defined eventDateTime, sort them numerically (earliest first)
-      // Use '!' for non-null assertion as we've handled null cases above
-      return aTime! - bTime!;
+      // If both events have a defined `eventDateTime`, sort them numerically (earliest first)
+      return aTime! - bTime!; // Use '!' for non-null assertion as we've handled null cases
     });
+    setDisplayedEvents(sortedFullList);
+  }, [initialEvents]); // Dependency: Re-sort only if the initialEvents prop itself changes
 
-    // Apply the selected filter to the sorted events
-    if (filter === "upcoming") {
-      setFilteredEvents(
-        // 'Upcoming', if its eventDateTime is `null` | `undefined` |  Future Event
-        sortedEvents.filter(
-          (event) =>
-            event.eventDateTime == null || event.eventDateTime >= nowEpoch
-        )
-      );
+  // Helper function to determine if an event is 'upcoming' based on its timestamp
+  // Filtering and Visual De-emphasis
+  const isUpcoming = (event: EventData, nowEpoch: number): boolean => {
+    // An event is upcoming if its eventDateTime is null/undefined OR it's a future event
+    return event.eventDateTime == null || event.eventDateTime >= nowEpoch;
+  };
+
+  // Handler for filter button clicks
+  const handleFilterClick = (filterType: "upcoming" | "past") => {
+    // If the currently active filter is the same as the clicked one
+    if (activeFilter === filterType) {
+      setActiveFilter(null); // Clear filter (Display all events)
     } else {
-      setFilteredEvents(
-        // 'Past', if its eventDateTime is defined && it's a past event.
-        // Reverse the order to show the most recent past events first.
-        sortedEvents
-          .filter(
-            (event) =>
-              event.eventDateTime != null && event.eventDateTime < nowEpoch
-          )
-          .reverse()
-      );
+      // Otherwise, set the new active filter
+      setActiveFilter(filterType);
     }
-  }, [filter, initialEvents]); // Dependencies: Effect re-runs when 'filter' or 'initialEvents' changes
+  };
 
   // Calculate Event Counts
   const nowEpochForCount = Date.now();
-  const upcomingCount = initialEvents.filter(
-    (event) =>
-      event.eventDateTime == null || event.eventDateTime >= nowEpochForCount
+  const upcomingCount = initialEvents.filter((event) =>
+    isUpcoming(event, nowEpochForCount)
   ).length;
   const pastCount = initialEvents.filter(
-    (event) =>
-      event.eventDateTime != null && event.eventDateTime < nowEpochForCount
+    (event) => !isUpcoming(event, nowEpochForCount)
   ).length;
 
   return (
@@ -100,21 +87,21 @@ export const EventSection: React.FC<EventSectionProps> = ({
         {/* Filter buttons */}
         <div className="flex justify-center space-x-4 mb-12">
           <button
-            onClick={() => setFilter("upcoming")}
+            onClick={() => handleFilterClick("upcoming")}
             className={`px-6 py-2 rounded-full border ${
-              filter === "upcoming"
-                ? "border-cyan-200 text-white"
-                : "border-gray-700 text-neutral-400"
+              activeFilter === "upcoming"
+                ? "border-cyan-200 text-white" // Style for selected button
+                : "border-gray-700 text-neutral-400" // Style for unselected button
             } hover:text-white hover:border-cyan-200 transition-colors`}
           >
             Upcoming ({upcomingCount})
           </button>
           <button
-            onClick={() => setFilter("past")}
+            onClick={() => handleFilterClick("past")}
             className={`px-6 py-2 rounded-full border ${
-              filter === "past"
-                ? "border-cyan-200 text-white"
-                : "border-gray-700 text-neutral-400"
+              activeFilter === "past"
+                ? "border-cyan-200 text-white" // Style for selected button
+                : "border-gray-700 text-neutral-400" // Style for unselected button
             } hover:text-white hover:border-cyan-200 transition-colors`}
           >
             Past ({pastCount})
@@ -123,27 +110,42 @@ export const EventSection: React.FC<EventSectionProps> = ({
 
         {/* Event cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredEvents.length > 0 ? (
-            filteredEvents.map((event) => (
-              <EventCard
-                key={
-                  event.title +
-                  event.date +
-                  (event.eventDateTime ?? "undefined")
-                } // Robust key for React lists
-                title={event.title}
-                date={event.date}
-                time={event.time}
-                location={event.location}
-                performers={event.performers}
-                pass={event.pass}
-                imageSrc={event.imageSrc}
-              />
-            ))
+          {displayedEvents.length > 0 ? (
+            displayedEvents.map((event) => {
+              const nowEpoch = Date.now();
+              const eventIsUpcoming = isUpcoming(event, nowEpoch);
+
+              // Check if the current event should be visually de-emphasized
+              const shouldDeemphasize =
+                (activeFilter === "upcoming" && !eventIsUpcoming) ||
+                (activeFilter === "past" && eventIsUpcoming);
+
+              return (
+                <EventCard
+                  key={
+                    event.title +
+                    event.date +
+                    (event.eventDateTime ?? "undefined")
+                  }
+                  title={event.title}
+                  date={event.date}
+                  time={event.time}
+                  location={event.location}
+                  performers={event.performers}
+                  pass={event.pass}
+                  imageSrc={event.imageSrc}
+                  className={
+                    shouldDeemphasize
+                      ? "opacity-50 blur-sm scale-95" // De-emphasized Event Card
+                      : "opacity-100 blur-none scale-100" // Nuetral Event Card
+                  }
+                />
+              );
+            })
           ) : (
-            // Message when no events match the current filter
+            // Message when no events are found in the initial list
             <p className="text-neutral-400 text-lg col-span-full">
-              No {filter} events found.
+              No events found.
             </p>
           )}
         </div>
