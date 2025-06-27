@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import Logo from "@/assets/logo_horizontal.png";
+import { EventSection } from "@/components/EventSection";
+import { allEvents } from "@/data/events.ts";
 ---
 
 <Layout>
@@ -76,4 +78,6 @@ import Logo from "@/assets/logo_horizontal.png";
       </div>
     </div>
   </div>
+
+  <EventSection events={allEvents} client:load />
 </Layout>
