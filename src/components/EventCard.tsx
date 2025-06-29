@@ -70,7 +70,7 @@ export const EventCard: React.FC<EventCardProps> = ({
             <span>{location}</span>
           </div>
 
-          {/* Evebt: Performers */}
+          {/* Event: Performers */}
           <div className="flex items-start text-gray-300">
             <div className="flex-none mr-2">
               <Users size={16} className="text-[#5be6ff]" />
