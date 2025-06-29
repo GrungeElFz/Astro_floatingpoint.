@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { EventCard } from "@/components/EventCard.tsx";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { ArrowRightCircle, ArrowLeft, ArrowRight } from "lucide-react";
 
 export interface EventData {
   imageSrc?: string;
@@ -13,10 +20,12 @@ export interface EventData {
 }
 
 interface EventSectionProps {
+  displayMode?: "grid" | "carousel";
   events: EventData[];
 }
 
 export const EventSection: React.FC<EventSectionProps> = ({
+  displayMode = "grid",
   events: initialEvents,
 }) => {
   // State: `activeFilter` can be 'upcoming', 'past', or `null` (Show all events when no filter)
@@ -28,6 +37,11 @@ export const EventSection: React.FC<EventSectionProps> = ({
   // State: This will hold the full list of sorted events.
   // Visual filtering (de-emphasis) will be applied during rendering.
   const [displayedEvents, setDisplayedEvents] = useState<EventData[]>([]);
+
+  // State for carousel API to manage navigation dots
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   // Effect to sort initial events once when component mounts or initialEvents change.
   // The full list is always maintained here.
@@ -47,6 +61,19 @@ export const EventSection: React.FC<EventSectionProps> = ({
     });
     setDisplayedEvents(sortedFullList);
   }, [initialEvents]); // Dependency: Re-sort only if the initialEvents prop itself changes
+
+  // Effect to connect to the carousel API and dot indicators
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
   // Helper function to determine if an event is 'upcoming' based on its timestamp
   // Filtering and Visual De-emphasis
@@ -74,6 +101,90 @@ export const EventSection: React.FC<EventSectionProps> = ({
   const pastCount = initialEvents.filter(
     (event) => !isUpcoming(event, nowEpochForCount)
   ).length;
+
+  // Helper function to render event cards for both grid and carousel modes
+  const renderEventCards = () => {
+    const maxCarouselEvents = 5;
+    const eventsToRender =
+      displayMode === "carousel"
+        ? displayedEvents.slice(0, maxCarouselEvents)
+        : displayedEvents;
+
+    if (eventsToRender.length === 0 && displayMode === "grid") {
+      // Message when no events are found in the initial list
+      return (
+        <p className="text-neutral-400 text-lg col-span-full">
+          No events found.
+        </p>
+      );
+    }
+
+    const cardComponents = eventsToRender.map((event) => {
+      const nowEpoch = Date.now();
+      const eventIsUpcoming = isUpcoming(event, nowEpoch);
+
+      // Check if the current event should be visually de-emphasized
+      const shouldDeemphasize =
+        (activeFilter === "upcoming" && !eventIsUpcoming) ||
+        (activeFilter === "past" && eventIsUpcoming);
+
+      const eventCard = (
+        <EventCard
+          key={event.title + event.date + (event.eventDateTime ?? "undefined")}
+          title={event.title}
+          date={event.date}
+          time={event.time}
+          location={event.location}
+          performers={event.performers}
+          pass={event.pass}
+          imageSrc={event.imageSrc}
+          className={
+            shouldDeemphasize
+              ? "opacity-50 blur-sm scale-95" // De-emphasized Event Card
+              : "opacity-100 blur-none scale-100" // Nuetral Event Card
+          }
+        />
+      );
+
+      if (displayMode === "carousel") {
+        return (
+          <CarouselItem
+            key={
+              event.title + event.date + (event.eventDateTime ?? "undefined")
+            }
+            className="basis-full md:basis-1/2 lg:basis-1/3"
+          >
+            <div className="p-1 h-full">{eventCard}</div>
+          </CarouselItem>
+        );
+      }
+      return eventCard;
+    });
+
+    // Append a "View All" card, if there are more events than the carousel limit
+    if (
+      displayMode === "carousel" &&
+      initialEvents.length > maxCarouselEvents
+    ) {
+      cardComponents.push(
+        <CarouselItem
+          key="view-all"
+          className="basis-full md:basis-1/2 lg:basis-1/3"
+        >
+          <div className="p-1 h-full">
+            <a
+              href="/events"
+              className="flex flex-col items-center justify-center w-full h-full backdrop-blur-sm bg-white/5 rounded-3xl border border-dashed border-white/20 text-neutral-300 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+            >
+              <span className="text-lg font-bold">View All Events</span>
+              <ArrowRightCircle size={32} className="mt-4 text-[#5be6ff]" />
+            </a>
+          </div>
+        </CarouselItem>
+      );
+    }
+    return cardComponents;
+  };
 
   return (
     <section className="bg-black text-neutral-100 py-16 sm:py-24">
@@ -108,47 +219,61 @@ export const EventSection: React.FC<EventSectionProps> = ({
           </button>
         </div>
 
-        {/* Event cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayedEvents.length > 0 ? (
-            displayedEvents.map((event) => {
-              const nowEpoch = Date.now();
-              const eventIsUpcoming = isUpcoming(event, nowEpoch);
+        {displayMode === "carousel" ? (
+          // Carousel and Controls Wrapper
+          <div>
+            <Carousel
+              setApi={setApi}
+              opts={{
+                align: "start",
+                loop: false,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {renderEventCards()}
+              </CarouselContent>
+            </Carousel>
 
-              // Check if the current event should be visually de-emphasized
-              const shouldDeemphasize =
-                (activeFilter === "upcoming" && !eventIsUpcoming) ||
-                (activeFilter === "past" && eventIsUpcoming);
+            {/* Navigation Controls */}
+            <div className="flex items-center justify-center space-x-4 mt-8">
+              <button
+                onClick={() => api?.scrollPrev()}
+                disabled={current === 1}
+                className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
+              >
+                <ArrowLeft size={16} />
+              </button>
 
-              return (
-                <EventCard
-                  key={
-                    event.title +
-                    event.date +
-                    (event.eventDateTime ?? "undefined")
-                  }
-                  title={event.title}
-                  date={event.date}
-                  time={event.time}
-                  location={event.location}
-                  performers={event.performers}
-                  pass={event.pass}
-                  imageSrc={event.imageSrc}
-                  className={
-                    shouldDeemphasize
-                      ? "opacity-50 blur-sm scale-95" // De-emphasized Event Card
-                      : "opacity-100 blur-none scale-100" // Nuetral Event Card
-                  }
-                />
-              );
-            })
-          ) : (
-            // Message when no events are found in the initial list
-            <p className="text-neutral-400 text-lg col-span-full">
-              No events found.
-            </p>
-          )}
-        </div>
+              <div className="flex items-center justify-center space-x-2">
+                {Array.from({ length: count }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => api?.scrollTo(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      current === index + 1
+                        ? "bg-neutral-400"
+                        : "bg-neutral-700 hover:bg-neutral-500"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={() => api?.scrollNext()}
+                disabled={current === count}
+                className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
+              >
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        ) : (
+          // Event cards grid
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {renderEventCards()}
+          </div>
+        )}
       </div>
     </section>
   );
