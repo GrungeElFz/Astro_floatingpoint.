@@ -223,7 +223,9 @@ export const EventSection: React.FC<EventSectionProps> = ({
   return (
     <section className="bg-black text-neutral-100 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
-        <h2 className="text-4xl sm:text-5xl font-bold mb-12">Events</h2>
+        <h2 className="text-4xl sm:text-5xl font-bold mb-12">
+          <a href="/events">Events</a>
+        </h2>
         <p className="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mb-12 mt-8">
           Immersive sonic environment that push the boundaries of sound and
           space.
