@@ -43,22 +43,33 @@ export const EventSection: React.FC<EventSectionProps> = ({
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
 
-  // Effect to sort initial events once when component mounts or initialEvents change.
-  // The full list is always maintained here.
+  // useEffect: Sort events by placing 'upcoming' first && 'past' in reverse chronological order
   useEffect(() => {
-    const sortedFullList = [...initialEvents].sort((a, b) => {
+    const now = Date.now();
+
+    // Separate events into 'upcoming' and 'past' groups for different sorting rules
+    const upcomingEvents = initialEvents.filter(
+      (event) => event.eventDateTime == null || event.eventDateTime >= now
+    );
+    const pastEvents = initialEvents.filter(
+      (event) => event.eventDateTime != null && event.eventDateTime < now
+    );
+
+    // Sort 'upcoming' events ascending, with null-date events at the top
+    upcomingEvents.sort((a, b) => {
       const aTime = a.eventDateTime;
       const bTime = b.eventDateTime;
-
-      // Sort Logic: Events with no defined `eventDateTime` are considered as 'Upcoming'
-      // This places them at the beginning of the list when sorted ascending.
-      if (aTime == null && bTime != null) return -1; // 'a' (no time) comes before 'b' (has time)
-      if (bTime == null && aTime != null) return 1; // 'b' (no time) comes before 'a' (has time)
-      if (aTime == null && bTime == null) return 0; // Both have no time, maintain relative order
-
-      // If both events have a defined `eventDateTime`, sort them numerically (earliest first)
-      return aTime! - bTime!; // Use '!' for non-null assertion as we've handled null cases
+      if (aTime == null && bTime != null) return -1;
+      if (bTime == null && aTime != null) return 1;
+      if (aTime == null && bTime == null) return 0;
+      return aTime! - bTime!;
     });
+
+    // Sort 'past' events descending (Most Recent First)
+    pastEvents.sort((a, b) => b.eventDateTime! - a.eventDateTime!);
+
+    // Combine the sorted lists back together and update the state.
+    const sortedFullList = [...upcomingEvents, ...pastEvents];
     setDisplayedEvents(sortedFullList);
   }, [initialEvents]); // Dependency: Re-sort only if the initialEvents prop itself changes
 
