@@ -1,3 +1,27 @@
+import type { ImageMetadata } from "astro";
+
+// Automatically search all the event cover images in `@/assets/events` directory
+const allEventImages = import.meta.glob<{ default: ImageMetadata }>(
+  "@/assets/events/*.{png,jpg,jpeg,webp}",
+  { eager: true }
+);
+
+const getEventImage = (title: string, ratio: "4x5" | "1x1" = "4x5") => {
+  // Create the unique part of the file name from the title
+  // (e.g., "cover-4x5-the-deans-list")
+  const slug = title.toLowerCase().replace(/'/g, "").replace(/\s+/g, "-");
+  const fileNameFragment = `cover-${ratio}-${slug}`;
+
+  // Search the full path of the image that contains the unique fragment
+  const imagePath = Object.keys(allEventImages).find((path) =>
+    path.includes(fileNameFragment)
+  );
+
+  // Return the image source if found, otherwise return undefined.
+  // The <EventCard /> component handles the fallback, if the src is undefined.
+  return imagePath ? allEventImages[imagePath]?.default.src : undefined;
+};
+
 export const allEvents = [
   {
     title: "TBA",
@@ -13,7 +37,7 @@ export const allEvents = [
       "Performer 5",
     ],
     pass: "#",
-    imageSrc: "",
+    imageSrc: getEventImage("TBA"),
   },
   {
     title: "Zenith",
@@ -23,7 +47,7 @@ export const allEvents = [
     eventDateTime: 1749265200000,
     performers: ["LCDC", "ILOVECAUSINGDRAMA", "0x01000111", "Qualia"],
     pass: "#",
-    imageSrc: "",
+    imageSrc: getEventImage("Zenith"),
   },
   {
     title: "The Dean's List",
@@ -33,7 +57,7 @@ export const allEvents = [
     eventDateTime: 1747612800000,
     performers: ["Dytro", "ILOVECAUSINGDRAMA", "0x01000111", "Qualia", "Fele"],
     pass: "#",
-    imageSrc: "",
+    imageSrc: getEventImage("The Dean's List"),
   },
   {
     title: "Bipolarity",
@@ -43,7 +67,7 @@ export const allEvents = [
     eventDateTime: 1746750600000,
     performers: ["LCDC", "Venus The Fly Trap", "0x01000111", "Qualia"],
     pass: "#",
-    imageSrc: "",
+    imageSrc: getEventImage("Bipolarity"),
   },
   {
     title: "Engrammatic Eden",
@@ -59,6 +83,6 @@ export const allEvents = [
       "Venus The Fly Trap",
     ],
     pass: "#",
-    imageSrc: "",
+    imageSrc: getEventImage("Engrammatic Eden"),
   },
 ];
