@@ -24,6 +24,15 @@ interface EventSectionProps {
   events: EventData[];
 }
 
+// Helper to generate a unique ID for each event card
+const generateEventId = (event: EventData) => {
+  const slug = event.title
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+  return `event-${slug}-${event.date.replace(/\s/g, "-")}`;
+};
+
 export const EventSection: React.FC<EventSectionProps> = ({
   displayMode = "grid",
   events: initialEvents,
@@ -93,14 +102,36 @@ export const EventSection: React.FC<EventSectionProps> = ({
     return event.eventDateTime == null || event.eventDateTime >= nowEpoch;
   };
 
-  // Handler for filter button clicks
+  // Handler for filter button clicks, scrolls carousel to the targeted event card section
   const handleFilterClick = (filterType: "upcoming" | "past") => {
-    // If the currently active filter is the same as the clicked one
-    if (activeFilter === filterType) {
-      setActiveFilter(null); // Clear filter (Display all events)
-    } else {
-      // Otherwise, set the new active filter
-      setActiveFilter(filterType);
+    const newFilter = activeFilter === filterType ? null : filterType;
+    setActiveFilter(newFilter);
+
+    const findTargetEvent = () => {
+      if (newFilter === null) {
+        return displayedEvents[0];
+      }
+      const now = Date.now();
+      return displayedEvents.find((event) => {
+        const eventIsUpcoming = isUpcoming(event, now);
+        return newFilter === "upcoming" ? eventIsUpcoming : !eventIsUpcoming;
+      });
+    };
+
+    const targetEvent = findTargetEvent();
+    if (!targetEvent) return;
+
+    if (displayMode === "carousel" && api) {
+      const targetIndex = displayedEvents.indexOf(targetEvent);
+      if (targetIndex > -1) {
+        api.scrollTo(targetIndex);
+      }
+    } else if (displayMode === "grid") {
+      const targetId = generateEventId(targetEvent);
+      document.getElementById(targetId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   };
 
@@ -141,6 +172,7 @@ export const EventSection: React.FC<EventSectionProps> = ({
 
       const eventCard = (
         <EventCard
+          id={generateEventId(event)}
           key={event.title + event.date + (event.eventDateTime ?? "undefined")}
           title={event.title}
           date={event.date}

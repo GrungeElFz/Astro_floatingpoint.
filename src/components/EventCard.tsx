@@ -2,6 +2,7 @@ import * as React from "react";
 import { Calendar, Clock, MapPin, Users, Ticket } from "lucide-react";
 
 interface EventCardProps {
+  id?: string;
   title: string;
   date: string;
   time: string;
@@ -14,6 +15,7 @@ interface EventCardProps {
 }
 
 export const EventCard: React.FC<EventCardProps> = ({
+  id,
   title,
   date,
   time,
@@ -25,6 +27,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 }) => {
   return (
     <div
+      id={id}
       className={`
         h-full backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 overflow-hidden text-neutral-300 flex flex-col transition-all duration-300 ease-in-out
         ${className || ""}
