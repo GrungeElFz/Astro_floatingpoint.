@@ -12,6 +12,7 @@ interface EventCardProps {
   pass: string;
   imageSrc?: string;
   className?: string;
+  onCardClick?: () => void;
 }
 
 export const EventCard: React.FC<EventCardProps> = ({
@@ -24,10 +25,12 @@ export const EventCard: React.FC<EventCardProps> = ({
   pass,
   imageSrc,
   className,
+  onCardClick,
 }) => {
   return (
     <div
       id={id}
+      onClick={onCardClick}
       className={`
         h-full backdrop-blur-sm bg-white/5 rounded-3xl border border-white/10 overflow-hidden text-neutral-300 flex flex-col transition-all duration-300 ease-in-out
         ${className || ""}
@@ -43,7 +46,6 @@ export const EventCard: React.FC<EventCardProps> = ({
             loading="lazy"
           />
         ) : (
-          // Fall Back Image
           <img
             src="src/assets/logo.png"
             alt={title}
@@ -72,8 +74,6 @@ export const EventCard: React.FC<EventCardProps> = ({
             <MapPin size={16} className="mr-2 text-[#5be6ff]" />
             <span>{location}</span>
           </div>
-
-          {/* Event: Performers */}
           <div className="flex items-start text-gray-300">
             <div className="flex-none mr-2">
               <Users size={16} className="text-[#5be6ff]" />
@@ -97,6 +97,7 @@ export const EventCard: React.FC<EventCardProps> = ({
           href={pass}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
           className="w-full inline-flex items-center justify-center border-2 border-gray-400 text-neutral-200 hover:text-white hover:outline-2 hover:outline-cyan-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 font-medium rounded-full py-2 px-4 transition-all duration-300 mt-auto"
         >
           Pass

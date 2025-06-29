@@ -102,11 +102,17 @@ export const EventSection: React.FC<EventSectionProps> = ({
     return event.eventDateTime == null || event.eventDateTime >= nowEpoch;
   };
 
-  // Handler for filter button clicks, scrolls carousel to the targeted event card section
-  const handleFilterClick = (filterType: "upcoming" | "past") => {
-    const newFilter = activeFilter === filterType ? null : filterType;
+  // Handler for filter button clicks, which scrolls to the targeted event card section.
+  const handleFilterClick = (filterType: "upcoming" | "past" | null) => {
+    const newFilter =
+      filterType === null
+        ? null
+        : activeFilter === filterType
+        ? null
+        : filterType;
     setActiveFilter(newFilter);
 
+    // This logic only runs for button clicks, not for card clicks.
     const findTargetEvent = () => {
       if (newFilter === null) {
         return displayedEvents[0];
@@ -161,7 +167,7 @@ export const EventSection: React.FC<EventSectionProps> = ({
       );
     }
 
-    const cardComponents = eventsToRender.map((event) => {
+    return eventsToRender.map((event) => {
       const nowEpoch = Date.now();
       const eventIsUpcoming = isUpcoming(event, nowEpoch);
 
@@ -170,9 +176,18 @@ export const EventSection: React.FC<EventSectionProps> = ({
         (activeFilter === "upcoming" && !eventIsUpcoming) ||
         (activeFilter === "past" && eventIsUpcoming);
 
+      // Defines the click behavior for each card
+      const handleCardClick = () => {
+        // If a de-emphasized card is clicked, clear the filter
+        if (shouldDeemphasize) {
+          setActiveFilter(null);
+        }
+      };
+
       const eventCard = (
         <EventCard
           id={generateEventId(event)}
+          onCardClick={handleCardClick}
           key={event.title + event.date + (event.eventDateTime ?? "undefined")}
           title={event.title}
           date={event.date}
@@ -183,8 +198,8 @@ export const EventSection: React.FC<EventSectionProps> = ({
           imageSrc={event.imageSrc}
           className={
             shouldDeemphasize
-              ? "opacity-50 blur-sm scale-95" // De-emphasized Event Card
-              : "opacity-100 blur-none scale-100" // Nuetral Event Card
+              ? "opacity-50 blur-sm scale-95 cursor-pointer"
+              : "opacity-100 blur-none scale-100"
           }
         />
       );
@@ -203,30 +218,6 @@ export const EventSection: React.FC<EventSectionProps> = ({
       }
       return eventCard;
     });
-
-    // Append a "View All" card, if there are more events than the carousel limit
-    if (
-      displayMode === "carousel" &&
-      initialEvents.length > maxCarouselEvents
-    ) {
-      cardComponents.push(
-        <CarouselItem
-          key="view-all"
-          className="basis-full md:basis-1/2 lg:basis-1/3"
-        >
-          <div className="p-1 h-full">
-            <a
-              href="/events"
-              className="flex flex-col items-center justify-center w-full h-full backdrop-blur-sm bg-white/5 rounded-3xl border border-dashed border-white/20 text-neutral-300 hover:bg-white/10 hover:border-white/30 transition-all duration-300"
-            >
-              <span className="text-lg font-bold">View All Events</span>
-              <ArrowRightCircle size={32} className="mt-4 text-[#5be6ff]" />
-            </a>
-          </div>
-        </CarouselItem>
-      );
-    }
-    return cardComponents;
   };
 
   return (
