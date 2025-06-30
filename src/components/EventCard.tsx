@@ -50,7 +50,7 @@ export const EventCard: React.FC<EventCardProps> = ({
           <img
             src={fallbackImage.src}
             alt={title}
-            className="w-fit h-fit"
+            className="w-fit h-fit object-contain"
             loading="lazy"
           />
         )}
