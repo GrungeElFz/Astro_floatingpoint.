@@ -118,3 +118,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes bg-orbit-clockwise {
+  0% {
+    /* Self-rotation starts at 0deg */
+    transform: rotate(0deg) translateX(250px) rotate(0deg);
+  }
+  25% {
+    /* Self-rotates 180deg (1/2 turn) */
+    transform: rotate(90deg) translateX(250px) rotate(-180deg);
+  }
+  50% {
+    /* Self-rotates 360deg (1 full turn) */
+    transform: rotate(180deg) translateX(250px) rotate(-360deg);
+  }
+  75% {
+    /* Self-rotates 540deg (1.5 turns) */
+    transform: rotate(270deg) translateX(250px) rotate(-540deg);
+  }
+  100% {
+    /* Completes orbit and 720deg (2 full turns, self-rotation) */
+    transform: rotate(360deg) translateX(250px) rotate(-720deg);
+  }
+}

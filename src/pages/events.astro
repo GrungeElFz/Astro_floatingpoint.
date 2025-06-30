@@ -1,7 +1,9 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
+import { EventSection } from "@/components/EventSection.tsx";
+import { allEvents } from "@/data/events.ts";
 ---
 
 <Layout title="Events">
-  <h1>Events</h1>
+  <EventSection events={allEvents} client:load />
 </Layout>
