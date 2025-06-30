@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Calendar, Clock, MapPin, Users, Ticket } from "lucide-react";
+import fallbackImage from "@/assets/logo.png";
 
 interface EventCardProps {
   id?: string;
@@ -47,7 +48,7 @@ export const EventCard: React.FC<EventCardProps> = ({
           />
         ) : (
           <img
-            src="src/assets/logo.png"
+            src={fallbackImage.src}
             alt={title}
             className="w-fit h-fit"
             loading="lazy"
