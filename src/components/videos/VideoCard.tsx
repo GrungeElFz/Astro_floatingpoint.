@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PlayCircle } from "lucide-react";
+import { Play } from "lucide-react";
 
 interface VideoCardProps {
   video: {
@@ -26,7 +26,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, className }) => {
       href={youtubeVideoUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`block rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 text-neutral-300 transition-all duration-300 ease-in-out ${
+      className={`group block rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 text-neutral-300 transition-all duration-300 ease-in-out hover:bg-white/10 ${
         className || ""
       }`}
     >
@@ -34,13 +34,20 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, className }) => {
         <img
           src={youtubeThumbnailUrl}
           alt={video.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
-        <PlayCircle
-          size={48}
-          className="absolute text-white/80 hover:text-white transition-colors"
-        />
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 ease-in-out"></div>
+
+        {/* Play Button */}
+        <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#5be6ff] hover:bg-[#4dd4ed] text-black rounded-full p-3 transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100">
+          <Play size={24} className="ml-0.5" />
+        </button>
+
+        {/* Duration Badge */}
+        <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs font-medium">
+          {video.duration}
+        </div>
       </div>
 
       <div className="p-4 flex flex-col flex-grow">
@@ -54,16 +61,17 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, className }) => {
             </span>
           ))}
         </div>
-        <h3 className="text-left text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-3">
+        <h3 className="text-left text-lg font-bold text-white mb-1 group-hover:text-[#5be6ff] transition-colors">
           {video.title}
         </h3>
-        <p className="text-left text-md font-normal text-white group-hover:text-cyan-400 transition-colors mb-3">
-          {video.duration}
+        <p className="text-left text-sm text-neutral-300 mb-3">
+          by {video.artist}
         </p>
-        <p className="text-sm text-neutral-400 mb-3">
-          by {video.artist} • {video.event} • {video.date}
-        </p>
-        <p className="text-xs text-neutral-500 line-clamp-2">
+        <div className="flex justify-between items-center text-sm text-neutral-400 mb-4">
+          <span>{video.event}</span>
+          <span>{video.date}</span>
+        </div>
+        <p className="text-sm font-light text-neutral-400 line-clamp-2">
           {video.description}
         </p>
       </div>
