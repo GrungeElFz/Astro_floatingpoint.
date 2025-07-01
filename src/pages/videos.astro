@@ -1,7 +1,9 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
+import { VideoSection } from "@/components/videos/VideoSection.tsx";
+import { allVideos } from "@/data/videos.ts";
 ---
 
 <Layout title="Videos">
-  <h1>Videos</h1>
+  <VideoSection videos={allVideos} displayMode="grid" client:load />
 </Layout>

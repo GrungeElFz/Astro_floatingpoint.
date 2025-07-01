@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EventCard } from "@/components/EventCard.tsx";
+import { EventCard } from "@/components/events/EventCard.tsx";
 import {
   Carousel,
   CarouselContent,
