@@ -1,0 +1,50 @@
+---
+import { YouTubeFeature } from "@/components/videos/youtube/YouTubeFeature.tsx";
+import { YouTubeSection } from "@/components/videos/youtube/YouTubeSection.tsx";
+import type { VideoData } from "@/data/videos.ts";
+
+interface Props {
+  videos: VideoData[];
+  displayMode: "grid" | "carousel";
+}
+
+const { videos: allVideos, displayMode } = Astro.props;
+
+// Find the featured video
+const featuredVideo = allVideos.find((video) => video.isFeatured);
+
+// Filter out the featured video from the grid list, so it's not duplicated
+const gridVideos = allVideos.filter((video) => !video.isFeatured);
+---
+
+<div class="bg-black text-neutral-100 py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+    {
+      displayMode === "grid" && (
+        <>
+          <h1 class="text-5xl sm:text-6xl font-bold mb-4">Videos</h1>
+          <p class="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mb-12">
+            Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+            consectetur, adipisci velit...
+          </p>
+        </>
+      )
+    }
+
+    {/* Render the Featured Video Player component */}
+    {
+      featuredVideo ? (
+        <div class="mb-16">
+          <YouTubeFeature video={featuredVideo} client:load />
+        </div>
+      ) : (
+        <p class="text-neutral-400 text-lg mb-16">
+          No featured video available.
+        </p>
+      )
+    }
+
+    {/* Render the Video Grid Section React component */}
+    <YouTubeSection videos={gridVideos} client:load />
+  </div>
+</div>

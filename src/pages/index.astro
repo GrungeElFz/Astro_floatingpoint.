@@ -4,6 +4,8 @@ import { Image } from "astro:assets";
 import Logo from "@/assets/logo_horizontal.png";
 import { EventSection } from "@/components/events/EventSection.tsx";
 import { allEvents } from "@/data/events.ts";
+import VideoSection from "@/components/videos/VideoSection.astro";
+import { allVideos } from "@/data/videos.ts";
 ---
 
 <Layout>
@@ -80,4 +82,5 @@ import { allEvents } from "@/data/events.ts";
   </div>
 
   <EventSection displayMode="carousel" events={allEvents} client:load />
+  <VideoSection displayMode="grid" videos={allVideos} client:visible />
 </Layout>
