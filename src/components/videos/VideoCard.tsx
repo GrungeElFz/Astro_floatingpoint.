@@ -37,7 +37,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, className }) => {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 ease-in-out"></div>
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 ease-in-out hover:scale-105"></div>
 
         {/* Play Button */}
         <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#5be6ff] hover:bg-[#4dd4ed] text-black rounded-full p-3 transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100">
@@ -68,7 +68,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, className }) => {
           by {video.artist}
         </p>
         <div className="flex justify-between items-center text-sm text-neutral-400 mb-4">
-          <span>{video.event}</span>
+          <span>{video.location}</span>
           <span>{video.date}</span>
         </div>
         <p className="text-sm font-light text-neutral-400 line-clamp-2">
