@@ -86,17 +86,4 @@ export const allVideos: VideoData[] = [
     duration: "0:41",
     categories: ["Live Performance", "Highlight"],
   },
-  {
-    id: "grid-video-5",
-    title: "Test - Title",
-    artist: "Test - Performer",
-    event: "Test - Event",
-    location: "The Terrarium",
-    date: "Month 00, 2025",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    youtubeId: "",
-    duration: "0:00",
-    categories: ["Test", "Behind the Scenes"],
-  },
 ];
