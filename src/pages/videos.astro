@@ -1,7 +1,41 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import Layout from "../layouts/Layout.astro";
+import { VideoFeature } from "@/components/videos/VideoFeature.tsx"; //
+import { VideoSection } from "@/components/videos/VideoSection.tsx";
+
+import { allVideos, type VideoData } from "@/data/videos.ts";
+
+// Find the featured video
+const featuredVideo = allVideos.find((video) => video.isFeatured);
+
+// Filter out the featured video from the grid list, so it's not duplicated
+const gridVideos = allVideos.filter((video) => !video.isFeatured);
 ---
 
 <Layout title="Videos">
-  <h1>Videos</h1>
+  <div class="bg-black text-neutral-100 py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+      <h1 class="text-5xl sm:text-6xl font-bold mb-4">Videos</h1>
+      <p
+        class="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mb-12"
+      >
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
+        consectetur, adipisci velit...
+      </p>
+
+      {/* Render the Featured Video Player component */}
+      {
+        featuredVideo ? (
+          <VideoFeature video={featuredVideo} client:load />
+        ) : (
+          <p class="text-neutral-400 text-lg mb-16">
+            No featured video available.
+          </p>
+        )
+      }
+
+      {/* Render the Video Grid Section React component */}
+      <VideoSection videos={gridVideos} client:load />
+    </div>
+  </div>
 </Layout>
