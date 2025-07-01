@@ -62,7 +62,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, className }) => {
           ))}
         </div>
         <h3 className="text-left text-lg font-bold text-white mb-1 group-hover:text-[#5be6ff] transition-colors">
-          {video.title}
+          {video.event}
         </h3>
         <p className="text-left text-sm text-neutral-300 mb-3">
           by {video.artist}
