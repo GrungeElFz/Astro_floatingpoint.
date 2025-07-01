@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Play, Youtube, Eye, Calendar, MapPin } from "lucide-react";
 import { type VideoData } from "@/data/videos";
 
-interface VideoFeatureProps {
+interface YouTubeFeatureProps {
   video: VideoData;
 }
 
-export const VideoFeature: React.FC<VideoFeatureProps> = ({ video }) => {
+export const YouTubeFeature: React.FC<YouTubeFeatureProps> = ({ video }) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // YouTube URLs

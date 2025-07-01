@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Play } from "lucide-react";
 
-interface VideoCardProps {
+interface YouTubeCardProps {
   video: {
     id: string;
     title: string;
@@ -17,7 +17,7 @@ interface VideoCardProps {
   className?: string;
 }
 
-export const VideoCard: React.FC<VideoCardProps> = ({ video, className }) => {
+export const YouTubeCard: React.FC<YouTubeCardProps> = ({ video, className }) => {
   const youtubeVideoUrl = `http://www.youtube.com/watch?v=${video.youtubeId}`;
   const youtubeThumbnailUrl = `http://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`;
 

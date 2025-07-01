@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from "react";
-import { VideoCard } from "@/components/videos/VideoCard.tsx";
+import { YouTubeCard } from "@/components/videos/youtube/YouTubeCard.tsx";
 import { type VideoData, type VideoCategory } from "@/data/videos";
 
 type FilterCategory = VideoCategory | "All";
 
-interface VideoSectionProps {
+interface YouTubeSectionProps {
   videos: VideoData[];
 }
 
-export const VideoSection: React.FC<VideoSectionProps> = ({
+export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
   videos: allVideos,
 }) => {
   const allCategories = useMemo(() => {
@@ -55,7 +55,7 @@ export const VideoSection: React.FC<VideoSectionProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredVideos.length > 0 ? (
             filteredVideos.map((video) => (
-              <VideoCard key={video.id} video={video} />
+              <YouTubeCard key={video.id} video={video} />
             ))
           ) : (
             <p className="text-neutral-400 text-lg col-span-full">
