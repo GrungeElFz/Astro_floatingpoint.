@@ -65,6 +65,7 @@ export const allVideos: VideoData[] = [
     title: "The Dean's List - 0x01000111",
     artist: "0x01000111",
     event: "The Dean's List",
+    location: "The Terrarium",
     date: "May 18, 2025",
     description:
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
@@ -77,6 +78,7 @@ export const allVideos: VideoData[] = [
     title: "The Dean's List - ILOVECAUSINGDRAMA",
     artist: "ILOVECAUSINGDRAMA",
     event: "The Dean's List",
+    location: "The Terrarium",
     date: "May 18, 2025",
     description:
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
@@ -89,6 +91,7 @@ export const allVideos: VideoData[] = [
     title: "Test - Title",
     artist: "Test - Performer",
     event: "Test - Event",
+    location: "The Terrarium",
     date: "Month 00, 2025",
     description:
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
