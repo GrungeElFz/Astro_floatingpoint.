@@ -6,6 +6,7 @@ import { EventSection } from "@/components/events/EventSection.tsx";
 import { allEvents } from "@/data/events.ts";
 import { VideoSection } from "@/components/videos/VideoSection.tsx";
 import { allVideos } from "@/data/videos.ts";
+import { SetSection } from "@/components/sets/SetSection";
 ---
 
 <Layout>
@@ -83,4 +84,5 @@ import { allVideos } from "@/data/videos.ts";
 
   <EventSection displayMode="carousel" events={allEvents} client:load />
   <VideoSection displayMode="grid" videos={allVideos} client:visible />
+  <SetSection client:load />
 </Layout>
