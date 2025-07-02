@@ -9,6 +9,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type ProcessedSet = SetData & {
   coverArtUrl: string;
@@ -18,6 +19,54 @@ type ProcessedSet = SetData & {
 interface SetsSectionProps {
   displayMode?: "grid" | "carousel";
 }
+
+// --- SKELETON COMPONENTS WITH DARKER COLORS ---
+
+const SkeletonFeature = () => (
+  <div className="flex flex-col md:flex-row gap-6 lg:gap-8 bg-neutral-900/50 rounded-3xl shadow-2xl border border-white/10 overflow-hidden">
+    <div className="w-full md:w-1/2 aspect-square bg-neutral-800">
+      <Skeleton className="w-full h-full bg-neutral-800" />
+    </div>
+    <div className="w-full md:w-1/2 flex flex-col justify-center text-left p-6">
+      <Skeleton className="h-8 w-5/6 mb-2 bg-neutral-800" />
+      <Skeleton className="h-6 w-1/3 mb-6 bg-neutral-800" />
+      <div className="space-y-2 text-neutral-300 mb-6">
+        <p className="flex items-center gap-3">
+          <Skeleton className="h-5 w-5 rounded-full bg-neutral-800" />
+          <Skeleton className="h-5 w-1/4 bg-neutral-800" />
+        </p>
+        <p className="flex items-center gap-3">
+          <Skeleton className="h-5 w-5 rounded-full bg-neutral-800" />
+          <Skeleton className="h-5 w-1/3 bg-neutral-800" />
+        </p>
+        <p className="flex items-center gap-3">
+          <Skeleton className="h-5 w-5 rounded-full bg-neutral-800" />
+          <Skeleton className="h-5 w-1/2 bg-neutral-800" />
+        </p>
+      </div>
+      <Skeleton className="h-16 w-full mb-8 bg-neutral-800" />
+      <Skeleton className="h-12 w-48 rounded-full self-start mt-auto bg-neutral-800" />
+    </div>
+  </div>
+);
+
+const SkeletonCard = () => (
+  <div className="group block rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10">
+    <div className="relative aspect-square bg-neutral-900">
+      <Skeleton className="w-full h-full bg-neutral-800" />
+    </div>
+    <div className="p-4 flex flex-col flex-grow">
+      <Skeleton className="h-6 w-3/4 mb-1 bg-neutral-800" />
+      <Skeleton className="h-4 w-1/2 mb-3 bg-neutral-800" />
+      <div className="flex justify-between items-center text-sm text-neutral-400 mb-4">
+        <Skeleton className="h-4 w-1/3 bg-neutral-800" />
+        <Skeleton className="h-4 w-1/4 bg-neutral-800" />
+      </div>
+      <Skeleton className="h-4 w-full bg-neutral-800" />
+      <Skeleton className="h-4 w-5/6 mt-1 bg-neutral-800" />
+    </div>
+  </div>
+);
 
 export const SetSection: React.FC<SetsSectionProps> = ({
   displayMode = "grid",
@@ -29,16 +78,19 @@ export const SetSection: React.FC<SetsSectionProps> = ({
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    fetch("/api/sets")
-      .then((res) => res.json())
-      .then((data: ProcessedSet[]) => {
-        setSets(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to load sets:", err);
-        setLoading(false);
-      });
+    const timer = setTimeout(() => {
+      fetch("/api/sets")
+        .then((res) => res.json())
+        .then((data: ProcessedSet[]) => {
+          setSets(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Failed to load sets:", err);
+          setLoading(false);
+        });
+    }, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -50,10 +102,6 @@ export const SetSection: React.FC<SetsSectionProps> = ({
 
   const featuredSet = useMemo(() => sets.find((set) => set.isFeatured), [sets]);
   const gridSets = useMemo(() => sets.filter((set) => !set.isFeatured), [sets]);
-
-  if (loading) {
-    return <div className="text-white text-center py-24">Loading sets...</div>;
-  }
 
   const setsDisplay =
     displayMode === "carousel" ? (
@@ -74,7 +122,6 @@ export const SetSection: React.FC<SetsSectionProps> = ({
             ))}
           </CarouselContent>
         </Carousel>
-
         <div className="flex items-center justify-center space-x-4 mt-8">
           <button
             onClick={() => api?.scrollPrev()}
@@ -132,13 +179,47 @@ export const SetSection: React.FC<SetsSectionProps> = ({
           </p>
         </div>
 
-        {featuredSet && (
-          <div className="mb-24">
-            <SetFeature set={featuredSet} />
+        {loading ? (
+          <div>
+            <div className="mb-24">
+              <SkeletonFeature />
+            </div>
+
+            {displayMode === "carousel" ? (
+              <div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8">
+                  {[...Array(3)].map((_, i) => (
+                    <SkeletonCard key={i} />
+                  ))}
+                </div>
+                <div className="flex items-center justify-center space-x-4 mt-8">
+                  <Skeleton className="h-8 w-8 rounded-full bg-neutral-800" />
+                  <div className="flex items-center justify-center space-x-2">
+                    <Skeleton className="h-2 w-2 rounded-full bg-neutral-800" />
+                    <Skeleton className="h-2 w-2 rounded-full bg-neutral-800" />
+                    <Skeleton className="h-2 w-2 rounded-full bg-neutral-800" />
+                  </div>
+                  <Skeleton className="h-8 w-8 rounded-full bg-neutral-800" />
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                {[...Array(3)].map((_, i) => (
+                  <SkeletonCard key={i} />
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          <div>
+            {featuredSet && (
+              <div className="mb-24">
+                <SetFeature set={featuredSet} />
+              </div>
+            )}
+            {setsDisplay}
           </div>
         )}
-
-        {setsDisplay}
       </div>
     </section>
   );
