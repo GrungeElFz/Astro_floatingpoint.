@@ -5,7 +5,7 @@ export interface SetData {
   event: string;
   location: string;
   duration: string;
-  trackId: number;
+  soundcloudUrl: string;
 }
 
 export const allSets: SetData[] = [
@@ -16,7 +16,7 @@ export const allSets: SetData[] = [
     duration: "49:49",
     event: "Zenith",
     location: "The Terrarium",
-    trackId: 2110052112,
+    soundcloudUrl: "https://on.soundcloud.com/yLsWP0UN2RmiQxig6Z",
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ export const allSets: SetData[] = [
     duration: "53:25",
     event: "Zenith",
     location: "The Terrarium",
-    trackId: 2109748299,
+    soundcloudUrl: "https://on.soundcloud.com/pIcFGhUD92As7eMRCT",
   },
   {
     id: 3,
@@ -34,6 +34,6 @@ export const allSets: SetData[] = [
     duration: "57:02",
     event: "Zenith",
     location: "The Terrarium",
-    trackId: 2109931611,
+    soundcloudUrl: "https://on.soundcloud.com/iMtjz7gj26nc9a40We",
   },
 ];
