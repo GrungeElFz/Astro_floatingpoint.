@@ -165,9 +165,9 @@ export const SetSection: React.FC<SetsSectionProps> = ({
       <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
         <div className="mb-12">
           {displayMode === "grid" ? (
-            <h1 className="text-5xl sm:text-6xl font-bold mb-4">
-              Recorded Sets
-            </h1>
+            <h2 className="text-4xl sm:text-5xl font-bold mb-12">
+              <a href="/sets">Recorded Sets</a>
+            </h2>
           ) : (
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               <a href="/sets">Recorded Sets</a>
