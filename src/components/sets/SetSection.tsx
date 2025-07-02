@@ -20,8 +20,6 @@ interface SetsSectionProps {
   displayMode?: "grid" | "carousel";
 }
 
-// --- SKELETON COMPONENTS WITH DARKER COLORS ---
-
 const SkeletonFeature = () => (
   <div className="flex flex-col md:flex-row gap-6 lg:gap-8 bg-neutral-900/50 rounded-3xl shadow-2xl border border-white/10 overflow-hidden">
     <div className="w-full md:w-1/2 aspect-square bg-neutral-800">
@@ -68,6 +66,8 @@ const SkeletonCard = () => (
   </div>
 );
 
+const generateSetId = (set: ProcessedSet) => `set-${set.id}`;
+
 export const SetSection: React.FC<SetsSectionProps> = ({
   displayMode = "grid",
 }) => {
@@ -76,6 +76,8 @@ export const SetSection: React.FC<SetsSectionProps> = ({
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [events, setEvents] = useState<string[]>([]);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -83,6 +85,10 @@ export const SetSection: React.FC<SetsSectionProps> = ({
         .then((res) => res.json())
         .then((data: ProcessedSet[]) => {
           setSets(data);
+          const uniqueEvents = [
+            ...new Set(data.map((set) => set.event).filter(Boolean)),
+          ];
+          setEvents(uniqueEvents);
           setLoading(false);
         })
         .catch((err) => {
@@ -103,71 +109,69 @@ export const SetSection: React.FC<SetsSectionProps> = ({
   const featuredSet = useMemo(() => sets.find((set) => set.isFeatured), [sets]);
   const gridSets = useMemo(() => sets.filter((set) => !set.isFeatured), [sets]);
 
-  const setsDisplay =
-    displayMode === "carousel" ? (
-      <div>
-        <Carousel
-          setApi={setApi}
-          opts={{ align: "start", loop: false }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-4">
-            {gridSets.map((set) => (
-              <CarouselItem
-                key={set.id}
-                className="pl-4 basis-full sm:basis-1/2 md:basis-1/3"
-              >
-                <SetCard set={set} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-        <div className="flex items-center justify-center space-x-4 mt-8">
-          <button
-            onClick={() => api?.scrollPrev()}
-            disabled={current === 1}
-            className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
+  const handleFilterClick = (eventName: string | null) => {
+    const newFilter = activeFilter === eventName ? null : eventName;
+    setActiveFilter(newFilter);
+
+    if (!newFilter) return;
+    const targetSet = gridSets.find((set) => set.event === newFilter);
+    if (!targetSet) return;
+
+    if (displayMode === "carousel" && api) {
+      const targetIndex = gridSets.findIndex((set) => set.event === newFilter);
+      if (targetIndex > -1) api.scrollTo(targetIndex, false);
+    } else if (displayMode === "grid") {
+      const targetId = generateSetId(targetSet);
+      document
+        .getElementById(targetId)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  const renderSetCards = (setsToRender: ProcessedSet[]) => {
+    return setsToRender.map((set) => {
+      const shouldDeemphasize = activeFilter && set.event !== activeFilter;
+      const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (shouldDeemphasize) {
+          e.preventDefault();
+          setActiveFilter(null);
+        }
+      };
+      const card = (
+        <SetCard
+          key={set.id}
+          id={generateSetId(set)}
+          set={set}
+          onCardClick={handleCardClick}
+          className={
+            shouldDeemphasize
+              ? "opacity-50 blur-sm scale-95 cursor-pointer"
+              : "opacity-100 blur-none scale-100"
+          }
+        />
+      );
+      if (displayMode === "carousel") {
+        return (
+          <CarouselItem
+            key={set.id}
+            className="pl-4 basis-full sm:basis-1/2 md:basis-1/3"
           >
-            <ArrowLeft size={16} />
-          </button>
-          <div className="flex items-center justify-center space-x-2">
-            {Array.from({ length: count }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => api?.scrollTo(index)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  current === index + 1
-                    ? "bg-neutral-400"
-                    : "bg-neutral-700 hover:bg-neutral-500"
-                }`}
-              />
-            ))}
-          </div>
-          <button
-            onClick={() => api?.scrollNext()}
-            disabled={current === count}
-            className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
-          >
-            <ArrowRight size={16} />
-          </button>
-        </div>
-      </div>
-    ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-        {gridSets.map((set) => (
-          <SetCard key={set.id} set={set} />
-        ))}
-      </div>
-    );
+            {card}
+          </CarouselItem>
+        );
+      }
+      return card;
+    });
+  };
 
   return (
     <section className="bg-black text-neutral-100 py-16 pb-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center">
         <div className="mb-12">
           {displayMode === "grid" ? (
-            <h2 className="text-4xl sm:text-5xl font-bold mb-12">
-              <a href="/sets">Recorded Sets</a>
-            </h2>
+            <h1 className="text-5xl sm:text-6xl font-bold mb-4">
+              Recorded Sets
+            </h1>
           ) : (
             <h2 className="text-4xl sm:text-5xl font-bold mb-4">
               <a href="/sets">Recorded Sets</a>
@@ -185,6 +189,11 @@ export const SetSection: React.FC<SetsSectionProps> = ({
               <SkeletonFeature />
             </div>
 
+            <div className="flex justify-center space-x-4 mb-12">
+              <Skeleton className="h-10 w-28 rounded-full bg-neutral-800" />
+              <Skeleton className="h-10 w-28 rounded-full bg-neutral-800" />
+            </div>
+
             {displayMode === "carousel" ? (
               <div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8">
@@ -192,6 +201,7 @@ export const SetSection: React.FC<SetsSectionProps> = ({
                     <SkeletonCard key={i} />
                   ))}
                 </div>
+                {/* Skeleton for Carousel Navigation */}
                 <div className="flex items-center justify-center space-x-4 mt-8">
                   <Skeleton className="h-8 w-8 rounded-full bg-neutral-800" />
                   <div className="flex items-center justify-center space-x-2">
@@ -217,7 +227,67 @@ export const SetSection: React.FC<SetsSectionProps> = ({
                 <SetFeature set={featuredSet} />
               </div>
             )}
-            {setsDisplay}
+            <div className="flex justify-center space-x-4 mb-12">
+              {events.map((event) => (
+                <button
+                  key={event}
+                  onClick={() => handleFilterClick(event)}
+                  className={`px-6 py-2 rounded-full border ${
+                    activeFilter === event
+                      ? "border-cyan-200 text-white"
+                      : "border-gray-700 text-neutral-400"
+                  } hover:text-white hover:border-cyan-200 transition-colors`}
+                >
+                  {event}
+                </button>
+              ))}
+            </div>
+            {displayMode === "carousel" ? (
+              <div>
+                <Carousel
+                  setApi={setApi}
+                  opts={{ align: "start", loop: false }}
+                  className="w-full"
+                >
+                  <CarouselContent className="-ml-4">
+                    {renderSetCards(gridSets)}
+                  </CarouselContent>
+                </Carousel>
+                <div className="flex items-center justify-center space-x-4 mt-8">
+                  <button
+                    onClick={() => api?.scrollPrev()}
+                    disabled={current === 1}
+                    className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
+                  >
+                    <ArrowLeft size={16} />
+                  </button>
+                  <div className="flex items-center justify-center space-x-2">
+                    {Array.from({ length: count }).map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => api?.scrollTo(index)}
+                        className={`w-2 h-2 rounded-full transition-colors ${
+                          current === index + 1
+                            ? "bg-neutral-400"
+                            : "bg-neutral-700 hover:bg-neutral-500"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    onClick={() => api?.scrollNext()}
+                    disabled={current === count}
+                    className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
+                  >
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                {renderSetCards(gridSets)}
+              </div>
+            )}
           </div>
         )}
       </div>
