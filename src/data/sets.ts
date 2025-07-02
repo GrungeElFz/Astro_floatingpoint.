@@ -12,7 +12,7 @@ export interface SetData {
 
 export const allSets: SetData[] = [
   {
-    id: 1,
+    id: 8,
     title: "Zenith - Qualia | The Terrarium (2025.06.06)",
     artist: "Qualia",
     event: "Zenith",
@@ -23,7 +23,7 @@ export const allSets: SetData[] = [
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
-    id: 2,
+    id: 7,
     title: "Zenith - 0x01000111 | The Terrarium (2025.06.06)",
     artist: "0x01000111",
     event: "Zenith",
@@ -35,7 +35,7 @@ export const allSets: SetData[] = [
     isFeatured: true,
   },
   {
-    id: 3,
+    id: 6,
     title: "Zenith - ILOVECAUSINGDRAMA | The Terrarium (2025.06.06)",
     artist: "ILOVECAUSINGDRAMA",
     event: "Zenith",
@@ -46,7 +46,7 @@ export const allSets: SetData[] = [
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
-    id: 4,
+    id: 5,
     title: "The Dean's List - ILOVECAUSINGDRAMA | The Terrarium (2025.05.18)",
     artist: "ILOVECAUSINGDRAMA",
     event: "The Dean's List",
@@ -57,7 +57,7 @@ export const allSets: SetData[] = [
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
-    id: 5,
+    id: 4,
     title: "The Dean's List - Qualia | The Terrarium (2025.05.18)",
     artist: "Qualia",
     event: "The Dean's List",
@@ -68,7 +68,7 @@ export const allSets: SetData[] = [
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
-    id: 6,
+    id: 3,
     title: "The Dean's List - 0x01000111 | The Terrarium (2025.05.18)",
     artist: "0x01000111",
     event: "The Dean's List",
@@ -79,7 +79,7 @@ export const allSets: SetData[] = [
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
-    id: 7,
+    id: 2,
     title: "The Dean's List - DYTRO | The Terrarium (2025.05.18)",
     artist: "DYTRO",
     event: "The Dean's List",
@@ -90,7 +90,7 @@ export const allSets: SetData[] = [
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
-    id: 8,
+    id: 1,
     title: "Bipolarity - 0x01000111 | The Terrarium (2025.05.08)",
     artist: "0x01000111",
     event: "Bipolarity",
