@@ -1,0 +1,19 @@
+---
+import Layout from "./Layout.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <div class="bg-black text-neutral-300 py-16 sm:py-24">
+    <div class="mx-auto max-w-3xl px-6 lg:px-8 mt-10">
+      <article class="prose prose-invert lg:prose-xl">
+        <slot />
+      </article>
+    </div>
+  </div>
+</Layout>
