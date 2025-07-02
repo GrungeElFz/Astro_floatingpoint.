@@ -45,4 +45,59 @@ export const allSets: SetData[] = [
     description:
       "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
+  {
+    id: 4,
+    title: "The Dean's List - ILOVECAUSINGDRAMA | The Terrarium (2025.05.18)",
+    artist: "ILOVECAUSINGDRAMA",
+    event: "The Dean's List",
+    location: "The Terrarium",
+    date: "May 18, 2025",
+    soundcloudUrl: "https://on.soundcloud.com/Am0oaoPj9VA943kZSQ",
+    description:
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+  },
+  {
+    id: 5,
+    title: "The Dean's List - Qualia | The Terrarium (2025.05.18)",
+    artist: "Qualia",
+    event: "The Dean's List",
+    location: "The Terrarium",
+    date: "May 18, 2025",
+    soundcloudUrl: "https://on.soundcloud.com/R3ZbHBlcEWcbQMvkGZ",
+    description:
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+  },
+  {
+    id: 6,
+    title: "The Dean's List - 0x01000111 | The Terrarium (2025.05.18)",
+    artist: "0x01000111",
+    event: "The Dean's List",
+    location: "The Terrarium",
+    date: "May 18, 2025",
+    soundcloudUrl: "https://on.soundcloud.com/fALycGUYybYlrcawOQ",
+    description:
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+  },
+  {
+    id: 7,
+    title: "The Dean's List - DYTRO | The Terrarium (2025.05.18)",
+    artist: "DYTRO",
+    event: "The Dean's List",
+    location: "The Terrarium",
+    date: "May 18, 2025",
+    soundcloudUrl: "https://on.soundcloud.com/IcSRq5GXo7NZt8hPKM",
+    description:
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+  },
+  {
+    id: 8,
+    title: "Bipolarity - 0x01000111 | The Terrarium (2025.05.08)",
+    artist: "0x01000111",
+    event: "Bipolarity",
+    location: "The Terrarium",
+    date: "May 8, 2025",
+    soundcloudUrl: "https://on.soundcloud.com/yBPa8voGaFPQz3rHBd",
+    description:
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+  },
 ];
