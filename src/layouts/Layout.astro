@@ -4,6 +4,7 @@ import '../styles/global.css';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Logo from '@/assets/logo_horizontal.png';
+import Icon from '@/assets/icon.png';
 
 interface Props {
   title?: string;
@@ -22,7 +23,7 @@ const pageDescription = description || "Our passion is in the art of sound, driv
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={Icon.src} />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta name="generator" content={Astro.generator} />
 		<SEO
