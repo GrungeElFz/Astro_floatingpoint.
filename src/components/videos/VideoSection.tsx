@@ -30,8 +30,8 @@ export const VideoSection: React.FC<VideoSectionProps> = ({
           <>
             <h1 className="text-5xl sm:text-6xl font-bold mb-4">Videos</h1>
             <p className="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mb-12">
-              Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,
-              consectetur, adipisci velit...
+              Exclusive recorded live performances and footages from
+              floatingpoint.
             </p>
           </>
         )}
