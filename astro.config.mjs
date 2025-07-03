@@ -6,11 +6,13 @@ import react from '@astrojs/react';
 
 import robotsTxt from 'astro-robots-txt';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
   site: 'https://www.floatingpoint.club',
-  integrations: [react(), robotsTxt()]
+  integrations: [react(), robotsTxt(), sitemap()]
 });
