@@ -28,7 +28,7 @@ export const allVideos: VideoData[] = [
     location: "The Terrarium",
     date: "June 6, 2025",
     description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+      "Dive into a live performance from 0x01000111 through a 53:22 minute set. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
     youtubeId: "fl_fQ88tG9M",
     duration: "53:22",
     categories: ["Live Performance"],
@@ -42,7 +42,7 @@ export const allVideos: VideoData[] = [
     location: "The Terrarium",
     date: "June 6, 2025",
     description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+      "Dive into a live performance from Qualia. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
     youtubeId: "psUWt720D7Q",
     duration: "23:29",
     categories: ["Live Performance", "Highlight"],
@@ -55,7 +55,7 @@ export const allVideos: VideoData[] = [
     location: "The Terrarium",
     date: "June 6, 2025",
     description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+      "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
     youtubeId: "hP1YW4ZYq2I",
     duration: "4:15",
     categories: ["Live Performance", "Highlight"],
@@ -68,7 +68,7 @@ export const allVideos: VideoData[] = [
     location: "The Terrarium",
     date: "May 18, 2025",
     description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+      "Dive into a live performance from 0x01000111. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
     youtubeId: "c6P27ef6gVI",
     duration: "1:01",
     categories: ["Live Performance", "Highlight"],
@@ -81,7 +81,7 @@ export const allVideos: VideoData[] = [
     location: "The Terrarium",
     date: "May 18, 2025",
     description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+      "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
     youtubeId: "5iBUYb8sXu0",
     duration: "0:41",
     categories: ["Live Performance", "Highlight"],
