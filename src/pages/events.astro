@@ -4,6 +4,9 @@ import { EventSection } from "@/components/events/EventSection.tsx";
 import { allEvents } from "@/data/events.ts";
 ---
 
-<Layout title="Events">
+<Layout
+  title="Events"
+  description="Explore all upcoming and past sonic landscapes from floatingpoint."
+>
   <EventSection events={allEvents} client:load />
 </Layout>
