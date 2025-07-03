@@ -4,6 +4,9 @@ import { VideoSection } from "@/components/videos/VideoSection.tsx";
 import { allVideos } from "@/data/videos.ts";
 ---
 
-<Layout title="Videos">
+<Layout
+  title="Videos"
+  description="Exclusive recorded live performances and footages from floatingpoint."
+>
   <VideoSection videos={allVideos} displayMode="grid" client:load />
 </Layout>

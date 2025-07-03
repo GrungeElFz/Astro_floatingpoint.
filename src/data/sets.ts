@@ -19,8 +19,6 @@ export const allSets: SetData[] = [
     location: "The Terrarium",
     date: "June 6, 2025",
     soundcloudUrl: "https://on.soundcloud.com/yLsWP0UN2RmiQxig6Z",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
     id: 7,
@@ -31,7 +29,7 @@ export const allSets: SetData[] = [
     date: "June 6, 2025",
     soundcloudUrl: "https://on.soundcloud.com/pIcFGhUD92As7eMRCT",
     description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
+      "Dive into 0x01000111's live performance through a 53:25 minute of Hypnotic Techno, Raw Techno, Tribal Techno, Acid Techno, Hard Groove Techno, and Industrial Techno.",
     isFeatured: true,
   },
   {
@@ -42,8 +40,6 @@ export const allSets: SetData[] = [
     location: "The Terrarium",
     date: "June 6, 2025",
     soundcloudUrl: "https://on.soundcloud.com/iMtjz7gj26nc9a40We",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
     id: 5,
@@ -53,8 +49,6 @@ export const allSets: SetData[] = [
     location: "The Terrarium",
     date: "May 18, 2025",
     soundcloudUrl: "https://on.soundcloud.com/Am0oaoPj9VA943kZSQ",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
     id: 4,
@@ -64,8 +58,6 @@ export const allSets: SetData[] = [
     location: "The Terrarium",
     date: "May 18, 2025",
     soundcloudUrl: "https://on.soundcloud.com/R3ZbHBlcEWcbQMvkGZ",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
     id: 3,
@@ -75,8 +67,6 @@ export const allSets: SetData[] = [
     location: "The Terrarium",
     date: "May 18, 2025",
     soundcloudUrl: "https://on.soundcloud.com/fALycGUYybYlrcawOQ",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
     id: 2,
@@ -86,8 +76,6 @@ export const allSets: SetData[] = [
     location: "The Terrarium",
     date: "May 18, 2025",
     soundcloudUrl: "https://on.soundcloud.com/IcSRq5GXo7NZt8hPKM",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
   {
     id: 1,
@@ -97,7 +85,5 @@ export const allSets: SetData[] = [
     location: "The Terrarium",
     date: "May 8, 2025",
     soundcloudUrl: "https://on.soundcloud.com/yBPa8voGaFPQz3rHBd",
-    description:
-      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
   },
 ];
