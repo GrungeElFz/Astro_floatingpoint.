@@ -11,6 +11,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-
+  site: 'https://www.floatingpoint.club',
   integrations: [react(), robotsTxt()]
 });
