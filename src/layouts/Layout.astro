@@ -1,13 +1,21 @@
 ---
+import { SEO, type Props as SEOProps } from 'astro-seo';
 import '../styles/global.css';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import Logo from '@/assets/logo_horizontal.png';
 
 interface Props {
   title?: string;
+	description?: string;
+	seo?: SEOProps;
 }
 
-const { title } = Astro.props;
+const { title, description, seo } = Astro.props;
+
+const siteName = 'floatingpoint.';
+const pageTitle = title ? `${siteName} | ${title}` : siteName;
+const pageDescription = description || "Our passion is in the art of sound, driven by deep connections through immersive sonic landscapes.";
 ---
 <!doctype html>
 <html lang="en">
@@ -17,7 +25,34 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta name="generator" content={Astro.generator} />
-		<title>floatingpoint. {title ? `| ${title}` : ''}</title>
+		<SEO
+      charset="UTF-8"
+      title={pageTitle}
+      description={pageDescription}
+      openGraph={{
+        basic: {
+          title: pageTitle,
+          type: 'website',
+          image: Astro.url.origin + Logo.src,
+          url: Astro.url.href,
+        },
+        image: {
+          alt: 'floatingpoint. horizontal logo.',
+          type: 'image/png'
+        },
+        optional: {
+          siteName: siteName,
+        },
+      }}
+      twitter={{
+        title: pageTitle,
+        description: pageDescription,
+        image: Astro.url.origin + Logo.src,
+        imageAlt: 'floatingpoint. horizontal logo.',
+        card: 'summary_large_image',
+      }}
+      {...seo}
+    />
 	</head>
 	<body>
 		<Header />
