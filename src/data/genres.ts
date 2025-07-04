@@ -535,3 +535,26 @@ export const hardDanceGenres: Genre[] = [
       "The modern evolution of Happy Hardcore in the UK, often faster and incorporating influences from trance and hardstyle.",
   },
 ];
+
+export const allGenres = [
+  ...technoGenres,
+  ...tranceGenres,
+  ...houseGenres,
+  ...breakbeatGenres,
+  ...hardDanceGenres,
+];
+
+export const genreCategoryMap = new Map<string, string>();
+technoGenres.forEach((g) => genreCategoryMap.set(g.name, "Techno"));
+tranceGenres.forEach((g) => genreCategoryMap.set(g.name, "Trance"));
+houseGenres.forEach((g) => genreCategoryMap.set(g.name, "House"));
+breakbeatGenres.forEach((g) => genreCategoryMap.set(g.name, "Breakbeat"));
+hardDanceGenres.forEach((g) => genreCategoryMap.set(g.name, "Hard Dance"));
+
+export const genreCategoryNames = [
+  "Techno",
+  "Trance",
+  "House",
+  "Breakbeat",
+  "Hard Dance",
+];
