@@ -1,7 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import WaveguideSection from "@/components/waveguide/WaveguideSection.astro";
+import { GenreSection } from "@/components/genres/GenreSection.tsx";
+import CTASection from "@/components/cta/CTASection.astro";
 ---
 
 <Layout title="About">
-  <h1>About</h1>
+  <WaveguideSection />
+  <GenreSection client:load />
+  <CTASection />
 </Layout>
