@@ -1,0 +1,62 @@
+---
+import { Atom, Orbit, CircleUser, Blend } from "@lucide/astro";
+
+const waveguides = [
+  {
+    icon: Atom,
+    title: "Artistic Purity",
+    description:
+      "We prioritize authentic artistic expression over commercial appeal, supporting artists who push boundaries and challenge conventions in electronic music.",
+  },
+  {
+    icon: CircleUser,
+    title: "Inclusive Community",
+    description:
+      "Our spaces welcome everyone who shares our passion for electronic music, regardless of background, identity, or experience level in the scene.",
+  },
+  {
+    icon: Orbit,
+    title: "Deep Connection",
+    description:
+      "We create immersive environments designed for deep engagement with the music, moving beyond casual partying to inspire a shared sonic journey.",
+  },
+  {
+    icon: Blend,
+    title: "Cultural Innovation",
+    description:
+      "We embrace new technologies and creative approaches to enhance the electronic music experience while respecting the culture’s roots and traditions.",
+  },
+];
+---
+
+<section class="bg-black text-neutral-100 py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl py-4 px-6 lg:px-8 text-center">
+    <div class="mb-16">
+      <h2 class="text-5xl sm:text-6xl font-bold mb-4">Our Waveguide</h2>
+      <p
+        class="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mt-8"
+      >
+        The principles that guide our sonic journey.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+      {
+        waveguides.map((waveguide) => {
+          const Icon = waveguide.icon;
+          return (
+            <div class="group backdrop-blur-sm bg-white/5 p-8 rounded-3xl border border-white/10 flex flex-col transition-all duration-300 ease-in-out hover:bg-white/10 hover:border-cyan-400/50 hover:-translate-y-1">
+              <div class="flex items-center mb-4">
+                <Icon class="text-cyan-400 mr-3 shrink-0" size={24} />
+                <h3 class="text-xl font-bold text-white transition-colors group-hover:text-cyan-300">
+                  {waveguide.title}
+                </h3>
+              </div>
+              <p class="text-neutral-300 font-light">{waveguide.description}</p>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
