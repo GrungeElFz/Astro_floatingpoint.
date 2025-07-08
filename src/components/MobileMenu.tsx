@@ -7,14 +7,34 @@ import {
   SheetFooter,
 } from "@/components/ui/sheet";
 import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ChevronDown, Users, Building2 } from "lucide-react";
+import {
   SiInstagram,
   SiYoutube,
   SiSoundcloud,
   SiMailboxdotorg,
 } from "@icons-pack/react-simple-icons";
 
+const collaborationLinks = [
+  {
+    href: "/collaborations/operation",
+    label: "For Individuals",
+    icon: Users,
+  },
+  {
+    href: "/collaborations/venue",
+    label: "For Venues",
+    icon: Building2,
+  },
+];
+
 export function MobileMenu() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [isCollaborateOpen, setIsCollaborateOpen] = React.useState(false);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -77,14 +97,37 @@ export function MobileMenu() {
                 About
               </a>
             </div>
-            <div className="py-6">
-              <a
-                href="/collaborations"
-                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:text-white"
-                onClick={() => setIsOpen(false)}
+            <div className="py-6 space-y-2">
+              <Collapsible
+                open={isCollaborateOpen}
+                onOpenChange={setIsCollaborateOpen}
               >
-                Collaborations
-              </a>
+                <CollapsibleTrigger className="flex w-full items-center justify-between -mx-3 rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:text-white">
+                  <span>Collaborations</span>
+                  <ChevronDown
+                    className={`h-5 w-5 transition-transform duration-200 ${
+                      isCollaborateOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="mt-2 space-y-1 pl-4">
+                  {collaborationLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className="flex items-center gap-x-3 rounded-lg py-2 pr-3 text-base/7 text-neutral-400 hover:text-white"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Icon className="h-4 w-4 flex-none text-cyan-400" />
+                        <span>{link.label}</span>
+                      </a>
+                    );
+                  })}
+                </CollapsibleContent>
+              </Collapsible>
+
               <a
                 href="/nerdstats"
                 className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-neutral-200 hover:text-white"
