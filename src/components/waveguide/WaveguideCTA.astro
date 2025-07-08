@@ -1,0 +1,36 @@
+---
+import { Instagram } from "@lucide/astro";
+---
+
+<section class="bg-black text-neutral-100 py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="relative isolate overflow-hidden backdrop-blur-sm bg-white/5 px-6 py-24 text-center shadow-2xl rounded-3xl border border-white/10 sm:px-16"
+    >
+      <h2 class="mx-auto max-w-2xl text-5xl sm:text-6xl font-bold">
+        Go Deeper
+      </h2>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-pretty text-neutral-300">
+        Connect with our community on Instagram for real-time updates, or
+        explore our upcoming events to find your next transcendent experience.
+      </p>
+      <div class="mt-10 flex items-center justify-center gap-x-6">
+        <a
+          href="https://instagram.com/floatingpoint___"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-x-2 rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-cyan-300 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-cyan-400 transition-colors"
+        >
+          <Instagram size={16} />
+          floatingpoint.
+        </a>
+        <a
+          href="/events"
+          class="rounded-full border border-white/20 px-5 py-2.5 text-sm font-semibold text-white hover:border-white/50 transition-colors"
+        >
+          Explore Events
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
