@@ -1,5 +1,6 @@
 ---
 import { MobileMenu } from "@/components/MobileMenu";
+import { CollaborationDropdown } from "./navigations/CollaborationsDropdown.tsx";
 import { Image } from "astro:assets";
 import Logo from "@/assets/logo.png";
 import {
@@ -32,11 +33,9 @@ import {
       <a href="/events" class="text-sm/6 font-semibold text-neutral-200"
         >Events</a
       >
-      <a href="/collaborations" class="text-sm/6 font-semibold text-neutral-200"
-        >Collaborations</a
-      >
       <a href="/about" class="text-sm/6 font-semibold text-neutral-200">About</a
       >
+      <CollaborationDropdown client:load />
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
       <div class="flex space-x-3 mt-auto">
