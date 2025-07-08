@@ -1,0 +1,119 @@
+---
+import { Globe, CalendarDays, Users, Settings } from "@lucide/astro";
+
+// Data: "Partnership Benefits" cards
+const benefits = [
+  {
+    icon: Globe,
+    title: "Exposure",
+    description:
+      "Connect with our community of authentic electronic music enthusiasts.",
+  },
+  {
+    icon: CalendarDays,
+    title: "Curated Events",
+    description:
+      "Professional event curation that respects your space while creating unforgettable experiences.",
+  },
+  {
+    icon: Users,
+    title: "Artist Network",
+    description:
+      "Access to our roster of diverse underground electronic artists.",
+  },
+  {
+    icon: Settings,
+    title: "Technical Expertise",
+    description:
+      "Optimized sound systems and lighting designed for your unique acoustics and layout.",
+  },
+];
+
+// Data: "How We Collaborate" timeline
+const processSteps = [
+  {
+    step: "1",
+    title: "Initial Contact",
+    description:
+      "Reach out to discuss your venue and vision for electronic music events.",
+  },
+  {
+    step: "2",
+    title: "Space Assessment",
+    description:
+      "We visit your venue to understand its unique characteristics and potential.",
+  },
+  {
+    step: "3",
+    title: "Collaboration Planning",
+    description:
+      "Together we design events that showcase both your space and our artists.",
+  },
+  {
+    step: "4",
+    title: "Event Execution",
+    description:
+      "Professional production and promotion for memorable underground experiences.",
+  },
+];
+---
+
+<section class="bg-black text-neutral-100 py-16 sm:py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="text-center">
+      <h2 class="text-4xl sm:text-5xl font-bold text-white">
+        Partnership Benefits
+      </h2>
+      <p class="mt-6 mx-auto max-w-2xl text-lg text-neutral-400">
+        Discover what makes collaborating with floatingpoint. a transformative
+        experience for your venue.
+      </p>
+    </div>
+    <div
+      class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center"
+    >
+      {
+        benefits.map((benefit) => (
+          <div class="backdrop-blur-sm bg-white/5 p-8 rounded-3xl border border-white/10">
+            <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-neutral-800 border border-white/10 mx-auto">
+              <benefit.icon class="text-cyan-400" size={24} />
+            </div>
+            <h3 class="mt-6 text-xl font-semibold text-white">
+              {benefit.title}
+            </h3>
+            <p class="mt-2 text-neutral-400">{benefit.description}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-24 pt-16 border-t border-white/10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-4xl sm:text-5xl font-bold text-white">
+          How We Collaborate
+        </h2>
+        <p class="mt-6 text-lg text-neutral-400">
+          Our partnership process is designed to understand your space and
+          create events that honor its unique character.
+        </p>
+      </div>
+      <div
+        class="mt-16 grid max-w-2xl grid-cols-1 gap-8 mx-auto lg:max-w-none lg:grid-cols-4"
+      >
+        {
+          processSteps.map((step) => (
+            <div class="flex flex-col items-center text-center">
+              <div class="flex items-center justify-center w-16 h-16 rounded-full bg-cyan-400/10 border border-cyan-400/30 mb-6">
+                <span class="text-2xl font-bold text-cyan-300">
+                  {step.step}
+                </span>
+              </div>
+              <h3 class="text-xl font-semibold text-white">{step.title}</h3>
+              <p class="mt-2 text-neutral-400">{step.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
