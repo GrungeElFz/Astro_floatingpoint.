@@ -1,0 +1,162 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { RoleSection } from "@/components/collaborations/RoleSection.tsx";
+import { CheckCircle2, ArrowUpRight } from "@lucide/astro";
+
+// Data: Application Process section
+const processSteps = [
+  {
+    step: "1",
+    title: "Submit Application",
+    description:
+      "Send us your portfolio, resume, or creative samples along with a brief note about why you want to join floatingpoint.",
+  },
+  {
+    step: "2",
+    title: "Creative Conversation",
+    description:
+      "We'll have a casual conversation about your passion for electronic music and how you see yourself contributing to our community.",
+  },
+  {
+    step: "3",
+    title: "Welcome to the club !",
+    description:
+      "Join our collective and start contributing to the underground electronic music scene with floatingpoint.",
+  },
+];
+
+// Data: "What We Offer" section
+const offers = [
+  {
+    title: "Creative Freedom",
+    description:
+      "Express your artistic vision within our underground aesthetic and values.",
+  },
+  {
+    title: "Growing Network",
+    description:
+      "Connect with artists, venues, and electronic music enthusiasts in our growing network.",
+  },
+  {
+    title: "Skill Development",
+    description:
+      "Grow your expertise through hands-on experience and collaborative learning, leveraging unique team skills and insights.",
+  },
+  {
+    title: "Event Access",
+    description:
+      "Exclusive access to floatingpoint. events and underground electronic music experiences.",
+  },
+  {
+    title: "Flexible Schedule",
+    description:
+      "Work around your other commitments with event-based and project-focused opportunities.",
+  },
+  {
+    title: "Community Impact",
+    description:
+      "Be part of shaping the future of underground electronic music culture.",
+  },
+];
+---
+
+<Layout title="Collaborations">
+  <main>
+    <RoleSection displayMode="grid" client:load />
+
+    <section class="py-16 sm:py-24 bg-black">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-4xl sm:text-5xl font-bold text-white">
+            Application Process
+          </h2>
+          <p class="mt-6 text-lg text-neutral-400">
+            Ready to join the underground? Here's how to become part of the
+            floatingpoint. collective.
+          </p>
+        </div>
+        <div
+          class="mt-16 grid max-w-2xl grid-cols-1 gap-8 mx-auto lg:max-w-none lg:grid-cols-3"
+        >
+          {
+            processSteps.map((step) => (
+              <div class="flex flex-col items-center text-center">
+                <div class="flex items-center justify-center w-16 h-16 rounded-full bg-cyan-400/10 border border-cyan-400/30 mb-6">
+                  <span class="text-2xl font-bold text-cyan-300">
+                    {step.step}
+                  </span>
+                </div>
+                <h3 class="text-xl font-semibold text-white">{step.title}</h3>
+                <p class="mt-2 text-neutral-400">{step.description}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-black text-neutral-100 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center">
+          <h2 class="text-4xl sm:text-5xl font-bold text-white">
+            What We Offer
+          </h2>
+          <p class="mt-6 text-lg text-neutral-400">
+            Beyond just a role, you'll be part of a creative collective that
+            values artistic expression and community.
+          </p>
+        </div>
+        <div class="mt-16 max-w-5xl mx-auto">
+          <dl
+            class="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:gap-y-12"
+          >
+            {
+              offers.map((offer) => (
+                <div class="relative pl-10">
+                  <dt class="font-semibold text-white">
+                    <CheckCircle2 class="absolute left-0 top-1 h-6 w-6 text-cyan-400" />
+                    {offer.title}
+                  </dt>
+                  <dd class="mt-2 text-neutral-400">{offer.description}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-black text-neutral-100 py-16 sm:py-24">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div
+          class="relative isolate overflow-hidden bg-neutral-900 px-6 py-20 text-center shadow-xl rounded-3xl border border-white/10 sm:px-16"
+        >
+          <h2
+            class="mx-auto max-w-2xl text-4xl sm:text-5xl font-bold text-white"
+          >
+            Ready to Join?
+          </h2>
+          <p class="mx-auto mt-6 max-w-xl text-lg text-neutral-300">
+            Send your application to our team and let's start a conversation
+            about how your unique skills can help shaping the scene.
+          </p>
+          <div class="mt-10 flex items-center justify-center gap-x-6">
+            <a
+              href="mailto:contact@floatingpoint.club"
+              class="flex items-center gap-x-2 rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-black shadow-sm hover:bg-cyan-300 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-cyan-400 transition-colors"
+            >
+              Send Application
+              <ArrowUpRight class="h-4 w-4" />
+            </a>
+            <a
+              href="mailto:contact@floatingpoint.club?subject=Question%20about%20Joining"
+              class="text-sm font-semibold leading-6 text-white hover:text-neutral-300 transition-colors"
+            >
+              Ask Questions
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
