@@ -79,6 +79,13 @@ export function MobileMenu() {
             </div>
             <div className="py-6">
               <a
+                href="/collaborations"
+                className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-neutral-200 hover:text-white"
+                onClick={() => setIsOpen(false)}
+              >
+                Collaborations
+              </a>
+              <a
                 href="/nerdstats"
                 className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-neutral-200 hover:text-white"
                 onClick={() => setIsOpen(false)}
