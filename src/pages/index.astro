@@ -15,14 +15,14 @@ import { GenreSection } from "@/components/genres/GenreSection.tsx";
     <div class="relative isolate px-6 pt-14 lg:px-8">
       <div class="mx-auto max-w-2xl py-32 sm:py-48 lg:py-64">
         <div class="hidden sm:mb-8 sm:flex sm:justify-center">
+          <!-- Announcement -->
           <div
             class="relative rounded-full px-3 py-1 text-sm/6 text-neutral-400 font-extralight ring-1 ring-gray-900/10 hover:ring-gray-900/20"
           >
-            New incoming event
-            <a href="#" class="font-semibold text-cyan-400 hover:text-cyan-300">
+            The website is currently ongoing development on
+            <a href="#" class="font-normal text-cyan-400 hover:text-cyan-300">
               <span class="absolute inset-0" aria-hidden="true"></span>
-              Read more
-              <span aria-hidden="true">→</span>
+              Github
             </a>
           </div>
         </div>
@@ -37,15 +37,16 @@ import { GenreSection } from "@/components/genres/GenreSection.tsx";
           </p>
           <div class="mt-10 flex items-center justify-center gap-x-6">
             <a
-              href="#"
+              href="/events"
               class="rounded-md px-3.5 py-2.5 text-sm font-semibold text-neutral-200 shadow-xs hover:outline-2 hover:outline-offset-2 hover:outline-cyan-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
             >
-              NAV 1
+              EVENTS
             </a>
             <a
-              href="#"
+              href="/collaborations/operation"
               class="rounded-md px-3.5 py-2.5 text-sm font-semibold text-neutral-200 shadow-xs hover:outline-2 hover:outline-offset-2 hover:outline-cyan-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
-              >NAV <span aria-hidden="true">→</span>
+            >
+              COLLAB
             </a>
           </div>
         </div>
@@ -84,7 +85,7 @@ import { GenreSection } from "@/components/genres/GenreSection.tsx";
   </div>
 
   <GenreSection client:load />
-  <EventSection displayMode="carousel" events={allEvents} client:load />
+  <EventSection displayMode="carousel" events={allEvents} client:visible />
   <VideoSection displayMode="grid" videos={allVideos} client:visible />
-  <SetSection displayMode="carousel" client:load />
+  <SetSection displayMode="carousel" client:idle />
 </Layout>

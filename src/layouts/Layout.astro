@@ -1,6 +1,7 @@
 ---
 import { SEO, type Props as SEOProps } from 'astro-seo';
 import '../styles/global.css';
+import { ViewTransitions } from "astro:transitions";
 import Header from '@/components/navigations/Header.astro';
 import Footer from '@/components/navigations/Footer.astro';
 import Icon from '@/assets/icon.png';
@@ -28,6 +29,7 @@ const pageDescription =
     <link rel="icon" type="image/svg+xml" href={Icon.src} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
     <SEO
       charset="UTF-8"
       title={pageTitle}
