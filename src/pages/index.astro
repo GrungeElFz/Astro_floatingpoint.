@@ -84,7 +84,7 @@ import { GenreSection } from "@/components/genres/GenreSection.tsx";
   </div>
 
   <GenreSection client:load />
-  <EventSection displayMode="carousel" events={allEvents} client:load />
+  <EventSection displayMode="carousel" events={allEvents} client:visible />
   <VideoSection displayMode="grid" videos={allVideos} client:visible />
-  <SetSection displayMode="carousel" client:load />
+  <SetSection displayMode="carousel" client:idle />
 </Layout>
