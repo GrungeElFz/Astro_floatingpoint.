@@ -5,10 +5,6 @@ export interface Genre {
 
 export const technoGenres: Genre[] = [
   {
-    name: "Acid Ambient Techno",
-    description: "Hypnotic, atmospheric techno with swirling acid lines.",
-  },
-  {
     name: "Acid Techno",
     description:
       "Dominated by the squelchy, liquid sound of the Roland TB-303 bass synthesizer, often with a harder edge than Acid House.",
@@ -31,11 +27,6 @@ export const technoGenres: Genre[] = [
   {
     name: "Bleep Techno",
     description: "Early UK techno with quirky, sci-fi bleeps and heavy bass.",
-  },
-  {
-    name: "Business Techno",
-    description:
-      "A term for mainstream, polished techno, often characterized by a more accessible and commercially-focused sound.",
   },
   {
     name: "Dark Techno",
