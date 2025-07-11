@@ -206,31 +206,6 @@ export const houseGenres: Genre[] = [
       "Characterized by the squelchy basslines of the Roland TB-303.",
   },
   {
-    name: "Afro House",
-    description:
-      "A fusion of traditional African musical elements with classic house music.",
-  },
-  {
-    name: "Amapiano",
-    description:
-      "A South African subgenre featuring piano melodies, kwaito basslines, and low-tempo house rhythms.",
-  },
-  {
-    name: "Balearic Beat",
-    description:
-      "An eclectic and often laid-back style originating from Ibiza, characterized by a mix of influences including pop, soul, and world music.",
-  },
-  {
-    name: "Bass House",
-    description:
-      "A high-energy subgenre featuring heavy, distorted basslines, often with influences from dubstep and garage.",
-  },
-  {
-    name: "Brazilian Bass",
-    description:
-      "A punchy, deep-toned style of house music originating from Brazil, characterized by its prominent basslines.",
-  },
-  {
     name: "Chicago House",
     description:
       "The original style of house music, born in Chicago, known for its soulful vocals and disco influences.",
@@ -241,49 +216,9 @@ export const houseGenres: Genre[] = [
       "Soulful and atmospheric house music with a focus on complex melodies and mellow vibes.",
   },
   {
-    name: "Disco House",
-    description:
-      "Directly incorporates samples and the joyful, string-laden feel of classic disco tracks.",
-  },
-  {
-    name: "Diva House",
-    description:
-      "Characterized by powerful, soulful, and often gospel-influenced female vocal performances over a strong house beat.",
-  },
-  {
-    name: "Dutch House",
-    description:
-      "A style of electro house known for its high-pitched synth leads, complex rhythms, and often syncopated drum patterns.",
-  },
-  {
-    name: "Electro House",
-    description:
-      "A harder form of house featuring prominent basslines, aggressive synths, and a tempo typically around 130 BPM.",
-  },
-  {
     name: "Fidget House",
     description:
       "Features glitchy, chopped-up vocal samples and bouncy, bass-heavy grooves.",
-  },
-  {
-    name: "French House",
-    description:
-      "A style of house music that heavily samples and filters disco and funk tracks.",
-  },
-  {
-    name: "Funky House",
-    description:
-      "Upbeat and groovy house music with prominent basslines and a strong funk influence.",
-  },
-  {
-    name: "Future House",
-    description:
-      "A modern take on house with a metallic, elastic-sounding drop and often incorporating deep house and garage elements.",
-  },
-  {
-    name: "Garage House",
-    description:
-      "A soulful and vocal-driven style of house music with roots in the New York club scene.",
   },
   {
     name: "Ghetto House",
@@ -291,19 +226,9 @@ export const houseGenres: Genre[] = [
       "A raw and energetic style of house music with explicit lyrics and a strong focus on the dancefloor.",
   },
   {
-    name: "Gqom",
-    description:
-      "A raw and hypnotic genre from Durban, South Africa, with a minimalistic and bass-heavy sound.",
-  },
-  {
     name: "Hard House",
     description:
       "A faster, more aggressive style of house featuring hard-hitting kick drums and often a 'hoover' synthesizer sound.",
-  },
-  {
-    name: "Hip House",
-    description:
-      "A fusion genre that combines the rhythms of house music with rapping.",
   },
   {
     name: "Italo House",
@@ -314,11 +239,6 @@ export const houseGenres: Genre[] = [
     name: "Jackin' House",
     description:
       "Characterized by its heavy use of disco and funk samples, with a strong, energetic, and often swinging groove.",
-  },
-  {
-    name: "Latin House",
-    description:
-      "Blends house music with Latin American sounds, incorporating salsa, samba, and other vibrant rhythms.",
   },
   {
     name: "Lo-Fi House",
@@ -341,21 +261,6 @@ export const houseGenres: Genre[] = [
       "A lo-fi and unconventional take on house music, often with a raw, distorted, and experimental edge.",
   },
   {
-    name: "Progressive House",
-    description:
-      "Builds in complexity and emotion, with long, evolving melodic and rhythmic patterns.",
-  },
-  {
-    name: "Slap House",
-    description:
-      "A modern, pop-oriented style known for its distinctive, punchy bass sound that 'slaps' on the off-beat.",
-  },
-  {
-    name: "Soulful House",
-    description:
-      "Characterized by its rich vocal melodies, soulful instrumentation, and uplifting vibe.",
-  },
-  {
     name: "Tech House",
     description:
       "A hybrid genre that combines the groove of house with the punch of techno.",
@@ -364,11 +269,6 @@ export const houseGenres: Genre[] = [
     name: "Tribal House",
     description:
       "Focuses on dense, polyrhythmic percussion and a driving, hypnotic groove.",
-  },
-  {
-    name: "Tropical House",
-    description:
-      "A lighter, more relaxed style of deep house, often featuring tropical instruments like steel drums and marimbas.",
   },
   {
     name: "UK Hard House",
