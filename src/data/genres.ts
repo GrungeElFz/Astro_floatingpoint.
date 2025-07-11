@@ -122,11 +122,6 @@ export const tranceGenres: Genre[] = [
       "Combines the melodies of trance with the squelchy basslines of the Roland TB-303, creating a hypnotic and driving sound.",
   },
   {
-    name: "Balearic Trance",
-    description:
-      "Originating from Ibiza, this style is often characterized by a relaxed, atmospheric, and uplifting feel, evoking beachside sunrises.",
-  },
-  {
     name: "Classic Trance",
     description:
       "Refers to the foundational sound of the 1990s, known for its iconic synth riffs, arpeggiated melodies, and euphoric breakdowns.",
@@ -135,11 +130,6 @@ export const tranceGenres: Genre[] = [
     name: "Dark Psytrance",
     description:
       "A heavier, faster subgenre of psytrance with sinister atmospheres, complex sound design, and tempos often exceeding 150 BPM.",
-  },
-  {
-    name: "Dream Trance",
-    description:
-      "A highly melodic and soothing style popularized in the mid-90s, often featuring beautiful piano melodies and ethereal pads.",
   },
   {
     name: "Forest Psytrance",
@@ -177,11 +167,6 @@ export const tranceGenres: Genre[] = [
       "A slower, groovier form of psytrance that builds gradually, focusing on a rolling bassline and more minimalistic psychedelic elements.",
   },
   {
-    name: "Progressive Trance",
-    description:
-      "A sophisticated style focusing on a gradual build-up and breakdown of musical elements to create a subtle, evolving journey.",
-  },
-  {
     name: "Psybient",
     description:
       "A fusion of psychedelic trance and ambient music, featuring slower tempos, complex soundscapes, and a focus on atmosphere.",
@@ -206,11 +191,7 @@ export const tranceGenres: Genre[] = [
     description:
       "A highly melodic and energetic style known for its long, epic breakdowns and euphoric chord progressions, often featuring major keys.",
   },
-  {
-    name: "Vocal Trance",
-    description:
-      "A broad category of trance featuring prominent vocal performances, which often form the central hook and emotional core of the track.",
-  },
+
   {
     name: "Zenonesque",
     description:
