@@ -307,11 +307,6 @@ export const breakbeatGenres: Genre[] = [
 
 export const hardDanceGenres: Genre[] = [
   {
-    name: "4-Beat",
-    description:
-      "A subgenre of UK Hardcore known for its off-beat bass and less aggressive, more bouncy feel.",
-  },
-  {
     name: "Bouncy Techno",
     description:
       "A fusion of hard house and techno from the Netherlands and UK, known for its fun, bouncy basslines.",
@@ -327,16 +322,6 @@ export const hardDanceGenres: Genre[] = [
       "A darker, more atmospheric style of hardcore, often featuring ambient pads and sinister, horror-influenced themes.",
   },
   {
-    name: "Digital Hardcore",
-    description:
-      "A fusion genre that combines the speed and intensity of hardcore with punk rock and heavy metal influences.",
-  },
-  {
-    name: "Frenchcore",
-    description:
-      "A style of hardcore originating from France, characterized by its off-beat, distorted basslines and high tempos.",
-  },
-  {
     name: "Gabber",
     description:
       "Originating from Rotterdam, this is a fast, aggressive style of hardcore known for its heavily distorted kick drums.",
@@ -350,41 +335,6 @@ export const hardDanceGenres: Genre[] = [
     name: "Hardstyle",
     description:
       "A fusion of hard trance and hardcore, defined by its deep, distorted kick drum, reverse bass, and anthemic melodies.",
-  },
-  {
-    name: "Hardtek",
-    description:
-      "A raw, repetitive style of techno associated with the European free party scene, faster and harder than traditional techno.",
-  },
-  {
-    name: "Industrial Hardcore",
-    description:
-      "A dark and abrasive form of hardcore that incorporates noisy, distorted sounds from industrial music.",
-  },
-  {
-    name: "Jumpstyle",
-    description:
-      "A style primarily from Belgium and the Netherlands, known for its simple 909 kick drum and shuffling, energetic dance.",
-  },
-  {
-    name: "Makina",
-    description:
-      "A fast and energetic genre from Spain, blending elements of happy hardcore and trance with a distinct, bouncy rhythm.",
-  },
-  {
-    name: "Speedcore",
-    description:
-      "An extreme subgenre of hardcore characterized by incredibly high tempos, typically ranging from 250 to 1000 BPM.",
-  },
-  {
-    name: "Terrorcore",
-    description:
-      "A dark and aggressive subgenre of hardcore, even more chaotic and sinister than standard Gabber.",
-  },
-  {
-    name: "UK Hardcore",
-    description:
-      "The modern evolution of Happy Hardcore in the UK, often faster and incorporating influences from trance and hardstyle.",
   },
 ];
 
