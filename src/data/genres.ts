@@ -294,34 +294,14 @@ export const breakbeatGenres: Genre[] = [
       "An early 90s UK genre that preceded jungle, combining breakbeats with rave stabs, high tempos, and heavy bass.",
   },
   {
-    name: "Broken Beat",
-    description:
-      "A sophisticated and syncopated style that fuses breakbeat with influences from jazz, funk, and soul.",
-  },
-  {
     name: "Chemical Breaks",
     description:
       "A term often used interchangeably with Big Beat, popularized by artists like The Chemical Brothers.",
   },
   {
-    name: "Florida Breaks",
-    description:
-      "A regional US style known for its groovy, funky basslines, faster tempos, and party-centric, accessible vibe.",
-  },
-  {
-    name: "Freestyle",
-    description:
-      "An 80s electronic genre with Latin-American influences, characterized by syncopated rhythms and melodic vocal hooks.",
-  },
-  {
     name: "Nu Skool Breaks",
     description:
       "A modern evolution of breakbeat featuring darker tones, complex rhythms, and high-tech sound design.",
-  },
-  {
-    name: "Progressive Breaks",
-    description:
-      "Merges the syncopated rhythms of breaks with the atmospheric pads and evolving structures of progressive house and trance.",
   },
 ];
 
