@@ -154,7 +154,7 @@ export function MobileMenu() {
 
             {/* Social Media: YouTube */}
             <a
-              href="https://youtube.com/@floatingpoint000"
+              href="https://youtube.com/@floatingpoint_club"
               target="_blank"
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
