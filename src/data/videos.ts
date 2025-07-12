@@ -21,7 +21,46 @@ export interface VideoData {
 
 export const allVideos: VideoData[] = [
   {
-    id: "main-video-1",
+    id: "grid-video-1",
+    title: "The Dean's List - ILOVECAUSINGDRAMA",
+    artist: "ILOVECAUSINGDRAMA",
+    event: "The Dean's List",
+    location: "The Terrarium",
+    date: "May 18, 2025",
+    description:
+      "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
+    youtubeId: "JogscRECHM8",
+    duration: "0:41",
+    categories: ["Live Performance", "Highlight"],
+  },
+  {
+    id: "grid-video-2",
+    title: "The Dean's List - 0x01000111",
+    artist: "0x01000111",
+    event: "The Dean's List",
+    location: "The Terrarium",
+    date: "May 18, 2025",
+    description:
+      "Dive into a live performance from 0x01000111. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
+    youtubeId: "20mjEXpOuhY",
+    duration: "1:01",
+    categories: ["Live Performance", "Highlight"],
+  },
+  {
+    id: "grid-video-3",
+    title: "Zenith - ILOVECAUSINGDRAMA",
+    artist: "ILOVECAUSINGDRAMA",
+    event: "Zenith",
+    location: "The Terrarium",
+    date: "June 6, 2025",
+    description:
+      "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
+    youtubeId: "kl_CS-R85Kg",
+    duration: "4:15",
+    categories: ["Live Performance", "Highlight"],
+  },
+  {
+    id: "main-video-4",
     title: "Zenith - 0x01000111",
     artist: "0x01000111",
     event: "Zenith",
@@ -35,7 +74,7 @@ export const allVideos: VideoData[] = [
     isFeatured: true,
   },
   {
-    id: "grid-video-1",
+    id: "grid-video-5",
     title: "Zenith - Qualia",
     artist: "Qualia",
     event: "Zenith",
@@ -45,45 +84,6 @@ export const allVideos: VideoData[] = [
       "Dive into a live performance from Qualia. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
     youtubeId: "WNshywj_Y2I",
     duration: "23:29",
-    categories: ["Live Performance", "Highlight"],
-  },
-  {
-    id: "grid-video-2",
-    title: "Zenith - ILOVECAUSINGDRAMA",
-    artist: "ILOVECAUSINGDRAMA",
-    event: "Zenith",
-    location: "The Terrarium",
-    date: "June 6, 2025",
-    description:
-      "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
-    youtubeId: "kl_CS-R85Kg",
-    duration: "4:15",
-    categories: ["Live Performance", "Highlight"],
-  },
-  {
-    id: "grid-video-3",
-    title: "The Dean's List - 0x01000111",
-    artist: "0x01000111",
-    event: "The Dean's List",
-    location: "The Terrarium",
-    date: "May 18, 2025",
-    description:
-      "Dive into a live performance from 0x01000111. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
-    youtubeId: "20mjEXpOuhY",
-    duration: "1:01",
-    categories: ["Live Performance", "Highlight"],
-  },
-  {
-    id: "grid-video-4",
-    title: "The Dean's List - ILOVECAUSINGDRAMA",
-    artist: "ILOVECAUSINGDRAMA",
-    event: "The Dean's List",
-    location: "The Terrarium",
-    date: "May 18, 2025",
-    description:
-      "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
-    youtubeId: "JogscRECHM8",
-    duration: "0:41",
     categories: ["Live Performance", "Highlight"],
   },
 ];
