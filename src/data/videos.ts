@@ -29,7 +29,7 @@ export const allVideos: VideoData[] = [
     date: "June 6, 2025",
     description:
       "Dive into a live performance from 0x01000111 through a 53:22 minute set. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
-    youtubeId: "fl_fQ88tG9M",
+    youtubeId: "fiIhjW837Gw",
     duration: "53:22",
     categories: ["Live Performance"],
     isFeatured: true,
@@ -43,7 +43,7 @@ export const allVideos: VideoData[] = [
     date: "June 6, 2025",
     description:
       "Dive into a live performance from Qualia. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
-    youtubeId: "psUWt720D7Q",
+    youtubeId: "WNshywj_Y2I",
     duration: "23:29",
     categories: ["Live Performance", "Highlight"],
   },
@@ -56,7 +56,7 @@ export const allVideos: VideoData[] = [
     date: "June 6, 2025",
     description:
       "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during the Zenith event at The Terrarium on June 6, 2025.",
-    youtubeId: "hP1YW4ZYq2I",
+    youtubeId: "kl_CS-R85Kg",
     duration: "4:15",
     categories: ["Live Performance", "Highlight"],
   },
@@ -69,7 +69,7 @@ export const allVideos: VideoData[] = [
     date: "May 18, 2025",
     description:
       "Dive into a live performance from 0x01000111. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
-    youtubeId: "c6P27ef6gVI",
+    youtubeId: "20mjEXpOuhY",
     duration: "1:01",
     categories: ["Live Performance", "Highlight"],
   },
@@ -82,7 +82,7 @@ export const allVideos: VideoData[] = [
     date: "May 18, 2025",
     description:
       "Dive into a live performance from ILOVECAUSINGDRAMA. Recorded during The Dean's List event at The Terrarium on May 18, 2025.",
-    youtubeId: "5iBUYb8sXu0",
+    youtubeId: "JogscRECHM8",
     duration: "0:41",
     categories: ["Live Performance", "Highlight"],
   },
