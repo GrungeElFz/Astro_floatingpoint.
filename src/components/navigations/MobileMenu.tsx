@@ -165,7 +165,7 @@ export function MobileMenu() {
 
             {/* Social Media: Instagram */}
             <a
-              href="https://instagram.com/floatingpoint___"
+              href="https://instagram.com/floatingpoint.club"
               target="_blank"
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
