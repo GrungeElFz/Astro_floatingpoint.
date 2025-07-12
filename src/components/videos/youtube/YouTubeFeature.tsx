@@ -11,7 +11,7 @@ export const YouTubeFeature: React.FC<YouTubeFeatureProps> = ({ video }) => {
 
   // YouTube URLs
   const youtubeVideoUrl = `http://www.youtube.com/watch?v=${video.youtubeId}`;
-  const youtubeThumbnailUrl = `http://img.youtube.com/vi/${video.youtubeId}/maxresdefault.jpg`;
+  const youtubeThumbnailUrl = `http://img.youtube.com/vi/${video.youtubeId}/sddefault.jpg`;
   const youtubeEmbedUrl = `http://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0&showinfo=0&modestbranding=1`;
 
   return (
