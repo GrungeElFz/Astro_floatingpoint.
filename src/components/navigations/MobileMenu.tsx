@@ -143,7 +143,7 @@ export function MobileMenu() {
           <div className="flex justify-center space-x-6">
             {/* Social Media: SoundCloud */}
             <a
-              href="https://soundcloud.com/floatingpoint000"
+              href="https://soundcloud.com/floatingpoint_club"
               target="_blank"
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
