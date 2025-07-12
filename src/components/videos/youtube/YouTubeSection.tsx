@@ -23,14 +23,15 @@ export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
 
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
 
-  const filteredVideos = useMemo(() => {
-    if (activeCategory === "All") {
-      return allVideos;
-    }
+  const reversedFilteredVideos = useMemo(() => {
+    const filtered =
+      activeCategory === "All"
+        ? allVideos
+        : allVideos.filter((video) =>
+            video.categories.includes(activeCategory as VideoCategory)
+          );
 
-    return allVideos.filter((video) =>
-      video.categories.includes(activeCategory as VideoCategory)
-    );
+    return [...filtered].reverse();
   }, [allVideos, activeCategory]);
 
   return (
@@ -53,8 +54,8 @@ export const YouTubeSection: React.FC<YouTubeSectionProps> = ({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredVideos.length > 0 ? (
-            filteredVideos.map((video) => (
+          {reversedFilteredVideos.length > 0 ? (
+            reversedFilteredVideos.map((video) => (
               <YouTubeCard key={video.id} video={video} />
             ))
           ) : (

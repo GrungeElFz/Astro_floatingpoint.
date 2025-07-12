@@ -143,7 +143,7 @@ export function MobileMenu() {
           <div className="flex justify-center space-x-6">
             {/* Social Media: SoundCloud */}
             <a
-              href="https://soundcloud.com/floatingpoint000"
+              href="https://soundcloud.com/floatingpoint_club"
               target="_blank"
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
@@ -154,7 +154,7 @@ export function MobileMenu() {
 
             {/* Social Media: YouTube */}
             <a
-              href="https://youtube.com/@floatingpoint000"
+              href="https://youtube.com/@floatingpoint_club"
               target="_blank"
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"
@@ -165,7 +165,7 @@ export function MobileMenu() {
 
             {/* Social Media: Instagram */}
             <a
-              href="https://instagram.com/floatingpoint___"
+              href="https://instagram.com/floatingpoint.club"
               target="_blank"
               rel="noopener noreferrer"
               className="text-neutral-400 hover:text-white"

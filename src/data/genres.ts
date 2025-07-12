@@ -5,10 +5,6 @@ export interface Genre {
 
 export const technoGenres: Genre[] = [
   {
-    name: "Acid Ambient Techno",
-    description: "Hypnotic, atmospheric techno with swirling acid lines.",
-  },
-  {
     name: "Acid Techno",
     description:
       "Dominated by the squelchy, liquid sound of the Roland TB-303 bass synthesizer, often with a harder edge than Acid House.",
@@ -31,11 +27,6 @@ export const technoGenres: Genre[] = [
   {
     name: "Bleep Techno",
     description: "Early UK techno with quirky, sci-fi bleeps and heavy bass.",
-  },
-  {
-    name: "Business Techno",
-    description:
-      "A term for mainstream, polished techno, often characterized by a more accessible and commercially-focused sound.",
   },
   {
     name: "Dark Techno",
@@ -131,11 +122,6 @@ export const tranceGenres: Genre[] = [
       "Combines the melodies of trance with the squelchy basslines of the Roland TB-303, creating a hypnotic and driving sound.",
   },
   {
-    name: "Balearic Trance",
-    description:
-      "Originating from Ibiza, this style is often characterized by a relaxed, atmospheric, and uplifting feel, evoking beachside sunrises.",
-  },
-  {
     name: "Classic Trance",
     description:
       "Refers to the foundational sound of the 1990s, known for its iconic synth riffs, arpeggiated melodies, and euphoric breakdowns.",
@@ -144,11 +130,6 @@ export const tranceGenres: Genre[] = [
     name: "Dark Psytrance",
     description:
       "A heavier, faster subgenre of psytrance with sinister atmospheres, complex sound design, and tempos often exceeding 150 BPM.",
-  },
-  {
-    name: "Dream Trance",
-    description:
-      "A highly melodic and soothing style popularized in the mid-90s, often featuring beautiful piano melodies and ethereal pads.",
   },
   {
     name: "Forest Psytrance",
@@ -186,11 +167,6 @@ export const tranceGenres: Genre[] = [
       "A slower, groovier form of psytrance that builds gradually, focusing on a rolling bassline and more minimalistic psychedelic elements.",
   },
   {
-    name: "Progressive Trance",
-    description:
-      "A sophisticated style focusing on a gradual build-up and breakdown of musical elements to create a subtle, evolving journey.",
-  },
-  {
     name: "Psybient",
     description:
       "A fusion of psychedelic trance and ambient music, featuring slower tempos, complex soundscapes, and a focus on atmosphere.",
@@ -215,11 +191,7 @@ export const tranceGenres: Genre[] = [
     description:
       "A highly melodic and energetic style known for its long, epic breakdowns and euphoric chord progressions, often featuring major keys.",
   },
-  {
-    name: "Vocal Trance",
-    description:
-      "A broad category of trance featuring prominent vocal performances, which often form the central hook and emotional core of the track.",
-  },
+
   {
     name: "Zenonesque",
     description:
@@ -234,31 +206,6 @@ export const houseGenres: Genre[] = [
       "Characterized by the squelchy basslines of the Roland TB-303.",
   },
   {
-    name: "Afro House",
-    description:
-      "A fusion of traditional African musical elements with classic house music.",
-  },
-  {
-    name: "Amapiano",
-    description:
-      "A South African subgenre featuring piano melodies, kwaito basslines, and low-tempo house rhythms.",
-  },
-  {
-    name: "Balearic Beat",
-    description:
-      "An eclectic and often laid-back style originating from Ibiza, characterized by a mix of influences including pop, soul, and world music.",
-  },
-  {
-    name: "Bass House",
-    description:
-      "A high-energy subgenre featuring heavy, distorted basslines, often with influences from dubstep and garage.",
-  },
-  {
-    name: "Brazilian Bass",
-    description:
-      "A punchy, deep-toned style of house music originating from Brazil, characterized by its prominent basslines.",
-  },
-  {
     name: "Chicago House",
     description:
       "The original style of house music, born in Chicago, known for its soulful vocals and disco influences.",
@@ -269,49 +216,9 @@ export const houseGenres: Genre[] = [
       "Soulful and atmospheric house music with a focus on complex melodies and mellow vibes.",
   },
   {
-    name: "Disco House",
-    description:
-      "Directly incorporates samples and the joyful, string-laden feel of classic disco tracks.",
-  },
-  {
-    name: "Diva House",
-    description:
-      "Characterized by powerful, soulful, and often gospel-influenced female vocal performances over a strong house beat.",
-  },
-  {
-    name: "Dutch House",
-    description:
-      "A style of electro house known for its high-pitched synth leads, complex rhythms, and often syncopated drum patterns.",
-  },
-  {
-    name: "Electro House",
-    description:
-      "A harder form of house featuring prominent basslines, aggressive synths, and a tempo typically around 130 BPM.",
-  },
-  {
     name: "Fidget House",
     description:
       "Features glitchy, chopped-up vocal samples and bouncy, bass-heavy grooves.",
-  },
-  {
-    name: "French House",
-    description:
-      "A style of house music that heavily samples and filters disco and funk tracks.",
-  },
-  {
-    name: "Funky House",
-    description:
-      "Upbeat and groovy house music with prominent basslines and a strong funk influence.",
-  },
-  {
-    name: "Future House",
-    description:
-      "A modern take on house with a metallic, elastic-sounding drop and often incorporating deep house and garage elements.",
-  },
-  {
-    name: "Garage House",
-    description:
-      "A soulful and vocal-driven style of house music with roots in the New York club scene.",
   },
   {
     name: "Ghetto House",
@@ -319,19 +226,9 @@ export const houseGenres: Genre[] = [
       "A raw and energetic style of house music with explicit lyrics and a strong focus on the dancefloor.",
   },
   {
-    name: "Gqom",
-    description:
-      "A raw and hypnotic genre from Durban, South Africa, with a minimalistic and bass-heavy sound.",
-  },
-  {
     name: "Hard House",
     description:
       "A faster, more aggressive style of house featuring hard-hitting kick drums and often a 'hoover' synthesizer sound.",
-  },
-  {
-    name: "Hip House",
-    description:
-      "A fusion genre that combines the rhythms of house music with rapping.",
   },
   {
     name: "Italo House",
@@ -342,11 +239,6 @@ export const houseGenres: Genre[] = [
     name: "Jackin' House",
     description:
       "Characterized by its heavy use of disco and funk samples, with a strong, energetic, and often swinging groove.",
-  },
-  {
-    name: "Latin House",
-    description:
-      "Blends house music with Latin American sounds, incorporating salsa, samba, and other vibrant rhythms.",
   },
   {
     name: "Lo-Fi House",
@@ -369,21 +261,6 @@ export const houseGenres: Genre[] = [
       "A lo-fi and unconventional take on house music, often with a raw, distorted, and experimental edge.",
   },
   {
-    name: "Progressive House",
-    description:
-      "Builds in complexity and emotion, with long, evolving melodic and rhythmic patterns.",
-  },
-  {
-    name: "Slap House",
-    description:
-      "A modern, pop-oriented style known for its distinctive, punchy bass sound that 'slaps' on the off-beat.",
-  },
-  {
-    name: "Soulful House",
-    description:
-      "Characterized by its rich vocal melodies, soulful instrumentation, and uplifting vibe.",
-  },
-  {
     name: "Tech House",
     description:
       "A hybrid genre that combines the groove of house with the punch of techno.",
@@ -392,11 +269,6 @@ export const houseGenres: Genre[] = [
     name: "Tribal House",
     description:
       "Focuses on dense, polyrhythmic percussion and a driving, hypnotic groove.",
-  },
-  {
-    name: "Tropical House",
-    description:
-      "A lighter, more relaxed style of deep house, often featuring tropical instruments like steel drums and marimbas.",
   },
   {
     name: "UK Hard House",
@@ -422,43 +294,18 @@ export const breakbeatGenres: Genre[] = [
       "An early 90s UK genre that preceded jungle, combining breakbeats with rave stabs, high tempos, and heavy bass.",
   },
   {
-    name: "Broken Beat",
-    description:
-      "A sophisticated and syncopated style that fuses breakbeat with influences from jazz, funk, and soul.",
-  },
-  {
     name: "Chemical Breaks",
     description:
       "A term often used interchangeably with Big Beat, popularized by artists like The Chemical Brothers.",
-  },
-  {
-    name: "Florida Breaks",
-    description:
-      "A regional US style known for its groovy, funky basslines, faster tempos, and party-centric, accessible vibe.",
-  },
-  {
-    name: "Freestyle",
-    description:
-      "An 80s electronic genre with Latin-American influences, characterized by syncopated rhythms and melodic vocal hooks.",
   },
   {
     name: "Nu Skool Breaks",
     description:
       "A modern evolution of breakbeat featuring darker tones, complex rhythms, and high-tech sound design.",
   },
-  {
-    name: "Progressive Breaks",
-    description:
-      "Merges the syncopated rhythms of breaks with the atmospheric pads and evolving structures of progressive house and trance.",
-  },
 ];
 
 export const hardDanceGenres: Genre[] = [
-  {
-    name: "4-Beat",
-    description:
-      "A subgenre of UK Hardcore known for its off-beat bass and less aggressive, more bouncy feel.",
-  },
   {
     name: "Bouncy Techno",
     description:
@@ -475,16 +322,6 @@ export const hardDanceGenres: Genre[] = [
       "A darker, more atmospheric style of hardcore, often featuring ambient pads and sinister, horror-influenced themes.",
   },
   {
-    name: "Digital Hardcore",
-    description:
-      "A fusion genre that combines the speed and intensity of hardcore with punk rock and heavy metal influences.",
-  },
-  {
-    name: "Frenchcore",
-    description:
-      "A style of hardcore originating from France, characterized by its off-beat, distorted basslines and high tempos.",
-  },
-  {
     name: "Gabber",
     description:
       "Originating from Rotterdam, this is a fast, aggressive style of hardcore known for its heavily distorted kick drums.",
@@ -498,41 +335,6 @@ export const hardDanceGenres: Genre[] = [
     name: "Hardstyle",
     description:
       "A fusion of hard trance and hardcore, defined by its deep, distorted kick drum, reverse bass, and anthemic melodies.",
-  },
-  {
-    name: "Hardtek",
-    description:
-      "A raw, repetitive style of techno associated with the European free party scene, faster and harder than traditional techno.",
-  },
-  {
-    name: "Industrial Hardcore",
-    description:
-      "A dark and abrasive form of hardcore that incorporates noisy, distorted sounds from industrial music.",
-  },
-  {
-    name: "Jumpstyle",
-    description:
-      "A style primarily from Belgium and the Netherlands, known for its simple 909 kick drum and shuffling, energetic dance.",
-  },
-  {
-    name: "Makina",
-    description:
-      "A fast and energetic genre from Spain, blending elements of happy hardcore and trance with a distinct, bouncy rhythm.",
-  },
-  {
-    name: "Speedcore",
-    description:
-      "An extreme subgenre of hardcore characterized by incredibly high tempos, typically ranging from 250 to 1000 BPM.",
-  },
-  {
-    name: "Terrorcore",
-    description:
-      "A dark and aggressive subgenre of hardcore, even more chaotic and sinister than standard Gabber.",
-  },
-  {
-    name: "UK Hardcore",
-    description:
-      "The modern evolution of Happy Hardcore in the UK, often faster and incorporating influences from trance and hardstyle.",
   },
 ];
 
