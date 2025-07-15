@@ -1,6 +1,7 @@
 export interface Genre {
   name: string;
   description: string;
+  spotifyTrackId?: string;
 }
 
 export const technoGenres: Genre[] = [
@@ -8,16 +9,19 @@ export const technoGenres: Genre[] = [
     name: "Acid Techno",
     description:
       "Dominated by the squelchy, liquid sound of the Roland TB-303 bass synthesizer, often with a harder edge than Acid House.",
+    spotifyTrackId: "2m7ynk5y5lelO47VJKMArc"
   },
   {
     name: "Ambient Techno",
     description:
       "Combines the atmospheric textures of ambient music with the rhythmic framework of techno.",
+    spotifyTrackId: "4NDOh3LZTIyvyhoaGpGBPF"
   },
   {
     name: "Berlin Techno",
     description:
       "Often characterized by a dark, deep, and hypnotic sound with a strong emphasis on powerful, repetitive grooves.",
+    spotifyTrackId: "3LlP50kHymifyzp6g9ZMG0"
   },
   {
     name: "Birmingham Techno",
