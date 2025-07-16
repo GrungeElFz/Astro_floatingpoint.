@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  type Genre,
-  allGenres,
-  genreCategoryMap,
-  genreCategoryNames,
-} from "@/data/genres";
-import { GenreCard } from "@/components/genres/GenreCard.tsx";
+import { genreCategoryNames } from "@/data/genres";
+import type { GenreWithSpotifyData } from "@/types/genres";
+import { GenreCard } from "@/components/genres/GenreCard";
 import {
   Carousel,
   CarouselContent,
@@ -19,34 +15,57 @@ export const GenreSection: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const [genres, setGenres] = useState<GenreWithSpotifyData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const carouselContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!api) return;
+    const fetchGenres = async () => {
+      try {
+        const response = await fetch("/api/genres");
+        if (!response.ok) {
+          throw new Error("Failed to fetch genres");
+        }
+        const data = await response.json();
+        setGenres(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchGenres();
+  }, []);
+
+  useEffect(() => {
+    if (!api || !genres.length) return;
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap() + 1);
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);
     });
-  }, [api]);
+  }, [api, genres]);
 
   const handleFilterClick = (category: string) => {
     const newFilter = activeFilter === category ? null : category;
     setActiveFilter(newFilter);
 
-    if (newFilter !== null) {
-      const targetGenre = allGenres.find(
-        (genre) => genreCategoryMap.get(genre.name) === newFilter
-      );
-      if (targetGenre && api) {
-        const targetIndex = allGenres.indexOf(targetGenre);
-        if (targetIndex > -1) {
-          api.scrollTo(targetIndex);
-        }
+    if (newFilter !== null && api) {
+      const targetIndex = genres.findIndex((g) => g.category === newFilter);
+      if (targetIndex !== -1) {
+        api.scrollTo(targetIndex);
       }
     }
   };
+
+  if (isLoading) {
+    return (
+      <section className="bg-black text-neutral-100 py-16 sm:py-24 text-center">
+        <p>Loading Genres...</p>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-black text-neutral-100 py-16 sm:py-24">
@@ -84,37 +103,35 @@ export const GenreSection: React.FC = () => {
           className="w-full"
         >
           <CarouselContent className="-ml-4">
-            {allGenres.map((genre) => {
-              const genreCategory = genreCategoryMap.get(genre.name);
-              const shouldDeemphasize =
-                activeFilter !== null && activeFilter !== genreCategory;
-              return (
-                <CarouselItem
-                  key={genre.name}
-                  className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
-                >
-                  <GenreCard
-                    genre={genre}
-                    onCardClick={() => {
-                      if (shouldDeemphasize) {
-                        setActiveFilter(null);
-                      }
-                    }}
-                    className={
-                      shouldDeemphasize
-                        ? "opacity-50 blur-sm scale-95 cursor-pointer"
-                        : "opacity-100 blur-none scale-100"
+            {genres.map((genre) => (
+              <CarouselItem
+                key={genre.name}
+                className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+              >
+                <GenreCard
+                  genre={genre}
+                  onCardClick={() => {
+                    if (
+                      activeFilter !== null &&
+                      activeFilter !== genre.category
+                    ) {
+                      setActiveFilter(null);
                     }
-                  />
-                </CarouselItem>
-              );
-            })}
+                  }}
+                  className={
+                    activeFilter !== null && activeFilter !== genre.category
+                      ? "opacity-50 blur-sm scale-95"
+                      : "opacity-100 blur-none scale-100"
+                  }
+                />
+              </CarouselItem>
+            ))}
           </CarouselContent>
 
           <div className="flex items-center justify-center space-x-6 mt-12">
             <button
               onClick={() => api?.scrollPrev()}
-              disabled={current === 1}
+              disabled={current <= 1}
               className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
             >
               <ArrowLeft size={16} />
