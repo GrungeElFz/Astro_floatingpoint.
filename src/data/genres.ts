@@ -137,82 +137,79 @@ export const tranceGenres: Genre[] = [
     name: "Acid Trance",
     description:
       "Combines the melodies of trance with the squelchy basslines of the Roland TB-303, creating a hypnotic and driving sound.",
+    spotifyTrackId: "3njXuqVKnYdKddq4CEWQKB",
   },
   {
     name: "Classic Trance",
     description:
       "Refers to the foundational sound of the 1990s, known for its iconic synth riffs, arpeggiated melodies, and euphoric breakdowns.",
+    spotifyTrackId: "0ZcJZSx8cZndVwZrudIFy9",
   },
   {
     name: "Dark Psytrance",
     description:
       "A heavier, faster subgenre of psytrance with sinister atmospheres, complex sound design, and tempos often exceeding 150 BPM.",
+    spotifyTrackId: "0SAUYBoMKa2a1b9wc4OV6y",
   },
   {
     name: "Forest Psytrance",
     description:
       "An organic and atmospheric style of psytrance with a focus on earthly, mysterious, and psychedelic soundscapes.",
+    spotifyTrackId: "1G7nwNENRhpJAbSBQmroIT",
   },
   {
     name: "Full-On",
     description:
       "An energetic and melodic style of psytrance, characterized by driving basslines, uplifting leads, and a peak-time, party-oriented vibe.",
+    spotifyTrackId: "6xGkdzNOOt4SL9JcWq4xCB",
   },
   {
     name: "Goa Trance",
     description:
       "The precursor to modern psytrance, originating in Goa, India. Known for its organic, swirling, and mystical melodies and textures.",
+    spotifyTrackId: "6LPQmTty2Vnr2Im63pvmMd",
   },
   {
     name: "Hard Trance",
     description:
       "A faster, more aggressive form of trance featuring harder kick drums, resonant basslines, and high-energy synth stabs.",
+    spotifyTrackId: "3AV99DqHVWkRjnE2FZBkmC",
   },
   {
     name: "Hi-Tech",
     description:
       "An extremely fast and futuristic style of psytrance, with BPMs often exceeding 170, featuring glitchy, complex, and synthetic sounds.",
+    spotifyTrackId: "354xLsICBASuCXSSGakZUK",
   },
   {
     name: "Nitzhonot",
     description:
       "An Israeli offshoot of Goa trance from the late 90s, blending hard, pulsating kick-basses with uplifting Eastern melodies.",
+    spotifyTrackId: "291g9JiBoFKOvrpH1S1k5X",
   },
   {
     name: "Progressive Psytrance",
     description:
       "A slower, groovier form of psytrance that builds gradually, focusing on a rolling bassline and more minimalistic psychedelic elements.",
-  },
-  {
-    name: "Psybient",
-    description:
-      "A fusion of psychedelic trance and ambient music, featuring slower tempos, complex soundscapes, and a focus on atmosphere.",
+    spotifyTrackId: "2QcTef0atf5V8hNK7TXaN6",
   },
   {
     name: "Psycore",
     description:
       "An extreme subgenre blending dark psytrance with industrial hardcore, characterized by very high speeds and abrasive, noisy textures.",
-  },
-  {
-    name: "Psytrance",
-    description:
-      "Evolving from Goa trance, this genre is defined by high-tempo riffs, layered melodies, and a distinct, pounding bass rhythm.",
+    spotifyTrackId: "2IXQBHOYgwgZWvWX7FMDwT",
   },
   {
     name: "Tech Trance",
     description:
       "A hybrid genre that merges the driving, repetitive rhythms of techno with the melodic and atmospheric elements of trance.",
+    spotifyTrackId: "0HkiSIBOhP31qAPevF0l8n",
   },
-  {
-    name: "Uplifting Trance",
-    description:
-      "A highly melodic and energetic style known for its long, epic breakdowns and euphoric chord progressions, often featuring major keys.",
-  },
-
   {
     name: "Zenonesque",
     description:
       "A dark, groovy, and minimal style of progressive psytrance, named after the Zenon Records label, known for its intricate sound design.",
+    spotifyTrackId: "5uPm1geAPxgYFiSPN6nhVB",
   },
 ];
 
