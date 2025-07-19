@@ -284,31 +284,25 @@ export const hardDanceGenres: Genre[] = [
     name: "Bouncy Techno",
     description:
       "A fusion of hard house and techno from the Netherlands and UK, known for its fun, bouncy basslines.",
-  },
-  {
-    name: "Breakcore",
-    description:
-      "An experimental and complex genre that combines chopped breakbeats with elements of hardcore, jungle, and industrial music.",
+    spotifyTrackId: "3NZQAR08ihh1KmiybjLxDs",
   },
   {
     name: "Darkcore",
     description:
       "A darker, more atmospheric style of hardcore, often featuring ambient pads and sinister, horror-influenced themes.",
+    spotifyTrackId: "2gF4hRBk1fnGuL6U8LzHfx",
   },
   {
     name: "Gabber",
     description:
       "Originating from Rotterdam, this is a fast, aggressive style of hardcore known for its heavily distorted kick drums.",
-  },
-  {
-    name: "Happy Hardcore",
-    description:
-      "A fast and energetic genre known for its high-pitched, cheerful piano melodies, breakbeats, and uplifting vocal samples.",
+    spotifyTrackId: "5EITDlMcZ1IEU886EEPEth",
   },
   {
     name: "Hardstyle",
     description:
       "A fusion of hard trance and hardcore, defined by its deep, distorted kick drum, reverse bass, and anthemic melodies.",
+    spotifyTrackId: "1tZRWJTbkKJtSa4adgObHO",
   },
 ];
 
