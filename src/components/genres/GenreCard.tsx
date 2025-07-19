@@ -27,7 +27,7 @@ export const GenreCard: React.FC<GenreCardProps> = ({
 
         <div className="h-5 mt-auto pt-4">
           {genre.artist && genre.trackName && (
-            <div className="flex items-center text-gray-400">
+            <div className="flex items-center justify-center text-gray-400">
               <p className="text-sm truncate">
                 {genre.artist} - {genre.trackName}
               </p>
