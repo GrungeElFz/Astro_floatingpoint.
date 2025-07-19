@@ -218,76 +218,43 @@ export const houseGenres: Genre[] = [
     name: "Acid House",
     description:
       "Characterized by the squelchy basslines of the Roland TB-303.",
-  },
-  {
-    name: "Chicago House",
-    description:
-      "The original style of house music, born in Chicago, known for its soulful vocals and disco influences.",
+    spotifyTrackId: "4hnwEklz4VPVjr8S71Rmo0",
   },
   {
     name: "Deep House",
     description:
       "Soulful and atmospheric house music with a focus on complex melodies and mellow vibes.",
-  },
-  {
-    name: "Fidget House",
-    description:
-      "Features glitchy, chopped-up vocal samples and bouncy, bass-heavy grooves.",
+    spotifyTrackId: "7oUJr1gFzQ7knjL7qBwyAM",
   },
   {
     name: "Ghetto House",
     description:
       "A raw and energetic style of house music with explicit lyrics and a strong focus on the dancefloor.",
-  },
-  {
-    name: "Hard House",
-    description:
-      "A faster, more aggressive style of house featuring hard-hitting kick drums and often a 'hoover' synthesizer sound.",
-  },
-  {
-    name: "Italo House",
-    description:
-      "A melodic and uplifting form of house music from Italy, known for its prominent piano chords.",
+    spotifyTrackId: "3UMEJQTuNYYHQqct7FuoMA",
   },
   {
     name: "Jackin' House",
     description:
       "Characterized by its heavy use of disco and funk samples, with a strong, energetic, and often swinging groove.",
-  },
-  {
-    name: "Lo-Fi House",
-    description:
-      "A subgenre that intentionally uses a lower-quality, often hazy and distorted sound aesthetic for a nostalgic feel.",
+    spotifyTrackId: "5vgZLkkAIgNepR2VOvB7ge",
   },
   {
     name: "Microhouse",
     description:
       "A minimalist subgenre of house music that uses short, sparse samples to create complex rhythms.",
-  },
-  {
-    name: "Organic House",
-    description:
-      "A subgenre focusing on natural, meditative, and often slower sounds with acoustic and world music influences.",
-  },
-  {
-    name: "Outsider House",
-    description:
-      "A lo-fi and unconventional take on house music, often with a raw, distorted, and experimental edge.",
+    spotifyTrackId: "0UYnNc1kXbN01kdiWmSt7c",
   },
   {
     name: "Tech House",
     description:
       "A hybrid genre that combines the groove of house with the punch of techno.",
+    spotifyTrackId: "6nkEIktuY8Gl5CVV3CFZdE",
   },
   {
     name: "Tribal House",
     description:
       "Focuses on dense, polyrhythmic percussion and a driving, hypnotic groove.",
-  },
-  {
-    name: "UK Hard House",
-    description:
-      "A UK-centric style of hard house that is faster and often features more aggressive and energetic elements than its US counterpart.",
+    spotifyTrackId: "2LkWnkKG6YjHVpiU1ohfPb",
   },
 ];
 
