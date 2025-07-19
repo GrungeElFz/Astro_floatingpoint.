@@ -306,12 +306,34 @@ export const hardDanceGenres: Genre[] = [
   },
 ];
 
+export const electronicBodyMusicGenres: Genre[] = [
+  {
+    name: "Electro-Industrial",
+    description:
+      "Distorted vocals, driving rhythms, and dark, aggressive themes combining electro and industrial.",
+    spotifyTrackId: "5rnRpNFJkv9h9hVUDhMfXw",
+  },
+  {
+    name: "Dark Electro",
+    description:
+      "Darker, atmospheric blending industrial, gothic, and techno, often with horror themes.",
+    spotifyTrackId: "6Y3VKAhFR2Zrqd2MiI35jR",
+  },
+  {
+    name: "Aggrotech",
+    description:
+      "Harsh, distorted, and aggressive electro-industrial, often with shouted vocals and dystopian themes.",
+    spotifyTrackId: "0G1QJXeeYKChFaYm5oMd6u",
+  },
+];
+
 export const allGenres = [
   ...technoGenres,
   ...tranceGenres,
   ...houseGenres,
   ...breakbeatGenres,
   ...hardDanceGenres,
+  ...electronicBodyMusicGenres,
 ];
 
 export const genreCategoryMap = new Map<string, string>();
@@ -320,6 +342,9 @@ tranceGenres.forEach((g) => genreCategoryMap.set(g.name, "Trance"));
 houseGenres.forEach((g) => genreCategoryMap.set(g.name, "House"));
 breakbeatGenres.forEach((g) => genreCategoryMap.set(g.name, "Breakbeat"));
 hardDanceGenres.forEach((g) => genreCategoryMap.set(g.name, "Hard Dance"));
+electronicBodyMusicGenres.forEach((g) =>
+  genreCategoryMap.set(g.name, "Electronic Body Music")
+);
 
 export const genreCategoryNames = [
   "Techno",
@@ -327,4 +352,5 @@ export const genreCategoryNames = [
   "House",
   "Breakbeat",
   "Hard Dance",
+  "Electronic Body Music",
 ];
