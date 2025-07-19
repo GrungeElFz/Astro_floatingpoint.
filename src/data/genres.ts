@@ -263,26 +263,19 @@ export const breakbeatGenres: Genre[] = [
     name: "Acid Breaks",
     description:
       "Combines the syncopated rhythms of breakbeat with the squelchy, hypnotic sounds of the Roland TB-303.",
-  },
-  {
-    name: "Big Beat",
-    description:
-      "A 90s style known for its heavy, distorted breakbeats, prominent synth lines, and samples from rock and funk.",
-  },
-  {
-    name: "Breakbeat Hardcore",
-    description:
-      "An early 90s UK genre that preceded jungle, combining breakbeats with rave stabs, high tempos, and heavy bass.",
+    spotifyTrackId: "1zCYEn1bfT4ZcAj36lgqsq",
   },
   {
     name: "Chemical Breaks",
     description:
       "A term often used interchangeably with Big Beat, popularized by artists like The Chemical Brothers.",
+    spotifyTrackId: "4iVjyzPXZwOuu5z6Gd4IvF",
   },
   {
     name: "Nu Skool Breaks",
     description:
       "A modern evolution of breakbeat featuring darker tones, complex rhythms, and high-tech sound design.",
+    spotifyTrackId: "730RDwIr8QHEjMLAPEY8FX",
   },
 ];
 
