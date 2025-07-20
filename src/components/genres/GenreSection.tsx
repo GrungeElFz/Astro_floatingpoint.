@@ -172,7 +172,7 @@ export const GenreSection: React.FC = () => {
           opts={{ align: "start", loop: false }}
           className="w-full"
         >
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-4 py-4">
             {genres.map((genre) => (
               <CarouselItem
                 key={genre.name}
