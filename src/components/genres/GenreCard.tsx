@@ -21,7 +21,7 @@ const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
   return (
-    <div className="p-2 pt-0 mt-auto relative h-[352px]">
+    <div className="p-2 pt-0 mt-auto relative">
       <div
         className={`absolute inset-0 flex items-center justify-center text-neutral-400 transition-opacity ${
           isIframeLoaded ? "opacity-0" : "opacity-100"
@@ -34,10 +34,10 @@ const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
         </div>
       </div>
       <iframe
-        className={`w-full h-[352px] relative z-10 transition-opacity duration-300 ${
+        className={`w-full relative z-10 transition-opacity duration-300 rounded-2xl ${
           isIframeLoaded ? "opacity-100" : "opacity-0"
         }`}
-        style={{ borderRadius: "12px" }}
+        style={{ height: "352px" }}
         src={`https://open.spotify.com/embed/track/${genre.spotifyTrackId}?utm_source=generator&theme=0&autoplay=1`}
         frameBorder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
