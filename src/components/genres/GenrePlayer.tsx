@@ -49,11 +49,11 @@ const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
   );
 };
 
-export const GenrePlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
-  genre,
-}) => {
-  const [isPlayerActive, setPlayerActive] = useState(false);
-  const [isFadingOut, setIsFadingOut] = useState(false);
+export const GenrePlayer: React.FC<{
+  genre: GenreWithSpotifyData;
+  isActive: boolean;
+  onPlay: () => void;
+}> = ({ genre, isActive, onPlay }) => {
   const [showHint, setShowHint] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -76,26 +76,16 @@ export const GenrePlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!isFadingOut) return;
-    const timeout = setTimeout(() => {
-      setPlayerActive(true);
-    }, 500);
-    return () => clearTimeout(timeout);
-  }, [isFadingOut]);
-
   if (!genre.artist || !genre.trackName) {
     return <PlayerSkeleton />;
   }
-  if (isPlayerActive) {
+
+  if (isActive) {
     return <ActivePlayerView genre={genre} />;
   }
+
   return (
-    <div
-      className={`mt-auto transition-opacity duration-500 ${
-        isFadingOut ? "opacity-0" : "opacity-100"
-      }`}
-    >
+    <div className="mt-auto">
       <div className="px-6 pt-4 pb-2 text-center">
         <p className="text-sm font-semibold truncate text-white">
           {genre.trackName}
@@ -106,7 +96,7 @@ export const GenrePlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
         <div
           ref={cardRef}
           className="group relative aspect-square w-full cursor-pointer"
-          onClick={() => setIsFadingOut(true)}
+          onClick={onPlay}
         >
           {genre.coverArtUrl ? (
             <img

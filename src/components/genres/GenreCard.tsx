@@ -1,12 +1,14 @@
 import React from "react";
 import type { GenreWithSpotifyData } from "@/types/genres";
-import { GenrePlayer } from "@/components/genres/GenrePlayer.tsx";
+import { GenrePlayer } from "@/components/genres/GenrePlayer";
 
 export const GenreCard: React.FC<{
   genre: GenreWithSpotifyData;
   className?: string;
+  isActive: boolean;
   onCardClick?: () => void;
-}> = ({ genre, className, onCardClick }) => {
+  onPlay: () => void;
+}> = ({ genre, className, onCardClick, isActive, onPlay }) => {
   return (
     <div
       onClick={onCardClick}
@@ -21,7 +23,7 @@ export const GenreCard: React.FC<{
         </p>
       </div>
 
-      <GenrePlayer genre={genre} />
+      <GenrePlayer genre={genre} isActive={isActive} onPlay={onPlay} />
     </div>
   );
 };

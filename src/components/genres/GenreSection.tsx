@@ -33,57 +33,52 @@ export const GenreSection: React.FC = () => {
   const [count, setCount] = useState(0);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [genres, setGenres] = useState<GenreWithSpotifyData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [activePlayerId, setActivePlayerId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchBaseGenres = async () => {
       try {
         const response = await fetch("/api/genres?enrich=false");
-        if (!response.ok) {
-          throw new Error("Failed to fetch base genres");
-        }
+        if (!response.ok) throw new Error("Failed to fetch base genres");
         const data = await response.json();
         setGenres(data);
       } catch (error) {
         console.error(error);
       } finally {
-        setIsLoading(false);
+        setIsInitialLoading(false);
       }
     };
     fetchBaseGenres();
   }, []);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
+    if (isInitialLoading) return;
     const enrichGenres = async () => {
       try {
         const response = await fetch("/api/genres");
-        if (!response.ok) {
-          throw new Error("Failed to enrich genres");
-        }
-        const enrichedData = await response.json();
-        setGenres(enrichedData);
+        if (!response.ok) throw new Error("Failed to enrich genres");
+        const data = await response.json();
+        setGenres(data);
       } catch (error) {
         console.error("Error enriching genres:", error);
       }
     };
     enrichGenres();
-  }, [isLoading]);
+  }, [isInitialLoading]);
 
   useEffect(() => {
     if (!api) return;
-    const updateState = () => {
+    const updateCarouselState = () => {
       setCount(api.scrollSnapList().length);
       setCurrent(api.selectedScrollSnap() + 1);
     };
-    updateState();
-    api.on("select", updateState);
-    api.on("reInit", updateState);
+    updateCarouselState();
+    api.on("select", updateCarouselState);
+    api.on("reInit", updateCarouselState);
     return () => {
-      api.off("select", updateState);
-      api.off("reInit", updateState);
+      api.off("select", updateCarouselState);
+      api.off("reInit", updateCarouselState);
     };
   }, [api, genres]);
 
@@ -97,8 +92,7 @@ export const GenreSection: React.FC = () => {
   }, [activeFilter, api, genres]);
 
   const handleFilterClick = (category: string) => {
-    const newFilter = activeFilter === category ? null : category;
-    setActiveFilter(newFilter);
+    setActiveFilter((prev) => (prev === category ? null : category));
   };
 
   return (
@@ -108,7 +102,7 @@ export const GenreSection: React.FC = () => {
           <h2 className="text-5xl sm:text-6xl font-bold mb-4">
             Our Genre Preferences
           </h2>
-          <p className="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mt-8">
+          <p className="text-lg font-normal italic text-pretty text-neutral-400 sm-text-xl/8 mx-auto mt-8">
             Exploring the depths of electronic music's most innovative and
             boundary-pushing subgenres.
           </p>
@@ -129,13 +123,9 @@ export const GenreSection: React.FC = () => {
           ))}
         </div>
 
-        <Carousel
-          setApi={setApi}
-          opts={{ align: "start", loop: false }}
-          className="w-full"
-        >
+        <Carousel setApi={setApi} opts={{ align: "start" }} className="w-full">
           <CarouselContent className="-ml-4 py-4">
-            {isLoading
+            {isInitialLoading
               ? Array.from({ length: 4 }).map((_, index) => (
                   <CarouselItem
                     key={index}
@@ -151,6 +141,12 @@ export const GenreSection: React.FC = () => {
                   >
                     <GenreCard
                       genre={genre}
+                      isActive={activePlayerId === genre.name}
+                      onPlay={() =>
+                        setActivePlayerId(
+                          activePlayerId === genre.name ? null : genre.name
+                        )
+                      }
                       onCardClick={() => {
                         if (activeFilter && activeFilter !== genre.category) {
                           setActiveFilter(null);
@@ -169,7 +165,7 @@ export const GenreSection: React.FC = () => {
             <button
               onClick={() => api?.scrollPrev()}
               disabled={!api?.canScrollPrev()}
-              className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
+              className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 hover:text-white hover:border-neutral-500"
             >
               <ArrowLeft size={16} />
             </button>
@@ -179,7 +175,7 @@ export const GenreSection: React.FC = () => {
             <button
               onClick={() => api?.scrollNext()}
               disabled={!api?.canScrollNext()}
-              className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 disabled:cursor-not-allowed hover:text-white hover:border-neutral-500 transition-colors"
+              className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 hover:text-white hover:border-neutral-500"
             >
               <ArrowRight size={16} />
             </button>
