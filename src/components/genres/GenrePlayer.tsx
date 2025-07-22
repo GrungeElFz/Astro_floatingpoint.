@@ -56,8 +56,13 @@ export const GenrePlayer: React.FC<{
 }> = ({ genre, isActive, onPlay }) => {
   const [showHint, setShowHint] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const hasBeenPlayed = useRef(false);
 
+  // Checks the ref before running
   useEffect(() => {
+    // If this card has been played before, do nothing.
+    if (hasBeenPlayed.current) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -84,6 +89,12 @@ export const GenrePlayer: React.FC<{
     return <ActivePlayerView genre={genre} />;
   }
 
+  // A handler to update the memory and call the parent
+  const handlePlay = () => {
+    hasBeenPlayed.current = true;
+    onPlay();
+  };
+
   return (
     <div className="mt-auto">
       <div className="px-6 pt-4 pb-2 text-center">
@@ -96,7 +107,7 @@ export const GenrePlayer: React.FC<{
         <div
           ref={cardRef}
           className="group relative aspect-square w-full cursor-pointer"
-          onClick={onPlay}
+          onClick={handlePlay}
         >
           {genre.coverArtUrl ? (
             <img
