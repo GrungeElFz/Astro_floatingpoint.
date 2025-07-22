@@ -16,11 +16,50 @@ const PlayerSkeleton: React.FC = () => (
   </>
 );
 
-// The SpotifyPlayer component now contains all the new interaction logic.
+// This component handles the smooth fade-in of the loaded iframe.
+const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
+  genre,
+}) => {
+  const [isIframeLoaded, setIsIframeLoaded] = useState(false);
+
+  return (
+    <div className="p-2 pt-0 mt-auto relative h-[352px]">
+      {/* This container shows the loading indicator until the iframe is ready. */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center text-neutral-400 transition-opacity ${
+          isIframeLoaded ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        {/* --- Pulsating Dots Loader --- */}
+        <div className="flex items-center justify-center gap-x-1.5">
+          <div className="h-2 w-2 animate-pulse rounded-full bg-neutral-500 [animation-delay:0s]"></div>
+          <div className="h-2 w-2 animate-pulse rounded-full bg-neutral-500 [animation-delay:0.2s]"></div>
+          <div className="h-2 w-2 animate-pulse rounded-full bg-neutral-500 [animation-delay:0.4s]"></div>
+        </div>
+      </div>
+
+      {/* Iframe with fade-in logic */}
+      <iframe
+        className={`w-full h-[352px] relative z-10 transition-opacity duration-300 ${
+          isIframeLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ borderRadius: "12px" }}
+        src={`https://open.spotify.com/embed/track/${genre.spotifyTrackId}?utm_source=generator&theme=0&autoplay=1`}
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title={`Spotify Player for ${genre.trackName}`}
+        onLoad={() => setIsIframeLoaded(true)}
+      ></iframe>
+    </div>
+  );
+};
+
 const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
   genre,
 }) => {
   const [isPlayerActive, setPlayerActive] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -28,58 +67,47 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // When the card is more than 75% visible
         if (entry.isIntersecting) {
-          // Start a timer to show the hint
           const hintTimeout = setTimeout(() => {
             setShowHint(true);
-            // Start another timer to hide the hint after it has been shown
             const hideTimeout = setTimeout(() => setShowHint(false), 1500);
-            // Cleanup the hide timer
             return () => clearTimeout(hideTimeout);
           }, 1000);
-
-          // We only want to do this once, so we unobserve after triggering.
           observer.unobserve(entry.target);
-
-          // Cleanup the hint timer
           return () => clearTimeout(hintTimeout);
         }
       },
-      { threshold: 0.75 } // Trigger when 75% of the element is visible
+      { threshold: 0.75 }
     );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    // Cleanup observer on component unmount
+    if (cardRef.current) observer.observe(cardRef.current);
     return () => observer.disconnect();
-  }, []); // Empty dependency array ensures this runs only once
+  }, []);
+
+  // This new effect handles the animation sequence.
+  useEffect(() => {
+    if (!isFadingOut) return;
+
+    const timeout = setTimeout(() => {
+      setPlayerActive(true);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [isFadingOut]);
 
   if (!genre.artist || !genre.trackName) {
     return <PlayerSkeleton />;
   }
 
   if (isPlayerActive) {
-    return (
-      <div className="p-2 pt-0 mt-auto">
-        <iframe
-          style={{ borderRadius: "12px" }}
-          src={`https://open.spotify.com/embed/track/${genre.spotifyTrackId}?utm_source=generator&theme=0&autoplay=1`}
-          width="100%"
-          height="352"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          title={`Spotify Player for ${genre.trackName}`}
-        ></iframe>
-      </div>
-    );
+    return <ActivePlayerView genre={genre} />;
   }
 
   return (
-    <div className="mt-auto">
+    <div
+      className={`mt-auto transition-opacity duration-500 ${
+        isFadingOut ? "opacity-0" : "opacity-100"
+      }`}
+    >
       <div className="px-6 pt-4 pb-2 text-center">
         <p className="text-sm font-semibold truncate text-white">
           {genre.trackName}
@@ -91,7 +119,7 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
         <div
           ref={cardRef}
           className="group relative aspect-square w-full cursor-pointer"
-          onClick={() => setPlayerActive(true)}
+          onClick={() => setIsFadingOut(true)}
         >
           {genre.coverArtUrl ? (
             <img
@@ -106,7 +134,6 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
             </div>
           )}
 
-          {/* --- Overlay & Play Button logic --- */}
           <div
             className={`
               absolute inset-0 flex items-center justify-center rounded-xl 
@@ -129,11 +156,10 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
 export const GenreCard: React.FC<{
   genre: GenreWithSpotifyData;
   className?: string;
-  onCardClick?: () => void;
 }> = ({ genre, className }) => {
   return (
     <div
-      className={`group rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 text-neutral-300 h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:-translate-y-1 ${className}`}
+      className={`group rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 text-neutral-300 h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:-translate-y-1 min-h-[520px]`}
     >
       <div className="p-6 pb-0 flex flex-col flex-grow">
         <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">
