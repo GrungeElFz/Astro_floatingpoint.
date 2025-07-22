@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import type { GenreWithSpotifyData } from "@/types/genres";
 import { Play, Music4 } from "lucide-react";
 
-// PlayerSkeleton component remains unchanged...
 const PlayerSkeleton: React.FC = () => (
   <>
     <div className="p-6 pt-2">
@@ -16,7 +15,6 @@ const PlayerSkeleton: React.FC = () => (
   </>
 );
 
-// This component handles the smooth fade-in of the loaded iframe.
 const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
   genre,
 }) => {
@@ -24,21 +22,17 @@ const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
 
   return (
     <div className="p-2 pt-0 mt-auto relative h-[352px]">
-      {/* This container shows the loading indicator until the iframe is ready. */}
       <div
         className={`absolute inset-0 flex items-center justify-center text-neutral-400 transition-opacity ${
           isIframeLoaded ? "opacity-0" : "opacity-100"
         }`}
       >
-        {/* --- Pulsating Dots Loader --- */}
         <div className="flex items-center justify-center gap-x-1.5">
           <div className="h-2 w-2 animate-pulse rounded-full bg-neutral-500 [animation-delay:0s]"></div>
           <div className="h-2 w-2 animate-pulse rounded-full bg-neutral-500 [animation-delay:0.2s]"></div>
           <div className="h-2 w-2 animate-pulse rounded-full bg-neutral-500 [animation-delay:0.4s]"></div>
         </div>
       </div>
-
-      {/* Iframe with fade-in logic */}
       <iframe
         className={`w-full h-[352px] relative z-10 transition-opacity duration-300 ${
           isIframeLoaded ? "opacity-100" : "opacity-0"
@@ -63,7 +57,6 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
   const [showHint, setShowHint] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // This effect handles the "hint" animation for mobile.
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -83,25 +76,20 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
     return () => observer.disconnect();
   }, []);
 
-  // This new effect handles the animation sequence.
   useEffect(() => {
     if (!isFadingOut) return;
-
     const timeout = setTimeout(() => {
       setPlayerActive(true);
     }, 500);
-
     return () => clearTimeout(timeout);
   }, [isFadingOut]);
 
   if (!genre.artist || !genre.trackName) {
     return <PlayerSkeleton />;
   }
-
   if (isPlayerActive) {
     return <ActivePlayerView genre={genre} />;
   }
-
   return (
     <div
       className={`mt-auto transition-opacity duration-500 ${
@@ -114,7 +102,6 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
         </p>
         <p className="text-xs truncate text-neutral-400">{genre.artist}</p>
       </div>
-
       <div className="px-2 pb-2">
         <div
           ref={cardRef}
@@ -133,7 +120,6 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
               <Music4 size={32} />
             </div>
           )}
-
           <div
             className={`
               absolute inset-0 flex items-center justify-center rounded-xl 
@@ -156,10 +142,12 @@ const SpotifyPlayer: React.FC<{ genre: GenreWithSpotifyData }> = ({
 export const GenreCard: React.FC<{
   genre: GenreWithSpotifyData;
   className?: string;
-}> = ({ genre, className }) => {
+  onCardClick?: () => void;
+}> = ({ genre, className, onCardClick }) => {
   return (
     <div
-      className={`group rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 text-neutral-300 h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:-translate-y-1 min-h-[520px]`}
+      onClick={onCardClick}
+      className={`group rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 text-neutral-300 h-full flex flex-col transition-all duration-300 hover:border-cyan-400/50 hover:-translate-y-1 min-h-[520px] ${className}`}
     >
       <div className="p-6 pb-0 flex flex-col flex-grow">
         <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-300">
@@ -169,7 +157,6 @@ export const GenreCard: React.FC<{
           {genre.description}
         </p>
       </div>
-
       <SpotifyPlayer genre={genre} />
     </div>
   );

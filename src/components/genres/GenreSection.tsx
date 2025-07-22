@@ -35,9 +35,6 @@ export const GenreSection: React.FC = () => {
   const [genres, setGenres] = useState<GenreWithSpotifyData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const carouselContainerRef = useRef<HTMLDivElement>(null);
-
-  // Phase 1: Fetch base data for an instant UI render.
   useEffect(() => {
     const fetchBaseGenres = async () => {
       try {
@@ -56,13 +53,10 @@ export const GenreSection: React.FC = () => {
     fetchBaseGenres();
   }, []);
 
-  // Phase 2: Asynchronously enrich the data with Spotify info.
   useEffect(() => {
-    // Don't run this enrichment logic while the initial data is loading.
     if (isLoading) {
       return;
     }
-
     const enrichGenres = async () => {
       try {
         const response = await fetch("/api/genres");
@@ -73,40 +67,39 @@ export const GenreSection: React.FC = () => {
         setGenres(enrichedData);
       } catch (error) {
         console.error("Error enriching genres:", error);
-        // If this fails, the cards will gracefully remain in their base state.
       }
     };
-
     enrichGenres();
-  }, [isLoading]); // This effect runs once after the initial loading is complete.
+  }, [isLoading]);
 
-  // This effect handles carousel state and remains largely the same.
   useEffect(() => {
     if (!api) return;
-
     const updateState = () => {
       setCount(api.scrollSnapList().length);
       setCurrent(api.selectedScrollSnap() + 1);
     };
-
     updateState();
     api.on("select", updateState);
     api.on("reInit", updateState);
-
     return () => {
       api.off("select", updateState);
       api.off("reInit", updateState);
     };
-  }, [api]);
+  }, [api, genres]);
+
+  useEffect(() => {
+    if (api && activeFilter) {
+      const targetIndex = genres.findIndex((g) => g.category === activeFilter);
+      if (targetIndex !== -1) {
+        api.scrollTo(targetIndex);
+      }
+    }
+  }, [activeFilter, api, genres]);
 
   const handleFilterClick = (category: string) => {
     const newFilter = activeFilter === category ? null : category;
     setActiveFilter(newFilter);
   };
-
-  const visibleGenres = activeFilter
-    ? genres.filter((g) => g.category === activeFilter)
-    : genres;
 
   return (
     <section className="bg-black text-neutral-100 py-16 sm:py-24">
@@ -120,7 +113,6 @@ export const GenreSection: React.FC = () => {
             boundary-pushing subgenres.
           </p>
         </div>
-
         <div className="flex justify-center flex-wrap gap-4 mb-12">
           {genreCategoryNames.map((category) => (
             <button
@@ -138,12 +130,9 @@ export const GenreSection: React.FC = () => {
         </div>
 
         <Carousel
-          ref={carouselContainerRef}
           setApi={setApi}
           opts={{ align: "start", loop: false }}
           className="w-full"
-          // Add a key to force re-initialization when the filter changes
-          key={activeFilter}
         >
           <CarouselContent className="-ml-4 py-4">
             {isLoading
@@ -155,16 +144,27 @@ export const GenreSection: React.FC = () => {
                     <GenreCardSkeleton />
                   </CarouselItem>
                 ))
-              : visibleGenres.map((genre) => (
+              : genres.map((genre) => (
                   <CarouselItem
                     key={genre.name}
                     className="pl-4 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
                   >
-                    <GenreCard genre={genre} />
+                    <GenreCard
+                      genre={genre}
+                      onCardClick={() => {
+                        if (activeFilter && activeFilter !== genre.category) {
+                          setActiveFilter(null);
+                        }
+                      }}
+                      className={
+                        activeFilter && activeFilter !== genre.category
+                          ? "opacity-50 blur-sm scale-95"
+                          : "opacity-100 blur-none scale-100"
+                      }
+                    />
                   </CarouselItem>
                 ))}
           </CarouselContent>
-
           <div className="flex items-center justify-center space-x-6 mt-12">
             <button
               onClick={() => api?.scrollPrev()}
