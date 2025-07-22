@@ -128,7 +128,11 @@ const InactivePlayerView: React.FC<{
             `}
           >
             <div className="absolute inset-0 bg-black/40"></div>
-            <div className="relative p-3 rounded-full border border-cyan-400/30 bg-cyan-900/30 text-cyan-300">
+            <div
+              className="relative p-3 rounded-full border border-cyan-400/30 bg-cyan-900/30 text-cyan-300
+                         hover:scale-105 hover:border-cyan-400/40 hover:bg-cyan-900/40
+                         transition-all ease-in-out duration-300"
+            >
               <Play size={24} className="ml-0.5" />
             </div>
           </div>
