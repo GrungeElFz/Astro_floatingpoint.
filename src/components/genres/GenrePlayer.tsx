@@ -15,13 +15,18 @@ export const PlayerSkeleton: React.FC = () => (
   </>
 );
 
-const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
-  genre,
-}) => {
+const ActivePlayerView: React.FC<{
+  genre: GenreWithSpotifyData;
+  isExiting: boolean;
+}> = ({ genre, isExiting }) => {
   const [isIframeLoaded, setIsIframeLoaded] = useState(false);
 
   return (
-    <div className="p-2 pt-0 mt-auto relative">
+    <div
+      className={`p-2 pt-0 mt-auto relative transition-opacity duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+        isExiting ? "opacity-0" : "opacity-100"
+      }`}
+    >
       <div
         className={`absolute inset-0 flex items-center justify-center text-neutral-400 transition-opacity ${
           isIframeLoaded ? "opacity-0" : "opacity-100"
@@ -34,7 +39,7 @@ const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
         </div>
       </div>
       <iframe
-        className={`w-full relative z-10 transition-opacity duration-300 rounded-2xl ${
+        className={`w-full relative z-10 transition-opacity duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] rounded-2xl ${
           isIframeLoaded ? "opacity-100" : "opacity-0"
         }`}
         style={{ height: "352px" }}
@@ -49,19 +54,17 @@ const ActivePlayerView: React.FC<{ genre: GenreWithSpotifyData }> = ({
   );
 };
 
-export const GenrePlayer: React.FC<{
+const InactivePlayerView: React.FC<{
   genre: GenreWithSpotifyData;
-  isActive: boolean;
   onPlay: () => void;
-}> = ({ genre, isActive, onPlay }) => {
+  showInitialHint: boolean;
+}> = ({ genre, onPlay, showInitialHint }) => {
   const [showHint, setShowHint] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const hasBeenPlayed = useRef(false);
 
-  // Checks the ref before running
   useEffect(() => {
-    // If this card has been played before, do nothing.
-    if (hasBeenPlayed.current) return;
+    if (!showInitialHint) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -79,24 +82,19 @@ export const GenrePlayer: React.FC<{
     );
     if (cardRef.current) observer.observe(cardRef.current);
     return () => observer.disconnect();
+  }, [showInitialHint]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsVisible(true), 10);
+    return () => clearTimeout(timeout);
   }, []);
 
-  if (!genre.artist || !genre.trackName) {
-    return <PlayerSkeleton />;
-  }
-
-  if (isActive) {
-    return <ActivePlayerView genre={genre} />;
-  }
-
-  // A handler to update the memory and call the parent
-  const handlePlay = () => {
-    hasBeenPlayed.current = true;
-    onPlay();
-  };
-
   return (
-    <div className="mt-auto">
+    <div
+      className={`mt-auto transition-opacity duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div className="px-6 pt-4 pb-2 text-center">
         <p className="text-sm font-semibold truncate text-white">
           {genre.trackName}
@@ -107,7 +105,7 @@ export const GenrePlayer: React.FC<{
         <div
           ref={cardRef}
           className="group relative aspect-square w-full cursor-pointer"
-          onClick={handlePlay}
+          onClick={onPlay}
         >
           {genre.coverArtUrl ? (
             <img
@@ -124,7 +122,7 @@ export const GenrePlayer: React.FC<{
           <div
             className={`
               absolute inset-0 flex items-center justify-center rounded-xl 
-              transition-opacity duration-500 ease-in-out
+              transition-opacity duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
               md:group-hover:opacity-100 
               ${showHint ? "opacity-100" : "opacity-0"}
             `}
@@ -137,5 +135,46 @@ export const GenrePlayer: React.FC<{
         </div>
       </div>
     </div>
+  );
+};
+
+export const GenrePlayer: React.FC<{
+  genre: GenreWithSpotifyData;
+  isActive: boolean;
+  onPlay: () => void;
+}> = ({ genre, isActive, onPlay }) => {
+  const [shouldRenderPlayer, setShouldRenderPlayer] = useState(isActive);
+  const hasBeenPlayed = useRef(false);
+
+  useEffect(() => {
+    if (isActive) {
+      setShouldRenderPlayer(true);
+    } else {
+      const timeout = setTimeout(() => {
+        setShouldRenderPlayer(false);
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [isActive]);
+
+  if (!genre.artist || !genre.trackName) {
+    return <PlayerSkeleton />;
+  }
+
+  const handlePlay = () => {
+    hasBeenPlayed.current = true;
+    onPlay();
+  };
+
+  if (shouldRenderPlayer) {
+    return <ActivePlayerView genre={genre} isExiting={!isActive} />;
+  }
+
+  return (
+    <InactivePlayerView
+      genre={genre}
+      onPlay={handlePlay}
+      showInitialHint={!hasBeenPlayed.current}
+    />
   );
 };
