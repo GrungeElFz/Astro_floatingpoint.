@@ -28,11 +28,27 @@ const getAccessToken = async () => {
   return data.access_token;
 };
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ url }) => {
+  const enrich = url.searchParams.get("enrich") !== "false";
+
+  // If client requests base data only, return immediately without calling Spotify.
+  if (!enrich) {
+    const baseGenres = allGenres.map((genre) => ({
+      ...genre,
+      category: genreCategoryMap.get(genre.name) || null,
+    }));
+    return new Response(JSON.stringify(baseGenres), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  // --- Full enrichment logic ---
   try {
     const accessToken = await getAccessToken();
     const trackIds = allGenres.map((genre) => genre.spotifyTrackId).join(",");
 
+    // FIX: Correctly construct the Spotify API URL with the 'ids' query parameter.
     const tracksEndpoint = `https://api.spotify.com/v1/tracks?ids=${trackIds}`;
 
     const response = await fetch(tracksEndpoint, {
@@ -42,6 +58,14 @@ export const GET: APIRoute = async () => {
     });
 
     if (!response.ok) {
+      // Add more detailed error logging
+      const errorBody = await response.text();
+      console.error(
+        "Spotify API request failed:",
+        response.status,
+        response.statusText,
+        errorBody
+      );
       throw new Error(`Spotify API request failed: ${response.statusText}`);
     }
 
@@ -74,7 +98,8 @@ export const GET: APIRoute = async () => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error in /api/spotify route:", error);
+    // FIX: Use the correct error variable name in the log
+    console.error("Error in /api/genres route:", error);
     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
       status: 500,
     });
