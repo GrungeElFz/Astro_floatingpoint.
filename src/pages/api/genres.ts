@@ -28,27 +28,71 @@ const getAccessToken = async () => {
   return data.access_token;
 };
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ url }) => {
+  const enrich = url.searchParams.get("enrich") !== "false";
+
+  // If client requests base data only, return immediately without calling Spotify.
+  if (!enrich) {
+    const baseGenres = allGenres.map((genre) => ({
+      ...genre,
+      category: genreCategoryMap.get(genre.name) || null,
+    }));
+    return new Response(JSON.stringify(baseGenres), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  // --- Full enrichment logic ---
   try {
     const accessToken = await getAccessToken();
-    const trackIds = allGenres.map((genre) => genre.spotifyTrackId).join(",");
+    const allTrackIds = allGenres.map((genre) => genre.spotifyTrackId!);
 
-    const tracksEndpoint = `https://api.spotify.com/v1/tracks?ids=${trackIds}`;
+    // --- START: CHUNKING LOGIC ---
+    const CHUNK_SIZE = 50;
+    const trackIdChunks: string[][] = [];
 
-    const response = await fetch(tracksEndpoint, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Spotify API request failed: ${response.statusText}`);
+    // Split the track IDs into chunks of 50
+    for (let i = 0; i < allTrackIds.length; i += CHUNK_SIZE) {
+      trackIdChunks.push(allTrackIds.slice(i, i + CHUNK_SIZE));
     }
 
-    const apiData = await response.json();
+    // Create a fetch promise for each chunk
+    const fetchPromises = trackIdChunks.map((chunk) => {
+      const trackIds = chunk.join(",");
+      const tracksEndpoint = `https://api.spotify.com/v1/tracks?ids=${trackIds}`;
+      return fetch(tracksEndpoint, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+    });
+
+    // Execute all fetches in parallel
+    const responses = await Promise.all(fetchPromises);
+
+    // Process all responses
+    let allApiTracks: any[] = [];
+    for (const response of responses) {
+      if (!response.ok) {
+        const errorBody = await response.text();
+        console.error(
+          "A Spotify API chunk request failed:",
+          response.status,
+          response.statusText,
+          errorBody
+        );
+        // Depending on desired behavior, Throw here or Continue
+        // For resilience, log the error and continue with the successful chunks
+        continue;
+      }
+      const apiData = await response.json();
+      allApiTracks = allApiTracks.concat(apiData.tracks);
+    }
+    // --- END: CHUNKING LOGIC ---
 
     const trackDataMap = new Map();
-    apiData.tracks.forEach((track: any) => {
+    allApiTracks.forEach((track: any) => {
       if (track) {
         trackDataMap.set(track.id, {
           artist: track.artists.map((_artist: any) => _artist.name).join(", "),
@@ -74,7 +118,7 @@ export const GET: APIRoute = async () => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error in /api/spotify route:", error);
+    console.error("Error in /api/genres route:", error);
     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
       status: 500,
     });
