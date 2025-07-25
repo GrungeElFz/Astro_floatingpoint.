@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo } from "react";
-import type { SetData } from "@/data/sets";
+import React, { useState, useEffect } from "react";
+import { useSets } from "@/hooks/useSets";
+import type { ProcessedSet } from "@/types/sets";
 import { SetFeature } from "./SetFeature";
 import { SetCard } from "./SetCard";
 import {
@@ -10,15 +11,6 @@ import {
 } from "@/components/ui/carousel";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-
-type ProcessedSet = SetData & {
-  coverArtUrl: string;
-  fetchedTrackId: number | null;
-};
-
-interface SetsSectionProps {
-  displayMode?: "grid" | "carousel";
-}
 
 const SkeletonFeature = () => (
   <div className="flex flex-col md:flex-row gap-6 lg:gap-8 bg-neutral-900/50 rounded-3xl shadow-2xl border border-white/10 overflow-hidden">
@@ -68,52 +60,34 @@ const SkeletonCard = () => (
 
 const generateSetId = (set: ProcessedSet) => `set-${set.id}`;
 
+interface SetsSectionProps {
+  displayMode?: "grid" | "carousel";
+}
+
 export const SetSection: React.FC<SetsSectionProps> = ({
   displayMode = "grid",
 }) => {
-  const [sets, setSets] = useState<ProcessedSet[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { loading, events, featuredSet, gridSets } = useSets();
+
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-  const [events, setEvents] = useState<string[]>([]);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      fetch("/api/sets")
-        .then((res) => res.json())
-        .then((data: ProcessedSet[]) => {
-          setSets(data);
-          const uniqueEvents = [
-            ...new Set(data.map((set) => set.event).filter(Boolean)),
-          ];
-          setEvents(uniqueEvents);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.error("Failed to load sets:", err);
-          setLoading(false);
-        });
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     if (!api) return;
     setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap() + 1);
-    api.on("select", () => setCurrent(api.selectedScrollSnap() + 1));
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
   }, [api]);
-
-  const featuredSet = useMemo(() => sets.find((set) => set.isFeatured), [sets]);
-  const gridSets = useMemo(() => sets.filter((set) => !set.isFeatured), [sets]);
 
   const handleFilterClick = (eventName: string | null) => {
     const newFilter = activeFilter === eventName ? null : eventName;
     setActiveFilter(newFilter);
 
-    if (!newFilter) return;
+    if (!newFilter || !gridSets) return;
     const targetSet = gridSets.find((set) => set.event === newFilter);
     if (!targetSet) return;
 
@@ -129,6 +103,7 @@ export const SetSection: React.FC<SetsSectionProps> = ({
   };
 
   const renderSetCards = (setsToRender: ProcessedSet[]) => {
+    if (!setsToRender) return null;
     return setsToRender.map((set) => {
       const shouldDeemphasize = activeFilter && set.event !== activeFilter;
       const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -168,15 +143,16 @@ export const SetSection: React.FC<SetsSectionProps> = ({
     <section className="bg-black text-neutral-100 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl py-4 px-6 lg:px-8 text-center">
         <div className="mb-12">
-          {displayMode === "grid" ? (
-            <h1 className="text-5xl sm:text-6xl font-bold mb-4">
+          <h1 className="text-5xl sm:text-6xl font-bold mb-4">
+            <a
+              href="/sets"
+              className={
+                displayMode === "carousel" ? "hover:text-cyan-400" : ""
+              }
+            >
               Recorded Sets
-            </h1>
-          ) : (
-            <h1 className="text-5xl sm:text-6xl font-bold mb-4">
-              <a href="/sets">Recorded Sets</a>
-            </h1>
-          )}
+            </a>
+          </h1>
           <p className="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mb-12 mt-8">
             Dive into our archive of live performances and exclusive mixes from
             underground electronic artists.
@@ -188,33 +164,19 @@ export const SetSection: React.FC<SetsSectionProps> = ({
             <div className="mb-24">
               <SkeletonFeature />
             </div>
-
             <div className="flex justify-center space-x-4 mb-12">
               <Skeleton className="h-10 w-28 rounded-full bg-neutral-800" />
-              <Skeleton className="h-10 w-28 rounded-full bg-neutral-800" />
+              <Skeleton className="h-10 w-32 rounded-full bg-neutral-800" />
             </div>
-
             {displayMode === "carousel" ? (
-              <div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8">
-                  {[...Array(3)].map((_, i) => (
-                    <SkeletonCard key={i} />
-                  ))}
-                </div>
-                {/* Skeleton for Carousel Navigation */}
-                <div className="flex items-center justify-center space-x-4 mt-8">
-                  <Skeleton className="h-8 w-8 rounded-full bg-neutral-800" />
-                  <div className="flex items-center justify-center space-x-2">
-                    <Skeleton className="h-2 w-2 rounded-full bg-neutral-800" />
-                    <Skeleton className="h-2 w-2 rounded-full bg-neutral-800" />
-                    <Skeleton className="h-2 w-2 rounded-full bg-neutral-800" />
-                  </div>
-                  <Skeleton className="h-8 w-8 rounded-full bg-neutral-800" />
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                {[...Array(3)].map((_, i) => (
+                  <SkeletonCard key={i} />
+                ))}
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                {[...Array(3)].map((_, i) => (
+                {[...Array(6)].map((_, i) => (
                   <SkeletonCard key={i} />
                 ))}
               </div>
@@ -227,16 +189,16 @@ export const SetSection: React.FC<SetsSectionProps> = ({
                 <SetFeature set={featuredSet} />
               </div>
             )}
-            <div className="flex justify-center space-x-4 mb-12">
+            <div className="flex justify-center flex-wrap gap-4 mb-12">
               {events.map((event) => (
                 <button
                   key={event}
                   onClick={() => handleFilterClick(event)}
-                  className={`px-6 py-2 rounded-full border ${
+                  className={`px-6 py-2 rounded-full border text-sm font-medium transition-colors ${
                     activeFilter === event
-                      ? "border-cyan-200 text-white"
-                      : "border-gray-700 text-neutral-400"
-                  } hover:text-white hover:border-cyan-200 transition-colors`}
+                      ? "border-cyan-400 bg-cyan-400/10 text-cyan-300"
+                      : "border-gray-700 text-neutral-400 hover:border-gray-500 hover:text-white"
+                  }`}
                 >
                   {event}
                 </button>
@@ -250,7 +212,7 @@ export const SetSection: React.FC<SetsSectionProps> = ({
                   className="w-full"
                 >
                   <CarouselContent className="-ml-4">
-                    {renderSetCards(gridSets)}
+                    {gridSets && renderSetCards(gridSets)}
                   </CarouselContent>
                 </Carousel>
                 <div className="flex items-center justify-center space-x-4 mt-8">
@@ -285,7 +247,7 @@ export const SetSection: React.FC<SetsSectionProps> = ({
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-                {renderSetCards(gridSets)}
+                {gridSets && renderSetCards(gridSets)}
               </div>
             )}
           </div>
