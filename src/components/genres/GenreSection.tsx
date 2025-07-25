@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { genreCategoryNames } from "@/data/genres";
-import type { GenreWithSpotifyData } from "@/types/genres";
 import { GenreCard } from "@/components/genres/GenreCard";
 import {
   Carousel,
@@ -9,6 +8,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useGenres } from "@/hooks/useGenres";
 
 const GenreCardSkeleton: React.FC = () => (
   <div className="rounded-3xl bg-white/5 border border-white/10 h-full flex flex-col">
@@ -28,44 +28,13 @@ const GenreCardSkeleton: React.FC = () => (
 );
 
 export const GenreSection: React.FC = () => {
+  const { genres, isLoading: isInitialLoading } = useGenres();
+
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
-  const [genres, setGenres] = useState<GenreWithSpotifyData[]>([]);
-  const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [activePlayerId, setActivePlayerId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchBaseGenres = async () => {
-      try {
-        const response = await fetch("/api/genres?enrich=false");
-        if (!response.ok) throw new Error("Failed to fetch base genres");
-        const data = await response.json();
-        setGenres(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsInitialLoading(false);
-      }
-    };
-    fetchBaseGenres();
-  }, []);
-
-  useEffect(() => {
-    if (isInitialLoading) return;
-    const enrichGenres = async () => {
-      try {
-        const response = await fetch("/api/genres");
-        if (!response.ok) throw new Error("Failed to enrich genres");
-        const data = await response.json();
-        setGenres(data);
-      } catch (error) {
-        console.error("Error enriching genres:", error);
-      }
-    };
-    enrichGenres();
-  }, [isInitialLoading]);
 
   useEffect(() => {
     if (!api) return;
