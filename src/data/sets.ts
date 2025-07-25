@@ -39,7 +39,7 @@ export const allSets: SetData[] = [
     event: "Zenith",
     location: "The Terrarium",
     date: "June 6, 2025",
-    soundcloudUrl: "https://on.soundcloud.com/iMtjz7gj26nc9a40We",
+    soundcloudUrl: "https://on.soundcloud.com/y3OaS7BdnPUoOdBdwc",
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ export const allSets: SetData[] = [
     event: "The Dean's List",
     location: "The Terrarium",
     date: "May 18, 2025",
-    soundcloudUrl: "https://on.soundcloud.com/Am0oaoPj9VA943kZSQ",
+    soundcloudUrl: "https://on.soundcloud.com/UviLpRUV9IS9VgqNsr",
   },
   {
     id: 4,
