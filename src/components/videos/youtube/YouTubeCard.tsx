@@ -1,23 +1,16 @@
 import * as React from "react";
 import { Play } from "lucide-react";
+import type { ProcessedVideo } from "@/types/videos";
 
 interface YouTubeCardProps {
-  video: {
-    id: string;
-    title: string;
-    artist: string;
-    event: string;
-    location?: string;
-    date: string;
-    description: string;
-    youtubeId: string;
-    duration: string;
-    categories: string[];
-  };
+  video: ProcessedVideo;
   className?: string;
 }
 
-export const YouTubeCard: React.FC<YouTubeCardProps> = ({ video, className }) => {
+export const YouTubeCard: React.FC<YouTubeCardProps> = ({
+  video,
+  className,
+}) => {
   const youtubeVideoUrl = `http://www.youtube.com/watch?v=${video.youtubeId}`;
   const youtubeThumbnailUrl = `http://img.youtube.com/vi/${video.youtubeId}/mqdefault.jpg`;
 
@@ -38,18 +31,15 @@ export const YouTubeCard: React.FC<YouTubeCardProps> = ({ video, className }) =>
           loading="lazy"
         />
         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 ease-in-out group-hover:scale-105"></div>
-
-        {/* Play Button */}
         <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#5be6ff] hover:bg-[#4dd4ed] text-black rounded-full p-3 transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100">
           <Play size={24} className="ml-0.5" />
         </button>
-
-        {/* Duration Badge */}
-        <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs font-medium">
-          {video.duration}
-        </div>
+        {video.duration && (
+          <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs font-medium">
+            {video.duration}
+          </div>
+        )}
       </div>
-
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex flex-wrap gap-2 mb-3">
           {video.categories.map((category, index) => (
@@ -62,7 +52,7 @@ export const YouTubeCard: React.FC<YouTubeCardProps> = ({ video, className }) =>
           ))}
         </div>
         <h3 className="text-left text-lg font-bold text-white mb-1 group-hover:text-[#5be6ff] transition-colors">
-          {video.event}
+          {video.title}
         </h3>
         <p className="text-left text-sm text-neutral-300 mb-3">
           by {video.artist}
