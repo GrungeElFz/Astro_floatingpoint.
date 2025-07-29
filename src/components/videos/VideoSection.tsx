@@ -2,6 +2,7 @@ import React from "react";
 import { useVideos } from "@/hooks/useVideos";
 import { YouTubeFeature } from "@/components/videos/youtube/YouTubeFeature";
 import { YouTubeSection } from "@/components/videos/youtube/YouTubeSection";
+import { HostedVideoSection } from "@/components/videos/hosted/HostedVideoSection";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const VideoSection: React.FC = () => {
@@ -32,6 +33,7 @@ export const VideoSection: React.FC = () => {
         </div>
 
         <YouTubeSection videos={gridVideos} isLoading={loading} />
+        <HostedVideoSection />
       </div>
     </div>
   );
