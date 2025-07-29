@@ -6,7 +6,7 @@
       "dependencies": {
         "@astrojs/react": "^4.3.0",
         "@astrojs/sitemap": "^3.4.1",
-        "@icons-pack/react-simple-icons": "^13.5.0",
+        "@icons-pack/react-simple-icons": "^13.6.0",
         "@lucide/astro": "^0.525.0",
         "@radix-ui/react-collapsible": "^1.1.11",
         "@radix-ui/react-dialog": "^1.1.14",
@@ -14,7 +14,7 @@
         "@radix-ui/react-slot": "^1.2.3",
         "@types/react": "^19.1.8",
         "@types/react-dom": "^19.1.6",
-        "astro": "^5.11.0",
+        "astro": "^5.12.0",
         "astro-robots-txt": "^1.0.0",
         "astro-seo": "^0.8.4",
         "class-variance-authority": "^0.7.1",
