@@ -34,7 +34,7 @@ export const HostedVideoCard: React.FC<HostedVideoCardProps> = ({
       </button>
 
       {/* --- Card Info Section --- */}
-      <div className="p-4 flex flex-col flex-grow">
+      <div className="p-4 flex flex-col flex-grow transition-all duration-300 ease-in-out group-hover:bg-white/10">
         <div className="flex flex-wrap gap-2 mb-3">
           {video.categories.map((category) => (
             <span
@@ -46,7 +46,7 @@ export const HostedVideoCard: React.FC<HostedVideoCardProps> = ({
           ))}
         </div>
         {video.event && (
-          <h3 className="text-left text-lg font-bold text-white mb-1">
+          <h3 className="text-left text-lg font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
             {video.event}
           </h3>
         )}
