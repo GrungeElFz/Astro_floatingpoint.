@@ -76,4 +76,51 @@ export const allHostedVideos: HostedVideo[] = [
       "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.04.25%20-%20Engrammatic%20Eden%2FGrunge's%20RayBan%20Meta%2F2025.04.26-00.14.10-engrammatic_eden.mp4?alt=media&token=fba1714d-0aca-4092-907f-edd1a4953e09",
     categories: ["Footage", "POV", "Behind the Scenes"],
   },
+
+  // [ 2025.05.03 - Cheap Data ]
+  {
+    id: "hosted-cheap_data-1",
+    artist: "Combinator J",
+    event: "Cheap Data",
+    date: "May 3, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.03%20-%20Cheap%20Data%2FGrunge's%20Pixel%209%20Pro%20XL%2F2025.05.03-22.42.18-cheap_data.mp4?alt=media&token=8923fd22-4f9f-4c0f-a976-0213ef6eedfb",
+    categories: ["Behind the Scenes"],
+  },
+  {
+    id: "hosted-cheap_data-2",
+    artist: "Combinator J",
+    event: "Cheap Data",
+    date: "May 3, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.03%20-%20Cheap%20Data%2FGrunge's%20Pixel%209%20Pro%20XL%2F2025.05.03-22.44.12-cheap_data.mp4?alt=media&token=ee8d4ac0-5910-4542-ad37-9d96087ebc84",
+    categories: ["Live Performance", "Highlight"],
+  },
+  {
+    id: "hosted-cheap_data-3",
+    artist: "Josh Tong",
+    event: "Cheap Data",
+    date: "May 4, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.03%20-%20Cheap%20Data%2FGrunge's%20Pixel%209%20Pro%20XL%2F2025.05.04-00.27.23-cheap_data.mp4?alt=media&token=986ccd1f-b64f-4af2-acd6-6ed1bbb57d5c",
+    categories: ["Live Performance", "Highlight"],
+  },
+  {
+    id: "hosted-cheap_data-4",
+    artist: "Josh Tong",
+    event: "Cheap Data",
+    date: "May 4, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.03%20-%20Cheap%20Data%2FGrunge's%20RayBan%20Meta%2F2025.05.04-00.41.54-cheap_data.mp4?alt=media&token=c9800efb-0434-4fe7-92be-bc0661fe1d3a",
+    categories: ["Live Performance", "Footage"],
+  },
+  {
+    id: "hosted-cheap_data-5",
+    artist: "0x01000111",
+    event: "Cheap Data",
+    date: "May 4, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.03%20-%20Cheap%20Data%2FGrunge's%20RayBan%20Meta%2F2025.05.04-01.20.11-cheap_data.mp4?alt=media&token=157d1816-d3d1-4ad8-957d-e5746f861e4f",
+    categories: ["Behind the Scenes"],
+  },
 ];
