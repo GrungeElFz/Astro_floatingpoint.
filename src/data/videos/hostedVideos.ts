@@ -1,24 +1,4 @@
-// Firebase: Videos
-
-export type VideoCategory =
-  | "Live Performance"
-  | "Highlight"
-  | "Footage"
-  | "POV"
-  | "Behind the Scenes"
-  | "Test";
-
-export interface HostedVideo {
-  id: string; // Unique ID for keying in lists, future integration
-  artist?: string; // "0x01000111"
-  event?: string; // "Zenith"
-  location?: string; // "The Terrarium"
-  date: string; // "June 06, 2025"
-  description?: string; // "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-  videoUrl: string; // The public `Download URL` from Firebase Storage
-  categories: VideoCategory[]; // ["Live Performance", "Hightlight", "Footage", ...]
-  isFeatured?: boolean; // Main Footage Video on the Videos page
-}
+import type { HostedVideo } from "@/types/videos/hostedVideos";
 
 export const allHostedVideos: HostedVideo[] = [
   // [ 2025.04.25 - Engrammatic Eden ]
