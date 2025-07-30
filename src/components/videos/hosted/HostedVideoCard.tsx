@@ -1,6 +1,6 @@
 import React from "react";
 import { Play } from "lucide-react";
-import type { HostedVideo } from "@/data/videos/hostedVideos";
+import type { HostedVideo } from "@/types/videos/hostedVideos";
 
 interface HostedVideoCardProps {
   video: HostedVideo;
