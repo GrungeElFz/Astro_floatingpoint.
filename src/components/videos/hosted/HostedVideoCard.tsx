@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { Play } from "lucide-react";
 import type { HostedVideo, VideoCategory } from "@/types/videos/hostedVideos";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useHostedVideos } from "@/hooks/useHostedVideos";
 
 interface HostedVideoCardProps {
   video: HostedVideo;
@@ -13,42 +14,7 @@ export const HostedVideoCard: React.FC<HostedVideoCardProps> = ({
   onClick,
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [duration, setDuration] = useState<string | null>(null);
-  const [isDurationLoading, setIsDurationLoading] = useState(true);
-
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (!videoElement) return;
-
-    const handleMetadataLoad = () => {
-      requestAnimationFrame(() => {
-        const seconds = Math.floor(videoElement.duration);
-        if (isNaN(seconds) || seconds === 0) {
-          setIsDurationLoading(false);
-          return;
-        }
-
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds % 60;
-        const formattedDuration = `${minutes}:${remainingSeconds
-          .toString()
-          .padStart(2, "0")}`;
-
-        setDuration(formattedDuration);
-        setIsDurationLoading(false);
-      });
-    };
-
-    if (videoElement.readyState >= 1) {
-      handleMetadataLoad();
-    }
-
-    videoElement.addEventListener("loadedmetadata", handleMetadataLoad);
-
-    return () => {
-      videoElement.removeEventListener("loadedmetadata", handleMetadataLoad);
-    };
-  }, [video.videoUrl]);
+  const { duration, isLoading: isDurationLoading } = useHostedVideos(videoRef);
 
   return (
     <div className="group rounded-3xl overflow-hidden backdrop-blur-sm bg-white/5 border border-white/10 text-neutral-300 flex flex-col">
