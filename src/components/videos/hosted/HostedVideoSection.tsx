@@ -1,9 +1,6 @@
 import React, { useState, useMemo } from "react";
-import {
-  allHostedVideos,
-  type HostedVideo,
-  type VideoCategory,
-} from "@/data/videos/hostedVideos";
+import type { HostedVideo, VideoCategory } from "@/types/videos/hostedVideos";
+import { allHostedVideos } from "@/data/videos/hostedVideos";
 import { HostedVideoCard } from "./HostedVideoCard";
 import { HostedVideoDialog } from "./HostedVideoDialog";
 
