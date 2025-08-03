@@ -103,4 +103,51 @@ export const allHostedVideos: HostedVideo[] = [
       "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.03%20-%20Cheap%20Data%2FGrunge's%20RayBan%20Meta%2F2025.05.04-01.20.11-cheap_data.mp4?alt=media&token=157d1816-d3d1-4ad8-957d-e5746f861e4f",
     categories: ["Behind the Scenes"],
   },
+
+  // [ 2025.05.18 - The Dean's List ]
+  {
+    id: "hosted-the_deans_list-1",
+    artist: "ILOVECAUSINGDRAMA",
+    event: "The Dean's List",
+    date: "May 18, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.18%20-%20The%20Dean's%20List%2FGrunge's%20RayBan%20Meta%2F2025.05.18-21.28.09-the_deans_list.mp4?alt=media&token=96f16487-612c-4345-ba2a-1242c574cc90",
+    categories: ["POV", "Behind the Scenes"],
+  },
+  {
+    id: "hosted-the_deans_list-2",
+    artist: "0x01000111",
+    event: "The Dean's List",
+    date: "May 18, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.18%20-%20The%20Dean's%20List%2FGrunge's%20RayBan%20Meta%2F2025.05.18-21.48.40-the_deans_list.mp4?alt=media&token=41c80cad-7ed4-4a60-968d-580a296d040d",
+    categories: ["Live Performance", "Highlight", "POV"],
+  },
+  {
+    id: "hosted-the_deans_list-3",
+    artist: "Qualia",
+    event: "The Dean's List",
+    date: "May 18, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.18%20-%20The%20Dean's%20List%2FGrunge's%20RayBan%20Meta%2F2025.05.18-23.00.40-the_deans_list.mp4?alt=media&token=124c4422-3539-4eba-91b2-bccb44a6da0d",
+    categories: ["Live Performance", "Footage", "POV"],
+  },
+  {
+    id: "hosted-the_deans_list-4",
+    artist: "Qualia",
+    event: "The Dean's List",
+    date: "May 18, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.18%20-%20The%20Dean's%20List%2FGrunge's%20RayBan%20Meta%2F2025.05.18-23.13.28-the_deans_list.mp4?alt=media&token=eaf00223-90b2-47ca-8d92-9ecaef708a74",
+    categories: ["Live Performance", "Footage", "POV"],
+  },
+  {
+    id: "hosted-the_deans_list-5",
+    artist: "Qualia",
+    event: "The Dean's List",
+    date: "May 18, 2025",
+    videoUrl:
+      "https://firebasestorage.googleapis.com/v0/b/astro-floatingpoint-cf267.firebasestorage.app/o/2025.05.18%20-%20The%20Dean's%20List%2FGrunge's%20RayBan%20Meta%2F2025.05.18-23.29.12-the_deans_list.mp4?alt=media&token=666440ae-3075-4aee-9080-431e9ffb9d1e",
+    categories: ["POV", "Behind the Scenes"],
+  },
 ];
