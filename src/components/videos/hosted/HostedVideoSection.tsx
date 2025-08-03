@@ -1,18 +1,39 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import type { HostedVideo, VideoCategory } from "@/types/videos/hostedVideos";
 import { allHostedVideos } from "@/data/videos/hostedVideos";
 import { HostedVideoCard } from "./HostedVideoCard";
 import { HostedVideoDialog } from "./HostedVideoDialog";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type FilterCategory = VideoCategory | "All";
 
-export const HostedVideoSection: React.FC = () => {
+interface HostedVideoSectionProps {
+  displayMode?: "grid" | "carousel";
+}
+
+export const HostedVideoSection: React.FC<HostedVideoSectionProps> = ({
+  displayMode = "grid",
+}) => {
   const [selectedVideo, setSelectedVideo] = useState<HostedVideo | null>(null);
 
-  const featuredVideo = useMemo(
-    () => allHostedVideos.find((video) => video.isFeatured),
-    []
-  );
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!api) return;
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap() + 1);
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1);
+    });
+  }, [api]);
 
   const gridVideos = useMemo(
     () => allHostedVideos.filter((video) => !video.isFeatured),
@@ -29,19 +50,79 @@ export const HostedVideoSection: React.FC = () => {
 
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
 
-  const filteredVideos = useMemo(() => {
-    if (activeCategory === "All") {
-      return gridVideos;
-    }
-    return gridVideos.filter((video) =>
-      video.categories.includes(activeCategory as VideoCategory)
+  const generateVideoId = (video: HostedVideo) => `hosted-video-${video.id}`;
+
+  const handleCategoryClick = (category: FilterCategory) => {
+    const newCategory = activeCategory === category ? "All" : category;
+    setActiveCategory(newCategory);
+
+    if (newCategory === "All" || !gridVideos.length) return;
+
+    const targetVideo = gridVideos.find((video) =>
+      video.categories.includes(newCategory as VideoCategory)
     );
-  }, [gridVideos, activeCategory]);
+    if (!targetVideo) return;
+
+    if (displayMode === "carousel" && api) {
+      const reversedGridVideos = [...gridVideos].reverse();
+      const targetIndex = reversedGridVideos.findIndex((video) =>
+        video.categories.includes(newCategory as VideoCategory)
+      );
+      if (targetIndex > -1) api.scrollTo(targetIndex);
+    } else if (displayMode === "grid") {
+      const targetId = generateVideoId(targetVideo);
+      document
+        .getElementById(targetId)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  const renderVideoCards = (videos: HostedVideo[]) => {
+    return [...videos].reverse().map((video) => {
+      const shouldDeemphasize =
+        activeCategory !== "All" &&
+        !video.categories.includes(activeCategory as VideoCategory);
+
+      const cardWrapper = (
+        <div
+          key={video.id}
+          id={generateVideoId(video)}
+          onClick={(e) => {
+            if (shouldDeemphasize) {
+              e.preventDefault();
+              setActiveCategory("All");
+            }
+          }}
+          className={
+            shouldDeemphasize
+              ? "opacity-50 blur-sm scale-95 cursor-pointer transition-all duration-300"
+              : "opacity-100 blur-none scale-100 transition-all duration-300"
+          }
+        >
+          <HostedVideoCard
+            video={video}
+            onClick={
+              !shouldDeemphasize ? () => setSelectedVideo(video) : () => {}
+            }
+          />
+        </div>
+      );
+
+      if (displayMode === "carousel") {
+        return (
+          <CarouselItem key={video.id} className="sm:basis-1/2 md:basis-1/3">
+            {cardWrapper}
+          </CarouselItem>
+        );
+      }
+      return cardWrapper;
+    });
+  };
 
   return (
     <>
       <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center mt-24">
-        <h2 className="text-4xl sm:text-5xl font-bold mb-4">Footages</h2>
+        <h2 className="text-4xl sm:text-5xl font-bold mb-4 mt-24">Footages</h2>
         <p className="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mb-12 mt-8">
           Exclusive footage and behind-the-scenes content.
         </p>
@@ -50,7 +131,7 @@ export const HostedVideoSection: React.FC = () => {
           {allCategories.map((category) => (
             <button
               key={category}
-              onClick={() => setActiveCategory(category)}
+              onClick={() => handleCategoryClick(category)}
               className={`px-6 py-2 rounded-full border text-sm font-medium transition-colors ${
                 activeCategory === category
                   ? "border-cyan-400 bg-cyan-400/10 text-cyan-300"
@@ -62,24 +143,42 @@ export const HostedVideoSection: React.FC = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredVideos.length > 0 ? (
-            // Create a reversed copy of the array before mapping to show newest first
-            [...filteredVideos]
-              .reverse()
-              .map((video) => (
-                <HostedVideoCard
-                  key={video.id}
-                  video={video}
-                  onClick={() => setSelectedVideo(video)}
-                />
-              ))
-          ) : (
-            <p className="text-neutral-400 text-lg col-span-full">
-              No videos found for this category.
-            </p>
-          )}
-        </div>
+        {displayMode === "carousel" ? (
+          <div>
+            <Carousel
+              setApi={setApi}
+              opts={{ align: "start" }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {renderVideoCards(gridVideos)}
+              </CarouselContent>
+            </Carousel>
+            <div className="flex items-center justify-center space-x-6 mt-12">
+              <button
+                onClick={() => api?.scrollPrev()}
+                disabled={!api?.canScrollPrev()}
+                className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 hover:text-white hover:border-neutral-500"
+              >
+                <ArrowLeft size={16} />
+              </button>
+              <div className="font-mono text-sm text-neutral-400 min-w-[50px]">
+                {count > 0 ? `${current} / ${count}` : ""}
+              </div>
+              <button
+                onClick={() => api?.scrollNext()}
+                disabled={!api?.canScrollNext()}
+                className="p-2 rounded-full border border-neutral-700 text-neutral-400 disabled:opacity-50 hover:text-white hover:border-neutral-500"
+              >
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {renderVideoCards(gridVideos)}
+          </div>
+        )}
       </div>
 
       <HostedVideoDialog
