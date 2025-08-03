@@ -122,7 +122,11 @@ export const HostedVideoSection: React.FC<HostedVideoSectionProps> = ({
   return (
     <>
       <div className="mx-auto max-w-7xl px-6 lg:px-8 text-center mt-24">
-        <h2 className="text-4xl sm:text-5xl font-bold mb-4 mt-24">Footages</h2>
+        <h1 className="text-5xl sm:text-6xl font-bold mb-4">
+          <a href="/videos" className="hover:text-cyan-400">
+            Footages
+          </a>
+        </h1>
         <p className="text-lg font-normal italic text-pretty text-neutral-400 sm:text-xl/8 mx-auto mb-12 mt-8">
           Exclusive footage and behind-the-scenes content.
         </p>
